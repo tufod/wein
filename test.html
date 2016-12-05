@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            input{
+                text-align: center;
+            }
+            input[type="button"] {
+                font-size: 1.1em;
+                height: 25px;
+                box-sizing: unset;
+                background-color:red;
+            }
+
+        </style>
+    </head>
+    <body>
+        <form action="test.php" method="post">
+        <input type="button" name="sub" id="subt" value="-" onclick="operation('-')">
+        <input type="text" name="menge" id="menge" size="3" value="1" onkeyup="menge_pruefen()">
+        <input type="button" name="addieren" id="addieren" value="+" onclick="operation('+')">
+        <br>
+        <br>
+        <br>
+        <br>
+        <input type="date" name="DATE">
+        <br>
+        <br>
+        <br>
+        <br>
+        pas1 <input type="password" name="khaled1" id="pas" size="20" required="required" value="" maxlength="20" ><br>
+        pas2 <input type="password" name="khaled2" id="pas1" size="20" required="required" value=""><br>
+        <input type="submit" name="khaled" value="send">
+        </form>
+        <script type="text/javascript" src="javascript_biblio.js"></script>
+
+        
+    </body>
+</html>
