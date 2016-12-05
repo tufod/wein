@@ -16,7 +16,8 @@ function list_output($table){
     $con=con_db();
     if($table=='produkt'){
      $sql='SELECT produkt_nummer,produkt_name,produkt_beschr,produkt_preis FROM produkt';   
-    }  else {
+    }  
+    else {
         
     }
     
@@ -47,7 +48,6 @@ function list_output($table){
 }
 
 //template
-
 function load_tpl($load){
      global $template;
     $template = file_get_contents($load);
