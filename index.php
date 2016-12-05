@@ -1,17 +1,14 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title></title>
-    </head>
-    <body>
-        <?php
-        //test//test
-        ?>
-    </body>
-</html>
+<?php
+session_start();
+require_once './biblio.inc.php';
+$template='';
+$titel='leste_seit';
+load_tpl('wein.tpl');
+$template = str_replace('{title}', $titel, $template);
+$list=list_output('produkt');
+$template = str_replace('{continer}', $list, $template);
+ echo '<script type="text/javascript" src="javascript_biblio.js"></script>';
+tpl_output();
+
+?>
+
