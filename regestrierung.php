@@ -1,7 +1,7 @@
   <?php  
   require_once './biblio.inc.php';
 $template='';
-$titel='leste_seit';
+$titel='regestrierung';
 load_tpl('wein.tpl');
 $erge='<div id="main">
         <h1>Registrierung</h1>
