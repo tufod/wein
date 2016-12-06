@@ -13,8 +13,8 @@
 
 
 -- Exportiere Datenbank Struktur für wein.handel3
-CREATE DATABASE IF NOT EXISTS `wein.handel3` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `wein.handel3`;
+CREATE DATABASE IF NOT EXISTS `weinhandel_test` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `weinhandel_test`;
 
 -- Exportiere Struktur von Tabelle wein.handel3.adressen
 CREATE TABLE IF NOT EXISTS `adressen` (
@@ -843,6 +843,23 @@ INSERT INTO `produkt` (`id_produkt`, `produkt_nummer`, `produkt_name`, `produkt_
 	(468, 1979, 'Condado de Haza Crianza 2006', '100% Tempranillo, 18 Mon. Barrique ', 14.90, 0.75, 2, 78, '', '2016-12-05 10:47:59', '2016-12-05 10:48:52');
 /*!40000 ALTER TABLE `produkt` ENABLE KEYS */;
 
+-- Exportiere Struktur von Tabelle wein.handel3.rechnung
+CREATE TABLE IF NOT EXISTS `rechnung` (
+  `id_rechnung` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `warenkorb_id` int(11) unsigned NOT NULL,
+  `lief_adresse_id` int(5) unsigned NOT NULL,
+  `rech_adresse_id` int(5) unsigned NOT NULL,
+  `rechnung_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_rechnung`),
+  KEY `lief_adresse_id` (`lief_adresse_id`),
+  KEY `rech_adresse_id` (`rech_adresse_id`),
+  KEY `warenkorb_id` (`warenkorb_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Exportiere Daten aus Tabelle wein.handel3.rechnung: ~0 rows (ungefähr)
+/*!40000 ALTER TABLE `rechnung` DISABLE KEYS */;
+/*!40000 ALTER TABLE `rechnung` ENABLE KEYS */;
+
 -- Exportiere Struktur von Tabelle wein.handel3.region
 CREATE TABLE IF NOT EXISTS `region` (
   `id_region` int(3) NOT NULL AUTO_INCREMENT,
@@ -908,6 +925,26 @@ INSERT INTO `region` (`id_region`, `name_region`) VALUES
 	(53, 'Aragón'),
 	(54, 'Wachau');
 /*!40000 ALTER TABLE `region` ENABLE KEYS */;
+
+-- Exportiere Struktur von Tabelle wein.handel3.warenkorb
+CREATE TABLE IF NOT EXISTS `warenkorb` (
+  `id_warenkorb` int(5) unsigned NOT NULL AUTO_INCREMENT,
+  `benutzer_id` int(4) unsigned NOT NULL,
+  `produkt_id` int(4) unsigned NOT NULL,
+  `menge` int(4) unsigned DEFAULT '0' COMMENT 'Artikel Anzahl',
+  `preis` decimal(10,2) unsigned NOT NULL COMMENT 'Aktuelles Einzelpreis ',
+  `rechung_id` int(10) unsigned DEFAULT NULL,
+  `eintrag_datum` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `aenderung_datum` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_warenkorb`),
+  KEY `kunden_id` (`benutzer_id`),
+  KEY `produkte_id` (`produkt_id`),
+  KEY `rechung_id` (`rechung_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Exportiere Daten aus Tabelle wein.handel3.warenkorb: ~0 rows (ungefähr)
+/*!40000 ALTER TABLE `warenkorb` DISABLE KEYS */;
+/*!40000 ALTER TABLE `warenkorb` ENABLE KEYS */;
 
 -- Exportiere Struktur von Tabelle wein.handel3.weingut
 CREATE TABLE IF NOT EXISTS `weingut` (
