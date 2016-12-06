@@ -1,22 +1,22 @@
 
-function menge_pruefen() {
+function menge_pruefen(idNummer) {
     "use strict";
-    var value = document.getElementById("menge").value;
+    var value = document.getElementById(idNummer).value;
     if (isNaN(value) || (value % 1) !== 0 || value == 0 || value > 9999) {
-        document.getElementById("menge").value = '1';
+        document.getElementById(idNummer).value = '1';
     } else {
-        document.getElementById("menge").value = parseInt(value);
+        document.getElementById(idNummer).value = parseInt(value);
     }
 }
-function operation(zeichen,id) {
+function operation(zeichen,idNummer) {
     "use strict";
-    var menge = document.getElementById(id).value;
+    var menge = document.getElementById(idNummer).value;
     if (zeichen === '+') {
-        document.getElementById(id).value = parseInt(menge) + 1;
+        document.getElementById(idNummer).value = parseInt(menge) + 1;
     } else
     {
         if (menge > 1) {
-            document.getElementById("menge").value = parseInt(menge) - 1;
+            document.getElementById(idNummer).value = parseInt(menge) - 1;
         }
     }
 }
