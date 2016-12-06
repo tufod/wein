@@ -13,15 +13,15 @@ function uncon_db($con) {
     @mysqli_close($con);
 }
 
-function id_benutzer_check() {
+function login_check() {
     if (isset($_SESSION['benutzer'])) {
         $kunde='<a class="button" href="#">'
-                .$_SESSION['benutzer']
-                .'</a>';
+                .'benutzer'
+                .'</a><a class="button" href="#">logout</a><a class="button" href="#">Warenkorp</a>';
     } else {
         $kunde='<a class="button" href="#">login/regis</a>';
     }
-    $kunde.='<a class="button" href="#">Warenkorp</a>';
+    
     return $kunde;
 }
 function list_output($table) {
