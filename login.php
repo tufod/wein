@@ -1,54 +1,55 @@
-<html>
-<head>
-<title>Weinhandel</title>
-<meta charset="utf-8">
-<link rel="stylesheet" href="styles.css" media="screen">
-</head>
-<body>
-    
-<div id="wrapper">
-    <div id="header">
-        <img src="images/in_vino_veritas.png" alt="In Vino Veritas">
-    </div>
-    <div id="navi">
-        <ul>
-            <li><a href="index_1.html">Startseite</a></li> 
-            <li><a></a></li>
-            <li><a></a></li>
-            <li><a></a></li> 
-        </ul>
-         
-    </div>
-    <div id="main">
+   <?php  
+   /*
+    *  zusätzliche datei die benötigt wird zum ausführen der Seite
+    */
+  require_once './biblio.inc.php';
+$template='';
+/*
+ *  Titel der Seite
+ */
+$titel='Login';
+
+/*
+ *  Load des Wein Template 
+ */
+load_tpl('wein.tpl');
+/* 
+ * Login Überschrift
+ * eMail Adress Zeile
+ * Password eingabe Feld
+ * Password Check Feld
+ *  */
+$erge='<div id="main">
         <h1>Login</h1>
         <form action="login.php" method="post">
             <table>
-               <tr>
-                
-                </tr>
                 <tr>
-                    <td id="footer">e-Mail adresse:</td><td><input id="footer" type="text" size="20" name="e-mail" value="tina.mueller@gmx.de"></td>
+                    <td id="registry">e-Mail adresse:</td><td><input id="registry" type="text" size="20" name="e-mail" value="tina.mueller@gmx.de"></td>
                 </tr>  
                 <tr> 
-                    <td id="footer">password:</td><td><input id="footer" type="text" size="20" name="password" value="tanz"></td>
+                    <td id="registry">password:</td><td><input id="registry" type="text" size="20" name="password" value="tanz"></td>
                 </tr>  
-            <tr>    <tr><td id="footer">Password:</td><Td><input id="footer" type="text" size="20" name="password" value="tanz"></td>
+                <tr>
+                    <td id="registry">Password:</td><Td><input id="registry" type="text" size="20" name="password" value="tanz"></td>
                 </tr>
-            
-            
-            
+                <tr>
+                    <td id="registry"><input class="button" type="submit" value="Login"></td>
+                </tr>
+            </table> 
+               
+            <table>
+                <tr> 
+                    <td id="registry">Sie sind noch nicht Regestriert dann gehen sie bitte zur <a class="button" href="regestrierung.php">Regestrierung</a></td>
+                </tr>
+                <tr>
+                    <td id="registry"> Sie haben ihr password Vergessen dann bitte hier  <a class="button" href="#">Passwort Anfordern</a></td>
+                </tr>   
             </table>
-            
-            
-            <input class="button" type="submit" value="registry">
-        </form>     
-        <a class="button" href="#">regänderung</a>
-        <a class="button" href="#">login</a>
-    </div>
-    <div id="footer">Impressum</div>
-    
-</div>
-    
-</body>
-</html>
-
+        </form>
+       </div>';
+/*
+ *   Load des container inhaltes
+ */
+$template = str_replace('{continer}', $erge, $template);
+tpl_output();
+?>
