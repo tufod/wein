@@ -1,25 +1,6 @@
-<html>
-<head>
-<title>Weinhandel</title>
-<meta charset="utf-8">
-<link rel="stylesheet" href="styles.css" media="screen">
-</head>
-<body>
-    
-<div id="wrapper">
-    <div id="header">
-        <img src="images/in_vino_veritas.png" alt="In Vino Veritas">
-    </div>
-    <div id="navi">
-        <ul>
-            <li><a href="index_1.html">Startseite</a></li> 
-            <li><a></a></li>
-            <li><a></a></li>
-            <li><a></a></li> 
-        </ul>
-         
-    </div>
-    <div id="main">
+ <?php
+ 
+    '<div id="main">
         <h1>Registrierung</h1>
         <form action="login.php" method="post">
             <table>
@@ -75,11 +56,5 @@
         </form>     
         <a class="button" href="#">änderung</a>
         <a class="button" href="index.php">regestrierung</a>
-    </div>
-    <div id="footer">Fußzeile</div>
-    
-</div>
-    
-</body>
-</html>
-
+    </div>'
+?>
