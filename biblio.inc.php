@@ -45,8 +45,9 @@ function list_output($table) {
 
 
         //name und kürzbeschreibung
-        $list .= '<a href="#">' . $zeil['produkt_name']
-                . '</a><br>'
+        $list .= '<a href="detail.php?id='
+                . $zeil['produkt_nummer'].'">'
+                . $zeil['produkt_name'].'</a><br>'
                 . $zeil['produkt_beschr'];
         $list .= '</div>';
         //Preis,Menge und Warenkorp
@@ -78,4 +79,11 @@ function load_tpl($load) {
 function tpl_output() {
     global $template;
     echo $template;
+}
+//detail_seite
+function diplay_detail() {
+    $id = $_GET['id'];
+    $con = con_db();
+    $sql = 'SELECT produkt_name,produkt_text,produkt_preis FROM produkt'
+            . 'WHERE produkt_nummer = '.$id.';';
 }
