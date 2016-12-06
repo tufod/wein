@@ -14,7 +14,7 @@ load_tpl('wein.tpl');
 $erge='<div id="main">
         <h1>Registrierung</h1>
         <form action="login.php" method="post">
-            <table>
+            <table id="registry_table">
                <tr>
                 <td id="registry">Anrede:</td> <td id="registry"> 
                 <!-- durch die radio Bottons ist die Auswahl möglich -->
@@ -57,8 +57,11 @@ $erge='<div id="main">
                 <tr>
                     <td id="registry">Password:</td><Td><input id="registry" type="text" size="20" name="password" value="tanz"></td>
                 </tr>
+                 <tr>
+                    <td id="registry"><input class="button" type="submit" value="ändern"><input class="button" type="submit" value="regestrieren"></td>
+                </tr>
                 </table>
-                <input class="button" type="submit" value="ändern"><input class="button" type="submit" value="regestrieren">
+               
         </form>     
        </div>';
 $template = str_replace('{continer}', $erge, $template);

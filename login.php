@@ -30,24 +30,24 @@ load_tpl('wein.tpl');
 $erge='<div id="main">
         <h1>Login</h1>
         <form action="login.php" method="post">
-            <table>
+            <table id="login_table">
                 <tr>
-                    <td id="registry">e-Mail adresse:</td><td><input id="registry" type="text" size="20" name="e-mail" value="tina.mueller@gmx.de"></td>
+                    <td id="login">e-Mail adresse:</td><td><input id="registry" type="text" size="20" name="e-mail" value="tina.mueller@gmx.de"></td>
                 </tr>  
                 <tr> 
-                    <td id="registry">password:</td><td><input id="registry" type="password" size="20" name="password" value="tanz" ></td>
+                    <td id="login">password:</td><td><input id="registry" type="password" size="20" name="password" value="tanz" ></td>
                 </tr>  
                 <tr>
-                    <td id="registry"><input class="button" type="submit" value="Login"></td>
+                    <td id="login"><input class="button" type="submit" value="Login"></td>
                 </tr>
             </table> 
                
-            <table>
+            <table id="login_table">
                 <tr> 
-                    <td id="registry">Sie sind noch nicht Regestriert dann gehen sie bitte zur <a class="button" href="regestrierung.php">Regestrierung</a></td>
+                    <td id="login">Sie sind noch nicht Regestriert dann gehen sie bitte zur <a class="button" href="regestrierung.php">Regestrierung</a></td>
                 </tr>
                 <tr>
-                    <td id="registry"> Sie haben ihr password Vergessen dann bitte hier  <a class="button" href="#">Passwort Anfordern</a></td>
+                    <td id="login"> Sie haben ihr password Vergessen dann bitte hier  <a class="button" href="#">Passwort Anfordern</a></td>
                 </tr>   
             </table>
         </form>
