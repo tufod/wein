@@ -2,7 +2,7 @@
 session_start();
 require_once './biblio.inc.php';
 $template='';
-$titel='leste_seit';
+$titel='Wein Liste';
 load_tpl('wein.tpl');
 $template = str_replace('{title}', $titel, $template);
 $list=list_output('produkt');
