@@ -1,4 +1,13 @@
-   <?php  
+   <?php 
+session_start();
+// session_set_cookie_params($lifetime=3);
+//session_status(2);
+echo'Session-Name:',session_name(),'<br>';
+echo'Session-ID (SID):',session_id(),'<br>';
+// echo'session-LifeTime:', session_set_cookie_params(),'<br>';
+echo'session-status:', session_status(),'<br>';
+
+   
    /*
     *  zusätzliche datei die benötigt wird zum ausführen der Seite
     */
