@@ -17,7 +17,7 @@
     <div id="navi">
         <ul>
             <li><a href="#">Startseite</a></li>
-            <li><a href="#">Weine</a></li>
+            <li><a href="liste.php">Weine</a></li>
             <li><a href="#">Über uns</a></li>
             <li><a href="#">Kontakt</a></li>
         </ul>
