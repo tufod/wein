@@ -35,11 +35,8 @@ $erge='<div id="main">
                     <td id="registry">e-Mail adresse:</td><td><input id="registry" type="text" size="20" name="e-mail" value="tina.mueller@gmx.de"></td>
                 </tr>  
                 <tr> 
-                    <td id="registry">password:</td><td><input id="registry" type="text" size="20" name="password" value="tanz"></td>
+                    <td id="registry">password:</td><td><input id="registry" type="password" size="20" name="password" value="tanz" ></td>
                 </tr>  
-                <tr>
-                    <td id="registry">Password:</td><Td><input id="registry" type="text" size="20" name="password" value="tanz"></td>
-                </tr>
                 <tr>
                     <td id="registry"><input class="button" type="submit" value="Login"></td>
                 </tr>
