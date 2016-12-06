@@ -8,14 +8,12 @@ $erge='<div id="main">
         <form action="login.php" method="post">
             <table>
                <tr>
-                <td id="registry">Anrede:</td> <td id="registry"><select size="1"> 
-                <!-- durch size wird es eine offene Liste -->
-                <!-- durch multiple eine mehrfach auswahl möglich -->
-           
-                <option size="20" >Frau</option>
-                <option size="20" >Herr</option> <!-- Listenfelder -->
-                <option size="20" >-</option>
-                    </select></td>
+                <td id="registry">Anrede:</td> <td id="registry"> 
+                <!-- durch die radio Bottons ist die Auswahl möglich -->
+                <input type="radio" name="anrede" value="female" required> Frau
+                <input type="radio" name="anrede" value="male" required> Herr
+                <input type="radio" name="anrede" value="neutral" required> -
+                </select></td>
                 </tr>
                 <tr>
                     <td id="registry">Nachname:</td><td><input id="registry" type="text" size="20" name="nachname" value="Müller"></td>
@@ -24,9 +22,6 @@ $erge='<div id="main">
                     <td id="registry">Vorname:</td><td><input id="registry" type="text" size="20" name="vorname" value="Tina"></td>
                 </tr>  
                 <tr>
-                <tr>
-                    <td id="registry">Firmname:</td><td><input id="registry" type="text" size="20" name="firma" value="-"></td>
-                </tr>
                 <tr> 
                     <td id="registry">Geburtsdatum:</td><td><input id="registry" type="text" size="20" name="geburtsdatum" value="24.08.1995"></td>
                 </tr>
@@ -55,11 +50,9 @@ $erge='<div id="main">
                     <td id="registry">Password:</td><Td><input id="registry" type="text" size="20" name="password" value="tanz"></td>
                 </tr>
                 </table>
-            <input class="button" type="submit" value="registry">
+                <input class="button" type="submit" value="ändern"><input class="button" type="submit" value="regestrieren">
         </form>     
-        <a class="button" href="#">änderung</a>
-        <a class="button" href="index.php">regestrierung</a>
-    </div>';
+       </div>';
 $template = str_replace('{continer}', $erge, $template);
 tpl_output();
 ?>
