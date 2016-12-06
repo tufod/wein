@@ -18,7 +18,7 @@ body {
 }
 
 #kunde {
-    background-color: black;
+    background-color: rgba(255,255,255,0.5);
     float: right;
     height: 40px;
     width: 250px;
