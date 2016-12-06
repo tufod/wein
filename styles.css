@@ -3,16 +3,18 @@ body {
     padding: 0;
     font-family: Calibri,sans-serif;
     background-color: #96C2DD;
-    background-image: url(images/background/red3.jpg);
+    background-image: url(images/background/white3.jpg);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
 .pro {
-    border: 3px solid aliceblue;
-    height: 70px;
-    width: 100%;
+    border: 3px solid #b9462d;
+    height: 75px;
+    width: 95%;
+    border-radius: 8px;
+    padding: 3px 20px;
 }
 
 #kunde {
@@ -140,4 +142,19 @@ a:link, a:visited, a:focus, a:active {
 a:hover {
     text-decoration:none;
 }
-
+.mengeUndWarenkorp{
+    float: right;
+    width: 40%;
+}
+input[type=button][class=warenkorp]{
+    float: right;
+     padding:0.1em 1em;
+    background-image: url(images/header_bg.png);
+    border-radius: 3px;
+    color:#fff;
+    
+}
+.bildUndName{
+    float: left;
+    width: 50%;
+}

@@ -25,6 +25,6 @@
     <div id="main">{continer}</div>
     <div id="footer"><a href="impressum.html">impressum</a></div>
 </div>
-    
+ <script type="text/javascript" src="javascript_biblio.js"></script>  
 </body>
 </html>
