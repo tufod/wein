@@ -104,6 +104,34 @@ body {
     max-width: 40%;
 }
 /*
+ * Regestrierungs und Login Seite 
+ * - Tabellen
+ */
+#registry, #login {
+    padding:auto;
+    background-position: center;
+}
+#registry_table, #login_table
+{
+    margin: 0px auto;
+}
+
+#main h1a {
+    margin: 0 0 0.2em 0; 
+    font-size: 1.5em;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-align: center;
+    background-position: center;
+}
+
+
+
+
+
+
+
+/*
  * Fussbereich
  */
 #footer {
