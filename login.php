@@ -45,7 +45,7 @@
         <a class="button" href="#">regänderung</a>
         <a class="button" href="#">login</a>
     </div>
-    <div id="footer">Fußzeile</div>
+    <div id="footer">Impressum</div>
     
 </div>
     
