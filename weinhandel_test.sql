@@ -12,13 +12,13 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
 
--- Exportiere Datenbank Struktur für wein.handel3
+-- Exportiere Datenbank Struktur für weinhandel_test
 CREATE DATABASE IF NOT EXISTS `weinhandel_test` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `weinhandel_test`;
 
--- Exportiere Struktur von Tabelle wein.handel3.adressen
+-- Exportiere Struktur von Tabelle weinhandel_test.adressen
 CREATE TABLE IF NOT EXISTS `adressen` (
-  `id_adresse` int(5) unsigned NOT NULL AUTO_INCREMENT,
+  `id_adresse` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `strasse` varchar(250) DEFAULT NULL,
   `hausnummer` varchar(50) DEFAULT NULL,
   `land_id` int(11) DEFAULT NULL,
@@ -28,20 +28,22 @@ CREATE TABLE IF NOT EXISTS `adressen` (
   KEY `land_id` (`land_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle wein.handel3.adressen: ~0 rows (ungefähr)
+-- Exportiere Daten aus Tabelle weinhandel_test.adressen: ~0 rows (ungefähr)
 /*!40000 ALTER TABLE `adressen` DISABLE KEYS */;
 /*!40000 ALTER TABLE `adressen` ENABLE KEYS */;
 
--- Exportiere Struktur von Tabelle wein.handel3.benutzer
+-- Exportiere Struktur von Tabelle weinhandel_test.benutzer
 CREATE TABLE IF NOT EXISTS `benutzer` (
-  `id_benutzer` int(4) unsigned NOT NULL AUTO_INCREMENT,
-  `zugang_id` int(4) unsigned DEFAULT NULL,
-  `anrede` tinyint(3) unsigned NOT NULL,
-  `vorname` varchar(100) NOT NULL,
-  `nachname` varchar(100) NOT NULL,
+  `id_benutzer` int(4) NOT NULL AUTO_INCREMENT,
+  `zugang_id` int(11) DEFAULT NULL,
+  `anrede` int(11) DEFAULT NULL,
+  `vorname` varchar(100) DEFAULT NULL,
+  `nachname` varchar(100) DEFAULT NULL,
   `geburtsdatum` date DEFAULT NULL,
   `telefon` varchar(50) DEFAULT NULL,
   `email` varchar(80) DEFAULT NULL,
+  `email_aktiv` int(10) unsigned DEFAULT '0',
+  `warenkorb_id` int(11) DEFAULT NULL,
   `lief_adresse_id` int(11) DEFAULT NULL,
   `rech_adresse_id` int(11) DEFAULT NULL,
   `regis_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
@@ -50,21 +52,22 @@ CREATE TABLE IF NOT EXISTS `benutzer` (
   PRIMARY KEY (`id_benutzer`),
   KEY `lief_adresse_id` (`lief_adresse_id`),
   KEY `rech_adresse_id` (`rech_adresse_id`),
-  KEY `zugang_id` (`zugang_id`)
+  KEY `zugang_id` (`zugang_id`),
+  KEY `warenkorb_id` (`warenkorb_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle wein.handel3.benutzer: ~0 rows (ungefähr)
+-- Exportiere Daten aus Tabelle weinhandel_test.benutzer: ~0 rows (ungefähr)
 /*!40000 ALTER TABLE `benutzer` DISABLE KEYS */;
 /*!40000 ALTER TABLE `benutzer` ENABLE KEYS */;
 
--- Exportiere Struktur von Tabelle wein.handel3.kontinent
+-- Exportiere Struktur von Tabelle weinhandel_test.kontinent
 CREATE TABLE IF NOT EXISTS `kontinent` (
   `id_kontinent` int(2) NOT NULL AUTO_INCREMENT,
   `name_kontinent` varchar(15) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_kontinent`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle wein.handel3.kontinent: ~10 rows (ungefähr)
+-- Exportiere Daten aus Tabelle weinhandel_test.kontinent: ~10 rows (ungefähr)
 /*!40000 ALTER TABLE `kontinent` DISABLE KEYS */;
 INSERT INTO `kontinent` (`id_kontinent`, `name_kontinent`) VALUES
 	(1, 'Asia'),
@@ -79,7 +82,7 @@ INSERT INTO `kontinent` (`id_kontinent`, `name_kontinent`) VALUES
 	(10, 'America');
 /*!40000 ALTER TABLE `kontinent` ENABLE KEYS */;
 
--- Exportiere Struktur von Tabelle wein.handel3.laender
+-- Exportiere Struktur von Tabelle weinhandel_test.laender
 CREATE TABLE IF NOT EXISTS `laender` (
   `id_land` varchar(2) NOT NULL DEFAULT '0',
   `land_name` varchar(50) NOT NULL DEFAULT '0',
@@ -88,7 +91,7 @@ CREATE TABLE IF NOT EXISTS `laender` (
   KEY `kontinent_id` (`kontinent_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle wein.handel3.laender: ~248 rows (ungefähr)
+-- Exportiere Daten aus Tabelle weinhandel_test.laender: ~248 rows (ungefähr)
 /*!40000 ALTER TABLE `laender` DISABLE KEYS */;
 INSERT INTO `laender` (`id_land`, `land_name`, `kontinent_id`) VALUES
 	('AD', 'Andorra', 3),
@@ -341,18 +344,18 @@ INSERT INTO `laender` (`id_land`, `land_name`, `kontinent_id`) VALUES
 	('ZW', 'Simbabwe', 2);
 /*!40000 ALTER TABLE `laender` ENABLE KEYS */;
 
--- Exportiere Struktur von Tabelle wein.handel3.plz
+-- Exportiere Struktur von Tabelle weinhandel_test.plz
 CREATE TABLE IF NOT EXISTS `plz` (
   `id_plz` int(4) NOT NULL AUTO_INCREMENT,
   `plz` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id_plz`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle wein.handel3.plz: ~0 rows (ungefähr)
+-- Exportiere Daten aus Tabelle weinhandel_test.plz: ~0 rows (ungefähr)
 /*!40000 ALTER TABLE `plz` DISABLE KEYS */;
 /*!40000 ALTER TABLE `plz` ENABLE KEYS */;
 
--- Exportiere Struktur von Tabelle wein.handel3.produkt
+-- Exportiere Struktur von Tabelle weinhandel_test.produkt
 CREATE TABLE IF NOT EXISTS `produkt` (
   `id_produkt` int(4) unsigned NOT NULL AUTO_INCREMENT,
   `produkt_nummer` int(4) unsigned DEFAULT NULL,
@@ -368,9 +371,9 @@ CREATE TABLE IF NOT EXISTS `produkt` (
   PRIMARY KEY (`id_produkt`),
   KEY `weintyp_id` (`weintyp_id`),
   KEY `weingut_id` (`weingut_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=512 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=469 DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle wein.handel3.produkt: ~468 rows (ungefähr)
+-- Exportiere Daten aus Tabelle weinhandel_test.produkt: ~468 rows (ungefähr)
 /*!40000 ALTER TABLE `produkt` DISABLE KEYS */;
 INSERT INTO `produkt` (`id_produkt`, `produkt_nummer`, `produkt_name`, `produkt_beschr`, `produkt_preis`, `produkt_volumen`, `weintyp_id`, `weingut_id`, `produkt_text`, `produkt_create`, `produkt_change`) VALUES
 	(1, 71, 'Brut Tradition', 'Assemblage aus Pinot Noir Pinot Meunier u. Chardonnay', 21.50, 0.75, 1, 1, '', '2016-12-05 10:47:59', '2016-12-05 10:48:52'),
@@ -843,31 +846,27 @@ INSERT INTO `produkt` (`id_produkt`, `produkt_nummer`, `produkt_name`, `produkt_
 	(468, 1979, 'Condado de Haza Crianza 2006', '100% Tempranillo, 18 Mon. Barrique ', 14.90, 0.75, 2, 78, '', '2016-12-05 10:47:59', '2016-12-05 10:48:52');
 /*!40000 ALTER TABLE `produkt` ENABLE KEYS */;
 
--- Exportiere Struktur von Tabelle wein.handel3.rechnung
+-- Exportiere Struktur von Tabelle weinhandel_test.rechnung
 CREATE TABLE IF NOT EXISTS `rechnung` (
-  `id_rechnung` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `warenkorb_id` int(11) unsigned NOT NULL,
-  `lief_adresse_id` int(5) unsigned NOT NULL,
-  `rech_adresse_id` int(5) unsigned NOT NULL,
-  `rechnung_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id_rechnung`),
-  KEY `lief_adresse_id` (`lief_adresse_id`),
-  KEY `rech_adresse_id` (`rech_adresse_id`),
-  KEY `warenkorb_id` (`warenkorb_id`)
+  `id_rechnung` int(11) NOT NULL AUTO_INCREMENT,
+  `Spalte 2` int(11) DEFAULT NULL,
+  `Spalte 3` int(11) DEFAULT NULL,
+  `Spalte 4` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_rechnung`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle wein.handel3.rechnung: ~0 rows (ungefähr)
+-- Exportiere Daten aus Tabelle weinhandel_test.rechnung: ~0 rows (ungefähr)
 /*!40000 ALTER TABLE `rechnung` DISABLE KEYS */;
 /*!40000 ALTER TABLE `rechnung` ENABLE KEYS */;
 
--- Exportiere Struktur von Tabelle wein.handel3.region
+-- Exportiere Struktur von Tabelle weinhandel_test.region
 CREATE TABLE IF NOT EXISTS `region` (
   `id_region` int(3) NOT NULL AUTO_INCREMENT,
   `name_region` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id_region`)
-) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle wein.handel3.region: ~54 rows (ungefähr)
+-- Exportiere Daten aus Tabelle weinhandel_test.region: ~54 rows (ungefähr)
 /*!40000 ALTER TABLE `region` DISABLE KEYS */;
 INSERT INTO `region` (`id_region`, `name_region`) VALUES
 	(1, 'Champagne'),
@@ -926,27 +925,26 @@ INSERT INTO `region` (`id_region`, `name_region`) VALUES
 	(54, 'Wachau');
 /*!40000 ALTER TABLE `region` ENABLE KEYS */;
 
--- Exportiere Struktur von Tabelle wein.handel3.warenkorb
+-- Exportiere Struktur von Tabelle weinhandel_test.warenkorb
 CREATE TABLE IF NOT EXISTS `warenkorb` (
-  `id_warenkorb` int(5) unsigned NOT NULL AUTO_INCREMENT,
-  `benutzer_id` int(4) unsigned NOT NULL,
-  `produkt_id` int(4) unsigned NOT NULL,
-  `menge` int(4) unsigned DEFAULT '0' COMMENT 'Artikel Anzahl',
-  `preis` decimal(10,2) unsigned NOT NULL COMMENT 'Aktuelles Einzelpreis ',
-  `rechung_id` int(10) unsigned DEFAULT NULL,
+  `id_warenkorb` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `benutzer_id` int(11) unsigned NOT NULL,
+  `produkt_id` int(11) unsigned NOT NULL,
+  `menge` int(11) unsigned NOT NULL DEFAULT '0' COMMENT 'Artikel Anzahl',
+  `preis` int(11) unsigned NOT NULL DEFAULT '0' COMMENT 'Artikel Einzelpreis ',
+  `status` tinyint(4) unsigned NOT NULL DEFAULT '0',
   `eintrag_datum` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `aenderung_datum` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_warenkorb`),
   KEY `kunden_id` (`benutzer_id`),
-  KEY `produkte_id` (`produkt_id`),
-  KEY `rechung_id` (`rechung_id`)
+  KEY `produkte_id` (`produkt_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle wein.handel3.warenkorb: ~0 rows (ungefähr)
+-- Exportiere Daten aus Tabelle weinhandel_test.warenkorb: ~0 rows (ungefähr)
 /*!40000 ALTER TABLE `warenkorb` DISABLE KEYS */;
 /*!40000 ALTER TABLE `warenkorb` ENABLE KEYS */;
 
--- Exportiere Struktur von Tabelle wein.handel3.weingut
+-- Exportiere Struktur von Tabelle weinhandel_test.weingut
 CREATE TABLE IF NOT EXISTS `weingut` (
   `id_weingut` int(3) unsigned NOT NULL AUTO_INCREMENT,
   `name_weingut` varchar(150) DEFAULT '0',
@@ -955,9 +953,9 @@ CREATE TABLE IF NOT EXISTS `weingut` (
   PRIMARY KEY (`id_weingut`),
   KEY `region_id` (`region_id`),
   KEY `land_id2` (`land_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=256 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=171 DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle wein.handel3.weingut: ~170 rows (ungefähr)
+-- Exportiere Daten aus Tabelle weinhandel_test.weingut: ~170 rows (ungefähr)
 /*!40000 ALTER TABLE `weingut` DISABLE KEYS */;
 INSERT INTO `weingut` (`id_weingut`, `name_weingut`, `land_id`, `region_id`) VALUES
 	(1, 'Domaine Jean Pernet', 'FR', 1),
@@ -1132,14 +1130,14 @@ INSERT INTO `weingut` (`id_weingut`, `name_weingut`, `land_id`, `region_id`) VAL
 	(170, 'Nothnagl', 'AT', 54);
 /*!40000 ALTER TABLE `weingut` ENABLE KEYS */;
 
--- Exportiere Struktur von Tabelle wein.handel3.weintyp
+-- Exportiere Struktur von Tabelle weinhandel_test.weintyp
 CREATE TABLE IF NOT EXISTS `weintyp` (
   `id_weintyp` int(2) unsigned NOT NULL AUTO_INCREMENT,
   `name_weintyp` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id_weintyp`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle wein.handel3.weintyp: ~5 rows (ungefähr)
+-- Exportiere Daten aus Tabelle weinhandel_test.weintyp: ~5 rows (ungefähr)
 /*!40000 ALTER TABLE `weintyp` DISABLE KEYS */;
 INSERT INTO `weintyp` (`id_weintyp`, `name_weintyp`) VALUES
 	(1, 'Champagner'),
@@ -1149,15 +1147,17 @@ INSERT INTO `weintyp` (`id_weintyp`, `name_weintyp`) VALUES
 	(5, 'Rosewein');
 /*!40000 ALTER TABLE `weintyp` ENABLE KEYS */;
 
--- Exportiere Struktur von Tabelle wein.handel3.zugang
+-- Exportiere Struktur von Tabelle weinhandel_test.zugang
 CREATE TABLE IF NOT EXISTS `zugang` (
   `id_zugang` int(4) NOT NULL AUTO_INCREMENT,
+  `benutzer_id` int(11) DEFAULT NULL,
   `password` varchar(50) DEFAULT NULL,
   `sessionid` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_zugang`)
+  PRIMARY KEY (`id_zugang`),
+  KEY `benutzer_id` (`benutzer_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle wein.handel3.zugang: ~0 rows (ungefähr)
+-- Exportiere Daten aus Tabelle weinhandel_test.zugang: ~0 rows (ungefähr)
 /*!40000 ALTER TABLE `zugang` DISABLE KEYS */;
 /*!40000 ALTER TABLE `zugang` ENABLE KEYS */;
 
