@@ -23,12 +23,34 @@ body {
 .detail {
     background-color: rgba(255,255,255,0.7);
     border: 3px solid #b9462d;
-    height: 175px;
+    min-height: 100%;
     width: 95%;
     border-radius: 8px;
     margin-bottom: 5px;
     padding: 20px 20px;
     border-collapse: collapse;
+}
+
+.detail_name {
+    padding-left: 130px;
+}
+
+.detail_bild {
+    
+     
+}
+figure {
+    
+}
+
+.detail_text {
+    padding-left: 130px;
+}
+
+.detail_waren {
+    padding-left: 130px;
+   
+   
 }
 
 #kunde {
