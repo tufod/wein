@@ -83,9 +83,14 @@ function tpl_output() {
 //detail_seite
 function diplay_detail() {
     $id = $_GET['id'];
+    $res = mysqli_query($con, $sql);
     $con = con_db();
     $sql = 'SELECT produkt_name,produkt_text,produkt_preis FROM produkt'
             . 'WHERE produkt_nummer = '.$id.';';
+    $d_bild = mysqli_fetch_assoc($res);
+    $d_bild = '<img src="images/weinbilder/mittel/w'
+                . $zeil['produkt_nummer']
+                . '.jpg" onerror="this.src=\'images/weinbilder/klein/blank.jpg\' ">';
 }
 
 //warenkorb_check tomas
