@@ -1,5 +1,6 @@
   <?php  
- /*
+  
+/*
  * Session Start ( Damit die Seite in die Laufende Session eingebunden ist )
  */
   session_start();
@@ -14,9 +15,12 @@ echo'session-status:', session_status(),'<br>';
  *  zusätzliche datei die benötigt wird zum ausführen der Seite
  */
 
-  require_once './javascript_biblio.js';
+  
   require_once './biblio.inc.php';
+  
+  
 $template='';
+$kunde=login_check();
 
 /*
  *  Ausgabe des Titels der Seite
@@ -26,9 +30,16 @@ $titel='regestrierung';
 /*
  *  Load des Wein Template 
  */
-load_tpl('wein.tpl');
+load_tpl('wein.tpl'); 
+
+
 $kunde='';
 
+
+/*
+ * Anzeige Kunde rechts oben auf der Seite
+ */
+$template = str_replace('{kunde}', $kunde, $template);
 
 /*
  *  $erge = Seiten inhalte
@@ -94,6 +105,9 @@ $erge='<div id="main">
  *   Seiten inhalt = $erge
  */
 $template = str_replace('{container}', $erge, $template);
-$template = str_replace('{kunde}', $kunde, $template);
+
+/*
+ * Seiten Ausgabe
+ */
 tpl_output();
 ?>
