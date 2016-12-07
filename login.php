@@ -16,6 +16,7 @@ echo'session-status:', session_status(), '<br>';
 require_once './biblio.inc.php';
 
 $template = '';
+
 /*
  *  Titel der Seite
  */
@@ -25,12 +26,13 @@ $titel = 'Login';
  *  Load des Wein Template 
  */
 load_tpl('wein.tpl');
+
 /*
  * Login Überschrift
  * eMail Adress Zeile
  * Password eingabe Feld
- * 
- *  */
+ */
+
 $kunde = '';
 
 
@@ -75,7 +77,7 @@ $erge .= '</table>
                 </tr>   
             </table>';
 /*
- *   Load des container inhaltes
+ *   Anzeige Kunde rechts oben auf der Seite
  */
 $template = str_replace('{kunde}', $kunde, $template);
 
