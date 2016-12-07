@@ -1,12 +1,12 @@
 <?php
 
 /*
- * Session Start ( Damit die Seite in die Laufende Session eingebunden ist )
+ * Session Start ( Damit die Seite in die Laufende Session eingebunden ist)
  */
 session_start();
 
 /*
- *  zusätzliche datei die benötigt wird zum ausführen der Seite
+ *  zusï¿½tzliche datei die benï¿½tigt wird zum ausfï¿½hren der Seite
  */
 require_once './biblio.inc.php';
 
