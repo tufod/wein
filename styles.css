@@ -31,14 +31,6 @@ body {
     border-collapse: collapse;
 }
 
-.detail_name {
-    padding-left: 130px;
-}
-
-.detail_text {
-    padding-left: 130px;
-}
-
 #kunde {
     background-color: rgba(255,255,255,0.5);
     float: right;
@@ -122,8 +114,10 @@ body {
     float: left;
     max-width: 40%;
 }
+
+
 /*
- * Regestrierungs und Login Seite 
+ * Regestrierungs und Login  und Kunden Konto Seite 
  * - Tabellen
  */
 #registry, #login {
@@ -134,7 +128,11 @@ body {
 {
     margin: 0px auto;
 }
-
+#registry_table1, #login_table
+{
+   
+   /* margin: 0px auto; */
+}
 #main h1a {
     margin: 0 0 0.2em 0; 
     font-size: 1.5em;
@@ -143,6 +141,30 @@ body {
     text-align: center;
     background-position: center;
 }
+#main h2a {
+color:#ac2135;
+margin: 0 0 0.2em 0;
+font-size: 1.2em;
+}
+
+/*
+ * Kunden Konto Seite 
+ * Tabellen links und rechts
+ */
+#leftside {
+                padding: 10px;
+                float:left;
+                width: 47%;
+                overflow: auto;
+            }
+           
+#rightside {
+                
+                padding: 10px;
+                width: 47%; 
+                float: right;
+            }
+
 
 
 
