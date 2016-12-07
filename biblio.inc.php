@@ -81,16 +81,21 @@ function tpl_output() {
     echo $template;
 }
 //detail_seite sascha
-function diplay_detail() {
+function display_detail() {
     $id = $_GET['id'];
     $con = con_db();
-    $sql = "SELECT produkt_name,produkt_text,produkt_preis FROM produkt'
-            . 'WHERE produkt_nummer = '.$id.';";
+    $sql = 'SELECT produkt_nummer,produkt_name,produkt_text,produkt_preis FROM produkt'
+            .' WHERE produkt_nummer = \''.$id.'\';';
     $res = mysqli_query($con, $sql);
-    while ($d_bild = mysqli_fetch_assoc($res));
-        echo '<img src="images/weinbilder/mittel/w',$d_bild['produkt_nummer']
-                .'.jpg" onerror="this.src=\'images/weinbilder/mittel/blank.jpg\' ">';
-        
+    $detail = '';
+    while ($d_bild = mysqli_fetch_assoc($res)) {
+        $detail.= '<div class="detail">';
+        $detail.='<img src="images/weinbilder/mittel/w'
+                . $d_bild['produkt_nummer']
+                . '.jpg" onerror="this.src=\'images/weinbilder/mittel/blank.jpg\' ">';
+        $detail.='</div>';
+    }
+    return $detail;
 }
 
 //warenkorb_check tomas
