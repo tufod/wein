@@ -6,6 +6,6 @@ $title='Wein Details';
 load_tpl('wein.tpl');
 $template = str_replace('{title}', $title, $template);
 tpl_output();
-diplay_detail('{continer}');
+diplay_detail('{container}');
 ?>
 
