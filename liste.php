@@ -45,6 +45,10 @@ $list=list_output('produkt');
  */
 $template = str_replace('{container}', $list, $template);
 //echo ' ';
+
+/*
+ * Seiten Ausgabe
+ */
 tpl_output();
 ?>
 
