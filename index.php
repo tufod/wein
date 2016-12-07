@@ -42,7 +42,9 @@ $list=list_output('produkt');
  */
 $template = str_replace('{container}', $list, $template);
 
-
+/*
+ * Seiten Ausgabe
+ */
 tpl_output();
 
 ?>
