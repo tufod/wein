@@ -88,10 +88,10 @@ function diplay_detail() {
             . 'WHERE produkt_nummer = '.$id.';';
     $res = mysqli_query($con, $sql);
     $d_bild = mysqli_fetch_assoc($res);
-    $d_bild = '<img src="images/weinbilder/mittel/w'
-                . $zeil['produkt_nummer']
+    echo '<img src="images/weinbilder/mittel/w'
+                . $d_bild['produkt_nummer']
                 . '.jpg" onerror="this.src=\'images/weinbilder/klein/blank.jpg\' ">';
-        return $d_bild;
+        
 }
 
 //warenkorb_check tomas
