@@ -1,16 +1,8 @@
-  <?php  
-  
+<?php
 /*
  * Session Start ( Damit die Seite in die Laufende Session eingebunden ist )
  */
-  session_start();
-// session_set_cookie_params($lifetime=3);
-//session_status(2);
-echo'Session-Name:',session_name(),'<br>';
-echo'Session-ID (SID):',session_id(),'<br>';
-// echo'session-LifeTime:', session_set_cookie_params(),'<br>';
-echo'session-status:', session_status(),'<br>';
- 
+session_start();
 /*
  *  zusätzliche datei die benötigt wird zum ausführen der Seite
  */
@@ -54,56 +46,60 @@ $erge='<div id="main">
                 <input type="radio" name="anrede" value="female" required> Frau
                 <input type="radio" name="anrede" value="male" required> Herr
                 <input type="radio" name="anrede" value="neutral" required> -
-                </select></td>
+                </td>
                 </tr>
                 <tr>
-                    <td id="registry">Nachname:</td><td><input id="registry" type="text" size="20" name="nachname" value="Müller"></td>
+                    <td id="registry">Nachname:</td><td><input id="registry" type="text" size="20" name="nachname" value="Müller" required="required" ></td>
                 </tr> 
                 <tr>
-                    <td id="registry">Vorname:</td><td><input id="registry" type="text" size="20" name="vorname" value="Tina"></td>
+                    <td id="registry">Vorname:</td><td><input id="registry" type="text" size="20" name="vorname" value="Tina" required="required" ></td>
                 </tr>  
                 <tr>
                 <tr> 
-                    <td id="registry">Geburtsdatum:</td><td><input id="registry" type="text" size="20" name="geburtsdatum" value="24.08.1995"></td>
+                    <td id="registry">Geburtsdatum:</td><td></td>
                 </tr>
                 <tr>
-                    <td id="registry">Strasse:</td><td><input id="registry" type="text" size="20" name="strasse" value="Bürgermeister-Smidt-Str."></td>
+                    <td id="registry">Strasse:</td><td><input id="registry" type="text" size="20" name="strasse" value="Bürgermeister-Smidt-Str." required="required" ></td>
                 </tr>  
                 <tr>
-                    <td id="registry">Hausnummer:</td><td><input id="registry" type="text" size="20" name="hausnummer" value="31"></td>
+                    <td id="registry">Hausnummer:</td><td><input id="registry" type="text" size="20" name="hausnummer" value="31" required="required" ></td>
                 </tr>  
                 <tr>
-                    <td id="registry">Ort:</td><td><input id="registry" type="text" size="20" name="ort" value="Bremen"></td>
+                    <td id="registry">Ort:</td><td><input id="registry" type="text" size="20" name="ort" value="Bremen" required="required" ></td>
                 </tr> 
                 <tr>
-                    <td id="registry">Plz:</td><td><input id="registry" type="text" size="20" name="plz" value="28195"></td>
+                    <td id="registry">Plz:</td><td><input id="registry" type="text" size="20" name="plz" value="28195" required="required" ></td>
                 </tr>  
                 <tr>
                     <td id="registry">Telefon für rückfragen:</td><td><input id="registry" type="text" size="20" name="telefon" value="0421554321"></td>
                 </tr>  
                 <tr> 
-                    <td id="registry">e-Mail adresse:</td><td><input id="registry" type="email" size="20" name="email" value="khaled@hotmail.com"></td>
+                    <td id="registry">e-Mail adresse:</td><td><input id="registry" type="email" size="20" name="email" value="khaled@hotmail.com" required="required" ></td>
                 </tr>  
                 <tr> 
-                    <td id="registry">password:</td><td><input id="registry1" type="password" size="20" name="password" value="tanz"></td>
+                    <td id="registry">password:</td><td><input id="registry1" type="password" size="20" name="password" required="required" value="tanz"></td>
                 </tr>  
                 <tr>
-                    <td id="registry">Password:</td><Td><input id="registry2" type="password" size="20" value="tanz"></td>
+                    <td id="registry">Password:</td><Td><input id="registry2" type="password" size="20" required="required" value="tanz"></td>
+                </tr>
+                <tr>
+                    <td id="registry"></td><td id="erorr"></td>
                 </tr>
                  <tr>
-                    <td id="registry"><input class="button" type="submit" value="ändern"><input class="button" type="submit" value="regestrieren" onclick="password_vergleichung()></td>
-                    <script type="text/javascript" src="javascript_biblio.js"></script>
+                    <td id="registry"><input class="button" type="submit" value="ändern"><input class="button" type="submit" value="regestrieren"></td>
+                    
                 </tr>
                 </table>
                
         </form>     
        </div>';
 
-
+$template = str_replace('{kunde}', $kunde, $template);
 /*
  *   Load des Seiten Inhaltes (container)
  *   Seiten inhalt = $erge
  */
+$template = str_replace('{container}', $regestr, $template);
 $template = str_replace('{container}', $erge, $template);
 
 /*
