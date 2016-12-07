@@ -93,7 +93,7 @@ $erge='<div id="main">
  *   Load des Seiten Inhaltes (container)
  *   Seiten inhalt = $erge
  */
-$template = str_replace('{continer}', $erge, $template);
+$template = str_replace('{container}', $erge, $template);
 $template = str_replace('{kunde}', $kunde, $template);
 tpl_output();
 ?>
