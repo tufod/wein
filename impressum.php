@@ -1,4 +1,8 @@
    <?php 
+   
+   /*
+    * Session Start ( Damit die Seite in die Laufende Session eingebunden ist )
+    */
 session_start();
 // session_set_cookie_params($lifetime=3);
 //session_status(2);
@@ -29,8 +33,8 @@ load_tpl('wein.tpl');
  * Impressums Text Inhalt
  *  */
 $erge='<div id="main">
-            <h2>Impressum</h2>
-            <main>
+        <h2>Impressum</h2>
+        <main>
             <section>
             <p>Angaben gemäß § 5 TMG</p><p>Max Muster <br> Musterweg<br> 12345 Musterstadt <br></p>
             <p> <strong> Vertreten durch: </strong> <br> Max Muster <br> </p>
@@ -79,11 +83,17 @@ $erge='<div id="main">
             in der zuvor beschriebenen Art und Weise und zu dem zuvor benannten Zweck einverstanden.</p>
 
             <p><a href="http://www.disclaimer.de/disclaimer.htm?farbe=000000/d7e3ae/000000/000000" target="_blank">Haftungsausschluss</a></p> 
-         </section>
-     </main>
+            </section>
+        </main>
     </div>';
 /*
- *   Load des container inhaltes
+ *   Titel Anzeige deer Seite
+ */
+$template = str_replace('{title}', $titel, $template);
+
+/*
+ *   Load des Seiten Inhaltes (container)
+ *   Seiten inhalt = $erge
  */
 $template = str_replace('{continer}', $erge, $template);
 tpl_output();
