@@ -121,10 +121,21 @@ $erge='<div id="">
                     <td id=""></td><td></td>
                 </tr>
                  <tr>
-                    <td id=""><input class="button" type="submit" value=""><input class="button" type="submit" value=""></td>
+                    
                 </tr>
             </table>
-        
+<!-- Abgeschlossene Bestellungen: Kunden Bestellungen die Abgeschlossen sind -->
+        <form action="login.php" method="post">
+            <h2>Abgeschlossene Bestellungen:</h2>
+            <table id="registry_table1">
+                <tr> 
+                    <td id=""></td><td></td>
+                </tr>  
+                
+                 <tr>
+                    
+                </tr>
+            </table>
                 
         </form>
     </div>';     
