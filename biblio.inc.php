@@ -87,3 +87,31 @@ function diplay_detail() {
     $sql = 'SELECT produkt_name,produkt_text,produkt_preis FROM produkt'
             . 'WHERE produkt_nummer = '.$id.';';
 }
+
+//warenkorb_check tomas
+
+function warenkorb_id($benutzer) {
+    if(!isset($_SESSION['warenkorb'])) {
+       $con = con_db();
+       $sql = 'SELECT id_warenkorb FROM warenkorb WHERE benutzer_id='.$benutzer.' AND ISNULL(rechung_id)';
+       $res = mysqli_query($con, $sql);
+       if (!mysqli_affected_rows($con)==0) {
+       $warenkorb = mysqli_fetch_assoc($res); 
+       $act_warenkorb=$warenkorb['id_warenkorb'];
+       }
+       else {
+       $act_warenkorb=warenkorb_new($benutzer);
+       }      
+    }     
+ return $act_warenkorb;
+}
+
+//warenkorb_new tomas
+
+function warenkorb_new($benutzer) {
+    $con = con_db();
+    $sql = 'INSERT INTO warenkorb(benutzer_id) VALUES ('.$benutzer.')';
+    mysqli_query($con, $sql);
+    $id_warenkorb=mysqli_insert_id($con);
+    return $id_warenkorb;
+}
