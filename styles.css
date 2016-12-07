@@ -31,6 +31,14 @@ body {
     border-collapse: collapse;
 }
 
+.detail_name {
+    padding-left: 130px;
+}
+
+.detail_text {
+    padding-left: 130px;
+}
+
 #kunde {
     background-color: rgba(255,255,255,0.5);
     float: right;
