@@ -20,4 +20,3 @@ function operation(zeichen,idNummer) {
         }
     }
 }
-

@@ -1,4 +1,7 @@
 <?php
+/*
+ * Session Start 
+*/
 session_start();
 require_once './biblio.inc.php';
 $template='';
@@ -9,4 +12,5 @@ $template = str_replace('{title}', $title, $template);
 $template = str_replace('{container}',$detail,$template);
 tpl_output();
 ?>
+
 
