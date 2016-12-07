@@ -11,27 +11,42 @@ echo'Session-ID (SID):',session_id(),'<br>';
 // echo'session-LifeTime:', session_set_cookie_params(),'<br>';
 echo'session-status:', session_status(),'<br>';
 
-   
-   /*
-    *  zusätzliche datei die benötigt wird zum ausführen der Seite
-    */
-  require_once './biblio.inc.php';
+/*
+ *  zusätzliche datei die benötigt wird zum ausführen der Seite
+ */
+require_once './biblio.inc.php';
+  
 $template='';
+$kunde=login_check();
+
 /*
  *  Titel der Seite
  */
 $titel='Impressum';
 
 /*
- *  Load des Wein Template 
+ *   Load des Seiten Aufbau Templates (Wein Template)
+ *   Seiten Backround Bild unf vorgaben
  */
 load_tpl('wein.tpl');
+
+/*
+ *   Titel Anzeige der Seite
+ */
+$template = str_replace('{title}', $titel, $template);
+
+/*
+ * Anzeige Kunde rechts oben auf der Seite
+ */
+$template = str_replace('{kunde}', $kunde, $template);
+
 /* 
  * Impressum
  * Überschrift
  * Text Inhalt
  * Impressums Text Inhalt
- *  */
+ * 
+ */
 $erge='<div id="main">
         <h2>Impressum</h2>
         <main>
@@ -86,15 +101,20 @@ $erge='<div id="main">
             </section>
         </main>
     </div>';
-/*
- *   Titel Anzeige deer Seite
- */
-$template = str_replace('{title}', $titel, $template);
 
+
+
+
+/*
+ *   Load  ... (produkt)
+ *  
+ */
+$list=list_output('produkt'); 
 /*
  *   Load des Seiten Inhaltes (container)
  *   Seiten inhalt = $erge
  */
 $template = str_replace('{container}', $erge, $template);
 tpl_output();
+
 ?>
