@@ -1,4 +1,7 @@
   <?php  
+ /*
+ * Session Start ( Damit die Seite in die Laufende Session eingebunden ist )
+ */
   session_start();
 // session_set_cookie_params($lifetime=3);
 //session_status(2);
@@ -6,14 +9,33 @@ echo'Session-Name:',session_name(),'<br>';
 echo'Session-ID (SID):',session_id(),'<br>';
 // echo'session-LifeTime:', session_set_cookie_params(),'<br>';
 echo'session-status:', session_status(),'<br>';
-  
+ 
+/*
+ *  zusätzliche datei die benötigt wird zum ausführen der Seite
+ */
+
+  require_once './javascript_biblio.js';
   require_once './biblio.inc.php';
 $template='';
+
+/*
+ *  Ausgabe des Titels der Seite
+ */
 $titel='regestrierung';
+
+/*
+ *  Load des Wein Template 
+ */
 load_tpl('wein.tpl');
+$kunde='';
+
+
+/*
+ *  $erge = Seiten inhalte
+ */
 $erge='<div id="main">
         <h1>Registrierung</h1>
-        <form action="login.php" method="post">
+        <form action="regestrierung_check.inc.php" method="post">
             <table id="registry_table">
                <tr>
                 <td id="registry">Anrede:</td> <td id="registry"> 
@@ -49,21 +71,29 @@ $erge='<div id="main">
                     <td id="registry">Telefon für rückfragen:</td><td><input id="registry" type="text" size="20" name="telefon" value="0421554321"></td>
                 </tr>  
                 <tr> 
-                    <td id="registry">e-Mail adresse:</td><td><input id="registry" type="text" size="20" name="e-mail" value="tina.mueller@gmx.de"></td>
+                    <td id="registry">e-Mail adresse:</td><td><input id="registry" type="email" size="20" name="email" value="khaled@hotmail.com"></td>
                 </tr>  
                 <tr> 
-                    <td id="registry">password:</td><td><input id="registry" type="text" size="20" name="password" value="tanz"></td>
+                    <td id="registry">password:</td><td><input id="registry1" type="password" size="20" name="password" value="tanz"></td>
                 </tr>  
                 <tr>
-                    <td id="registry">Password:</td><Td><input id="registry" type="text" size="20" name="password" value="tanz"></td>
+                    <td id="registry">Password:</td><Td><input id="registry2" type="password" size="20" value="tanz"></td>
                 </tr>
                  <tr>
-                    <td id="registry"><input class="button" type="submit" value="ändern"><input class="button" type="submit" value="regestrieren"></td>
+                    <td id="registry"><input class="button" type="submit" value="ändern"><input class="button" type="submit" value="regestrieren" onclick="password_vergleichung()></td>
+                    <script type="text/javascript" src="javascript_biblio.js"></script>
                 </tr>
                 </table>
                
         </form>     
        </div>';
+
+
+/*
+ *   Load des Seiten Inhaltes (container)
+ *   Seiten inhalt = $erge
+ */
 $template = str_replace('{continer}', $erge, $template);
+$template = str_replace('{kunde}', $kunde, $template);
 tpl_output();
 ?>
