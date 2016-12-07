@@ -110,11 +110,16 @@ $erge='<div id="main">
  *  
  */
 $list=list_output('produkt'); 
+
 /*
  *   Load des Seiten Inhaltes (container)
  *   Seiten inhalt = $erge
  */
 $template = str_replace('{container}', $erge, $template);
+
+/*
+ * Seiten Ausgabe
+ */
 tpl_output();
 
 ?>
