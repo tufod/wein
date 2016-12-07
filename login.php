@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Session Start ( Damit die Seite in die Laufende Session eingebunden ist )
  */
@@ -91,5 +92,9 @@ $template = str_replace('{title}', $titel, $template);
  *   Seiten inhalt = $erge
  */
 $template = str_replace('{container}', $erge, $template);
+
+/*
+ * Seiten Ausgabe
+ */
 tpl_output();
 ?>
