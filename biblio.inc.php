@@ -93,8 +93,11 @@ function display_detail() {
         $detail.='<img src="images/weinbilder/mittel/w'
                 . $d_bild['produkt_nummer']
                 . '.jpg" onerror="this.src=\'images/weinbilder/mittel/blank.jpg\' ">';
+        $detail.='<h2 class="detail_name">'.$d_bild['produkt_name'].'</h2>';
+        $detail.='<br><div class="detail_text">'.$d_bild['produkt_text'].'</div>';
         $detail.='</div>';
     }
+    
     return $detail;
 }
 
