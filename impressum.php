@@ -95,6 +95,6 @@ $template = str_replace('{title}', $titel, $template);
  *   Load des Seiten Inhaltes (container)
  *   Seiten inhalt = $erge
  */
-$template = str_replace('{continer}', $erge, $template);
+$template = str_replace('{container}', $erge, $template);
 tpl_output();
 ?>
