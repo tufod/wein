@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="styles.css" media="screen">
 </head>
 <body>
-<div id="kunde">{kunde}</div>
+{kunde}
     <div class="clearfix"></div>
 <div id="wrapper">
    
