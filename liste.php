@@ -6,7 +6,7 @@ $title='Wein Liste';
 load_tpl('wein.tpl');
 $template = str_replace('{title}', $title, $template);
 $list=list_output('produkt');
-$template = str_replace('{continer}', $list, $template);
+$template = str_replace('{container}', $list, $template);
 //echo ' ';
 tpl_output();
 ?>
