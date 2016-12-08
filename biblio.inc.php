@@ -61,7 +61,7 @@ function login_check() {
 function list_output($table) {
     $con = con_db();
     if ($table == 'produkt') {
-        $sql = 'SELECT produkt_nummer,produkt_name,produkt_beschr,produkt_preis FROM produkt';
+        $sql = 'SELECT produkt_nummer,produkt_name,produkt_beschr,produkt_preis FROM produkt LIMIT 20';
     } else {
         
     }
