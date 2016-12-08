@@ -61,7 +61,7 @@ function login_check() {
 function list_output($table) {
     $con = con_db();
     if ($table == 'produkt') {
-        $sql = 'SELECT produkt_nummer,produkt_name,produkt_beschr,produkt_preis FROM produkt LIMIT 20';
+        $sql = 'SELECT produkt_nummer,produkt_name,produkt_beschr,produkt_preis,produkt_volumen FROM produkt LIMIT 20';
     } else {
         
     }
@@ -80,9 +80,10 @@ function list_output($table) {
 
         //name und kürzbeschreibung
         $list .= '<a href="detail.php?id='
-                . $zeil['produkt_nummer'].'">'
-                . $zeil['produkt_name'].'</a><br>'
-                . $zeil['produkt_beschr'];
+                . $zeil['produkt_nummer'].'"></div>'
+                . '<div class="nameundtext">'.$zeil['produkt_name'].'</a><br>'
+                . $zeil['produkt_beschr'].'<br>'
+                . $zeil['produkt_volumen'].' Liter';
         $list .= '</div>';
         //Preis,Menge und Warenkorp
         $list .= '<div class="mengeUndWarenkorp"><br>';
@@ -118,7 +119,7 @@ function tpl_output() {
 function display_detail() {
     $id = $_GET['id'];
     $con = con_db();
-    $sql = 'SELECT produkt_nummer,produkt_name,produkt_text,produkt_preis FROM produkt'
+    $sql = 'SELECT produkt_nummer,produkt_name,produkt_text,produkt_preis,produkt_volumen FROM produkt'
             .' WHERE produkt_nummer = \''.$id.'\';';
     $res = mysqli_query($con, $sql);
     $detail = '';
@@ -128,7 +129,8 @@ function display_detail() {
                 . $d_bild['produkt_nummer']
                 . '.jpg" onerror="this.src=\'images/weinbilder/mittel/blank.jpg\' ">';
         $detail.='<h2 class="detail_name">'.$d_bild['produkt_name'].'</h2>';
-        $detail.='<br><div class="detail_text">'.$d_bild['produkt_text'].'</div><br>';
+        $detail.='<br><div class="detail_text">'.$d_bild['produkt_text'].'<br>'
+                .$d_bild['produkt_volumen'].' Liter</div>';
         $detail.= '<div class="detail_waren"><br>';
         $detail.= $d_bild['produkt_preis'] . ' €/stück';
         $detail.= ' <input type="button" class="warenkorp" value="warenkorp">';
