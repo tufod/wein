@@ -29,6 +29,7 @@ body {
     margin-bottom: 5px;
     padding: 20px 20px;
     border-collapse: collapse;
+    display: inline-block;
 }
 
 .detail_name {
