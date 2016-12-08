@@ -61,7 +61,10 @@ function login_check() {
 function list_output($table) {
     $con = con_db();
     if ($table == 'produkt') {
-        $sql = 'SELECT produkt_nummer,produkt_name,produkt_beschr,produkt_preis,produkt_volumen FROM produkt LIMIT 20';
+        $sql = 'SELECT produkt_nummer,produkt_name,produkt_beschr,produkt_preis,produkt_volumen,LOWER(land_id) AS land_id '
+                . 'FROM produkt '
+                . 'JOIN weingut ON weingut_id = id_weingut '
+                . ' LIMIT 20';
     } else {
         
     }
@@ -81,7 +84,8 @@ function list_output($table) {
         //name und kürzbeschreibung
         $list .= '<a href="detail.php?id='
                 . $zeil['produkt_nummer'].'"></div>'
-                . '<div class="nameundtext">'.$zeil['produkt_name'].'</a><br>'
+                . '<div class="nameundtext">'.$zeil['produkt_name'].'</a>'
+                . '<img class="l_flag" src="images/flags/1x1/'.$zeil['land_id'].'.svg"><br>'
                 . $zeil['produkt_beschr'].'<br>'
                 . $zeil['produkt_volumen'].' Liter';
         $list .= '</div>';
@@ -119,7 +123,9 @@ function tpl_output() {
 function display_detail() {
     $id = $_GET['id'];
     $con = con_db();
-    $sql = 'SELECT produkt_nummer,produkt_name,produkt_text,produkt_preis,produkt_volumen FROM produkt'
+    $sql = 'SELECT produkt_nummer,produkt_name,produkt_text,produkt_preis,produkt_volumen,LOWER(land_id) AS land_id '
+            . 'FROM produkt '
+            . 'JOIN weingut ON weingut_id=id_weingut'
             .' WHERE produkt_nummer = \''.$id.'\';';
     $res = mysqli_query($con, $sql);
     $detail = '';
@@ -128,7 +134,8 @@ function display_detail() {
         $detail.='<img class="detail_bild" src="images/weinbilder/mittel/w'
                 . $d_bild['produkt_nummer']
                 . '.jpg" onerror="this.src=\'images/weinbilder/mittel/blank.jpg\' ">';
-        $detail.='<h2 class="detail_name">'.$d_bild['produkt_name'].'</h2>';
+        $detail.='<h2 class="detail_name">'.$d_bild['produkt_name'].'</h2>'
+                . '<img class="d_flag" src="images/flags/4x3/'.$d_bild['land_id'].'.svg">';
         $detail.='<br><div class="detail_text">'.$d_bild['produkt_text'].'<br>'
                 .$d_bild['produkt_volumen'].' Liter</div>';
         $detail.= '<div class="detail_waren"><br>';
