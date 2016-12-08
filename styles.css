@@ -241,10 +241,11 @@ a:hover {
 .mengeUndWarenkorp{
     float: right;
     width: 40%;
+    
 }
 input[type=button][class=warenkorp]{
     float: right;
-     padding:0.1em 1em;
+    padding:0.1em 1em;
     background-image: url(images/header_bg.png);
     border-radius: 3px;
     color:#fff;
