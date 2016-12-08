@@ -58,8 +58,30 @@ function login_check() {
     
     return $kunde;
 }
-function list_output($table) {
+
+function filtrator($filter) {
+    $filtrator="";
+    if(isset($filter['name'])) {
+        $filtrator.=' produkt_name LIKE "%'.$filter['name'].'%"';
+    }
+    if(isset($filter['weingut'])) {
+        $filtrator.=' weingut = '.$filter["weingut"];
+    }
+    if(isset($filter['land'])) {
+        $filtrator.=' land = '.$filter["land"];
+    }
+    
+    return $filtrator;
+}
+
+
+function list_output($table,$list,$input_filter) {
     $con = con_db();
+    $filter="";
+    if(isset($input_filter['filter'])) {
+            $filter.= " WHERE";
+            $filter.=filtrator($input_filter);
+    }
     if ($table == 'produkt') {
         $sql = 'SELECT produkt_nummer,produkt_name,produkt_beschr,'
                 . 'land_name,'
@@ -71,7 +93,7 @@ function list_output($table) {
     } else {
         
     }
-
+    echo $sql;
     $res = mysqli_query($con, $sql);
     $list = '';
     while ($zeil = mysqli_fetch_assoc($res)) {
@@ -256,3 +278,50 @@ function cryptKennwort($input,$runden = 9) {                                //TO
     }
     return crypt($input, sprintf('$2y$%02d$',$runden) . $salz);
 }
+
+function search_feld() {
+ $code='
+    <form action="liste.php" method="get">
+    <input type="hidden" name="filter" value="1">        
+    <input placeholder="Was mochtest du suchen..." type="search" value="" name="name" id="search">
+    <input type="submit" value="Suchen">  
+    </form>';
+    return $code;   
+}
+
+function password_vergleichen($pass1,$pass2){
+    if($pass1==$pass2){
+        return TRUE;
+    } else {
+     return FALSE;
+}
+}
+
+
+
+function schaltjahr($datum_jahr) {
+            if (($datum_jahr % 4 == 0 && $datum_jahr % 100 != 0) || $datum_jahr % 400 == 0) {
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        }
+        function datum_Tag_pruefen($schaltjahr,$datum_monat,$datum_tag){
+         $Monat_30_tag=[4,6,9,11];
+         $Monat_31_tag=[1,3,5,7,8,10,12];
+            if($datum_monat==2 &&(($schaltjahr && $datum_tag==29) || (!$schaltjahr && $datum_tag==28))){
+                return TRUE;
+            }elseif ((in_array($datum_monat,$Monat_30_tag)) && $datum_tag<=30 ) {
+               return TRUE; 
+            }elseif ((in_array($datum_monat,$Monat_31_tag)) && $datum_tag<=31 ) {
+                return TRUE;
+            } else {
+                 return FALSE;
+            }
+           
+      }
+      function datum_pruefen($datum_jahr,$datum_monat,$datum_tag){
+         $schaltjahr=schaltjahr($datum_jahr);
+        $ergebnis=datum_Tag_pruefen($schaltjahr,$datum_monat,$datum_tag);
+        return $ergebnis;
+      }
