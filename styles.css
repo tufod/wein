@@ -12,7 +12,7 @@ body {
 .pro {
     background-color: rgba(255,255,255,0.6);
     border: 3px solid #b9462d;
-    height: 80px;
+    height: 75px;
     width: 95%;
     border-radius: 8px;
     margin-bottom: 5px;
@@ -34,11 +34,14 @@ body {
 
 .detail_name {
     padding-left: 130px;
-   
 }
 
 .detail_bild {
-     display: inline-block;
+    
+     
+}
+figure {
+    
 }
 
 .detail_text {
@@ -49,18 +52,6 @@ body {
     padding-left: 130px;
     float: right;
     clear: both;
-}
-
-.l_flag {
-    width: 15px;
-    height: 15px;
-}
-
-.d_flag {
-    width: 40px;
-    height: 30px;
-    padding-left: 15px;
-    
 }
 
 #kunde {
@@ -78,6 +69,7 @@ body {
     width: 1000px;
     margin:0 auto;
     overflow: auto;
+    position: relative;
 }
 
 /*
@@ -125,7 +117,7 @@ body {
 
 #main h1, #main h2, #main h3 {
     color:#ac2135;
-    background-color: rgba(255,255,255,0);
+    background-color: rgba(255,255,255,0.2);
     margin: 0 0 0.2em 0;
 }
 #main h1 {
@@ -139,6 +131,7 @@ body {
 #main h3 {
     font-size: 1em;
 }
+
 #main p {
     margin: 0 0 0.4em 0;
 }
@@ -149,22 +142,24 @@ body {
 
 
 /*
- * Regestrierungs und Login  und Kunden Konto Seite 
+ * Regestrierungs und Login und Kunden Konto Seite 
  * - Tabellen
  */
-#registry, #login {
+#registry, #login, #kontakt {
     padding:auto;
     background-position: center;
 }
-#registry_table, #login_table
+#registry_table, #login_table, #kontakt_table
 {
     margin: 0px auto;
 }
-#registry_table1, #login_table
+#registry_table1, #login_table1, #kontakt_table1
 {
    
-   /* margin: 0px auto; */
+    margin: 0px left; 
 }
+
+
 #main h1a {
     margin: 0 0 0.2em 0; 
     font-size: 1.5em;
@@ -196,6 +191,31 @@ font-size: 1.2em;
                 width: 47%; 
                 float: right;
             }
+            
+/*
+ * Kontakt Seite
+ * Info Zeile über Eingabe Feld (textarea)
+ */
+#kontakt_Infozeile{
+                
+    /* padding:auto; */
+    /* background-position: center; */
+    background-color:rgba(255,255,255,0.7);
+    width: 500px;
+    height: 20px;
+    color:#ac2135;
+    background-color: rgba(255,255,255,0.5);
+    margin: 0 0 0.2em 0;
+    font-size: 0.9em;
+    
+            }            
+            
+#history{
+            text-decoration: none;
+            padding: 0px;
+            margin: 0px;
+            text-align: justify;
+            } 
 
 
 
@@ -215,12 +235,23 @@ font-size: 1.2em;
     padding:5px 20px;
     background-color: rgba(172,33,53,0.6);
 }
+#search {
+    position: absolute;  
+    right: 0;
+    margin: auto;
+    color:#fff;
+    background-color: rgba(172,33,53,0.6);
+}
+
+
 #footer a{
     color: #fff;
     text-decoration: none;
 }
-
-
+#copyright{
+    margin: 5px 5px 5px 5px;
+   text-align: center;
+}
 /*
  * Schaltflächen
  */
@@ -261,15 +292,6 @@ input[type=button][class=warenkorp]{
     
 }
 .bildUndName{
-    padding-top: 5px;
-    width: 50%;
-    
-    
-}
-
-.nameundtext{
-    padding-left: 5px;
     float: left;
     width: 50%;
-    display: inline-block;
 }
