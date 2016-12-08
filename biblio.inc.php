@@ -3,7 +3,7 @@ $_SERVER='localhost';
 // database
 
 function con_db() {
-    $con = mysqli_connect('localhost', 'root', '');
+    $con = mysqli_connect('localhost', 'root', '');             //tauschen zu globalen variablen
     mysqli_set_charset($con, 'utf8');
     mysqli_select_db($con, 'weinhandel_test');
     return $con;
@@ -104,7 +104,7 @@ function list_output($table) {
     return $list;
 }
 
-//template
+//template khaled
 function load_tpl($load) {
     global $template;
     $template = file_get_contents($load);
@@ -151,17 +151,17 @@ function display_detail() {
 
 //warenkorb_check tomas
 
-function warenkorb_id($benutzer) {
+function warenkorb_id($id_benutzer) {
     if(!isset($_SESSION['warenkorb'])) {
        $con = con_db();
-       $sql = 'SELECT id_warenkorb FROM warenkorb WHERE benutzer_id='.$benutzer.' AND ISNULL(rechung_id)';
+       $sql = 'SELECT id_warenkorb FROM warenkorb WHERE benutzer_id='.$id_benutzer.' AND ISNULL(rechung_id)';
        $res = mysqli_query($con, $sql);
        if (!mysqli_affected_rows($con)==0) {
        $warenkorb = mysqli_fetch_assoc($res); 
        $act_warenkorb=$warenkorb['id_warenkorb'];
        }
        else {
-       $act_warenkorb=warenkorb_new($benutzer);
+       $act_warenkorb=warenkorb_new($id_benutzer);
        }      
     }     
  return $act_warenkorb;
@@ -169,18 +169,18 @@ function warenkorb_id($benutzer) {
 
 //warenkorb_new tomas
 
-function warenkorb_new($benutzer) {
+function warenkorb_new($id_benutzer) {
     $con = con_db();
-    $sql = 'INSERT INTO warenkorb(benutzer_id) VALUES ('.$benutzer.')';
+    $sql = 'INSERT INTO warenkorb(benutzer_id) VALUES ('.$id_benutzer.')';
     mysqli_query($con, $sql);
     $id_warenkorb=mysqli_insert_id($con);
     return $id_warenkorb;
 }
 
-//email senden mit id_benutzer
+//email senden mit id_benutzer                              //TODO email server konfigurieren
 
-function email2benutzer($benutzer,$action) {
-    $empfaenger= holab($benutzer,'email');
+function email2benutzer($id_benutzer,$action) {
+    $empfaenger= holab($id_benutzer,'email');
     
 switch ($action) {
     case "aktivation" :
@@ -203,22 +203,39 @@ switch ($action) {
     // $header .= "Cc: $cc\r\n";  // falls an CC gesendet werden soll
     $header .= "X-Mailer: PHP ". phpversion();
 
-    echo mail($empfaenger,$betreff,$text,$header);
+    echo mail($empfaenger,$betreff,$text,$header);  //zu email testen schrein echo vor der funktion mail
+                                                    // bei dem output 1 war email geschickt
 }
 
-//holt benutzer datene aus datenbank
-
-function holab($benutzer,$was) {
+//holt benutzer daten aus datenbank ab (kann auch kennwort abholen) $was kann zb. vorname, nachname, anrede... sein.
+function holab($id_benutzer,$was) {
     $con = con_db();
-    $sql = 'SELECT '.$was.' FROM benutzer WHERE (id_benutzer='.$benutzer.')';
+    $sql = 'SELECT '.$was.' FROM benutzer JOIN zugang ON benutzer.zugang_id=zugang.id_zugang WHERE (id_benutzer='.$id_benutzer.')';
     $res=mysqli_query($con, $sql);
     $das=mysqli_fetch_assoc($res);
     return $das["$was"];
 }
 
-//
-function konto_aktivation($benutzer) {
+//funktion fur aktivieren benutzer konto, return 1 wenn konto aktiviert war
+function konto_aktivation($id_benutzer) {
     $con = con_db();
-    $sql = 'UPDATE benutzer SET email_aktiv=1 WHERE benutzer = '.$benutzer.';';
+    $sql = 'UPDATE benutzer SET email_aktiv=1 WHERE email_aktiv=0 AND id_benutzer = '.$id_benutzer.';';
     mysqli_query($con, $sql);
- }
+    if (mysqli_affected_rows($con)==1) {
+        uncon_db($con);
+        return 1;                                           //TODO einstellen log
+    }
+    else {
+        uncon_db($con);
+        return 0;                                           //TODO einstellen log
+    }
+}
+//generiert salz und macht sichers hash fur kennwort
+function cryptKennwort($input,$runden = 9) {                                //TODO salz in datenbank speichern fur login_check
+    $salz = "";
+    $salzCharset= array_merge(range('A', 'Z'),range('a','z'),range(0,9));
+    for($i=0;$i<22;$i++) {
+        $salz.= $salzCharset[array_rand($salzCharset)];
+    }
+    return crypt($input, sprintf('$2y$%02d$',$runden) . $salz);
+}
