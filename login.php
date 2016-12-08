@@ -1,40 +1,33 @@
 <?php
-
-/*
- * Session Start ( Damit die Seite in die Laufende Session eingebunden ist )
- */
 session_start();
-
 /*
  *  zusätzliche datei die benötigt wird zum ausführen der Seite
  */
 require_once './biblio.inc.php';
-
-$template = '';
-
-/*
- *  Titel der Seite
- */
-$titel = 'Login';
-
 /*
  *  Load des Wein Template 
  */
 load_tpl('wein.tpl');
-
+/*
+ *  Titel der Seite
+ */
+$titel = 'Login';
+/*
+ *  Ausgabe des Titels der Seite
+ */
+$template = str_replace('{title}', $titel, $template);
 /*
  * Login Überschrift
- * eMail Adress Zeile
- * Password eingabe Feld
  */
-
-$kunde = '';
-
-
+$kunde_Info = '';
+/*
+ *   Anzeige Kunde rechts oben auf der Seite
+ */
+$template = str_replace('{kunde}', $kunde_Info, $template);
 /*
  *  $erge = Seiten inhalt
  */
-$erge = '<h1>Login</h1>
+$login_container = '<h1>Login</h1>
         <form action="login_check.inc.php" method="post">
             <table id="login_table">
                 <tr>
@@ -51,17 +44,16 @@ $erge = '<h1>Login</h1>
  */
 if (isset($_SESSION['id_benutzer'])) {
     if ($_SESSION['id_benutzer'] == 0) {
-        $erge .= '<tr>
+        $login_container .= '<tr>
                    <td id="login"></td><td id="login">Geben Sie bitte die Email und Password!</td>
                 </tr>';
     }
 }
-
 /*
  * Hinweis Wenn mann nicht auf der Seite Regestriert ist (link zur regestrierungs.php)
  * Hinweis wenn man das Password Vergessen hat ()
  */
-$erge .= '</table> 
+$login_container .= '</table> 
              </form>  
             <table id="login_table">
                 <tr> 
@@ -72,20 +64,10 @@ $erge .= '</table>
                 </tr>   
             </table>';
 /*
- *   Anzeige Kunde rechts oben auf der Seite
- */
-$template = str_replace('{kunde}', $kunde, $template);
-
-/*
- *  Ausgabe des Titels der Seite
- */
-$template = str_replace('{title}', $titel, $template);
-
-/*
  *   Load des Seiten Inhaltes (container)
  *   Seiten inhalt = $erge
  */
-$template = str_replace('{container}', $erge, $template);
+$template = str_replace('{container}', $login_container, $template);
 
 /*
  * Seiten Ausgabe
