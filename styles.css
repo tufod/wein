@@ -34,14 +34,11 @@ body {
 
 .detail_name {
     padding-left: 130px;
+   
 }
 
 .detail_bild {
-    
-     
-}
-figure {
-    
+     display: inline-block;
 }
 
 .detail_text {
@@ -62,6 +59,8 @@ figure {
 .d_flag {
     width: 40px;
     height: 30px;
+    padding-left: 15px;
+    
 }
 
 #kunde {
@@ -265,10 +264,12 @@ input[type=button][class=warenkorp]{
     padding-top: 5px;
     width: 50%;
     
+    
 }
 
 .nameundtext{
     padding-left: 5px;
     float: left;
     width: 50%;
+    display: inline-block;
 }
