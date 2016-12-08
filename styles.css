@@ -50,8 +50,8 @@ figure {
 
 .detail_waren {
     padding-left: 130px;
-   
-   
+    float: right;
+    clear: both;
 }
 
 #kunde {
