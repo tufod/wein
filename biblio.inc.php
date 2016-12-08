@@ -320,7 +320,7 @@ function schaltjahr($datum_jahr) {
             }
            
       }
-      function datum_pruefen($datum_jahr,$datum_monat,$datum_tag){
+      function datum_pruefen($datum_jahr, $datum_monat, $datum_tag) {
          $schaltjahr=schaltjahr($datum_jahr);
         $ergebnis=datum_Tag_pruefen($schaltjahr,$datum_monat,$datum_tag);
         return $ergebnis;
