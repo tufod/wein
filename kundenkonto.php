@@ -16,7 +16,7 @@ echo'session-status:', session_status(),'<br>';
  require_once './biblio.inc.php';
 
 $template='';
-$kunde=login_check();
+$kunde_Info=login_check();
 
 /*
  *  Ausgabe des Titels der Seite
@@ -36,14 +36,14 @@ $template = str_replace('{title}', $titel, $template);
 /*
  * Anzeige Kunde rechts oben auf der Seite
  */
-$template = str_replace('{kunde}', $kunde, $template);
+$template = str_replace('{kunde}', $kunde_Info, $template);
 
 
 
 /*
  *  $erge = Seiten inhalte
  */
-$erge='<div id="">
+$regestrierung_container='<div id="">
         
         <h1>Kunden Konto</h1>
     <div id="leftside">
@@ -144,7 +144,7 @@ $erge='<div id="">
  *   Load des Seiten Inhaltes (container)
  *   Seiten inhalt = $erge
  */
-$template = str_replace('{container}', $erge, $template);
+$template = str_replace('{container}', $regestrierung_container, $template);
 
 /*
  * Seiten Ausgabe
