@@ -48,7 +48,7 @@ function benutzer_Email_check($email) {
 }
 
 function login_check() {
-    if (isset($_SESSION['id_benutzer'])) {
+    if (isset($_SESSION['id_benutzer']) && $_SESSION['id_benutzer']>0) {
         $kunde = '<div id="kunde"><a class="button" href="#">'
                 . $_SESSION['vorname']
                 . '</a><a class="button" href="#">logout</a><a class="button" href="#">Warenkorp</a></div>';
@@ -104,7 +104,7 @@ function list_output($table) {
     return $list;
 }
 
-//template khaled
+//template
 function load_tpl($load) {
     global $template;
     $template = file_get_contents($load);
