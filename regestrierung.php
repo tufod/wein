@@ -1,42 +1,30 @@
 <?php
-/*
- * Session Start ( Damit die Seite in die Laufende Session eingebunden ist )
- */
 session_start();
 /*
  *  zusätzliche datei die benötigt wird zum ausführen der Seite
  */
-
-  
-  require_once './biblio.inc.php';
-  
-  
-$template='';
-$kunde=login_check();
-
-/*
- *  Ausgabe des Titels der Seite
- */
-$titel='regestrierung';
-
+require_once './biblio.inc.php';
 /*
  *  Load des Wein Template 
  */
-load_tpl('wein.tpl'); 
-
-
-$kunde='';
-
-
+load_tpl('wein.tpl');
+/*
+ *  Ausgabe des Titels der Seite
+ */
+$titel = 'regestrierung';
+/*
+ *  Ausgabe des Titels der Seite
+ */
+$template = str_replace('{title}', $titel, $template);
+$kunde_Info = '';
 /*
  * Anzeige Kunde rechts oben auf der Seite
  */
-$template = str_replace('{kunde}', $kunde, $template);
-
+$template = str_replace('{kunde}', $kunde_Info, $template);
 /*
- *  $erge = Seiten inhalte
+ *  $regestrierung_container = Seiten inhalte
  */
-$erge='<div id="main">
+$regestrierung_container = '<div id="main">
         <h1>Registrierung</h1>
         <form action="regestrierung_check.inc.php" method="post">
             <table id="registry_table">
@@ -75,8 +63,15 @@ $erge='<div id="main">
                 </tr>  
                 <tr> 
                     <td id="registry">e-Mail adresse:</td><td><input id="registry" type="email" size="20" name="email" value="khaled@hotmail.com" required="required" ></td>
-                </tr>  
-                <tr> 
+                </tr> '; 
+if($_SESSION['id_benutzer'] == 'brief'){
+                    $regestrierung_container .='<tr> 
+                    <td id="registry"></td><td>Email existiert</td>
+                </tr> ';
+                  
+                    
+}
+                $regestrierung_container .='<tr> 
                     <td id="registry">password:</td><td><input id="registry1" type="password" size="20" name="password" required="required" value="tanz"></td>
                 </tr>  
                 <tr>
@@ -86,22 +81,22 @@ $erge='<div id="main">
                     <td id="registry"></td><td id="erorr"></td>
                 </tr>
                  <tr>
-                    <td id="registry"><input class="button" type="submit" value="ändern"><input class="button" type="submit" value="regestrieren"></td>
+                    <td id="registry"><input class="button" type="submit" value="ändern"><input class="button" type="submit" value="regestrieren"></td>';
+                if($_SESSION['id_benutzer'] !== 'brief'){
+                    $regestrierung_container .='<td><a class="button" href="login.php">login</a></td>';
+                    $_SESSION['id_benutzer'] =0;
                     
-                </tr>
-                </table>
-               
+}
+                    
+                $regestrierung_container .='</tr>
+                </table>   
         </form>     
        </div>';
-
-$template = str_replace('{kunde}', $kunde, $template);
 /*
  *   Load des Seiten Inhaltes (container)
  *   Seiten inhalt = $erge
  */
-$template = str_replace('{container}', $regestr, $template);
-$template = str_replace('{container}', $erge, $template);
-
+$template = str_replace('{container}', $regestrierung_container, $template);
 /*
  * Seiten Ausgabe
  */
