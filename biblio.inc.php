@@ -132,7 +132,7 @@ function display_detail() {
         $detail.= '<div class="detail_waren"><br>';
         $detail.= $d_bild['produkt_preis'] . ' €/stück';
         $detail.= ' <input type="button" class="warenkorp" value="warenkorp">';
-        $detail.= ' <input type="button" class="warenkorp" value="zurück">';
+        $detail.= ' <input type="button" class="warenkorp" value="zurück" onClick="history.back()">';
         $detail.= '<input type="button" class="operation" value="-" onclick="operation(\'-\','
                 . $d_bild['produkt_nummer'] . ')">';
         $detail.= ' <input type="text" name="menge" id="'
