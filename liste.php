@@ -1,20 +1,32 @@
 <?php
+ /*
+  * Session Start ( Damit die Seite in die Laufende Session eingebunden ist )
+  */
 session_start();
+
 /*
  *  zus�tzliche datei die ben�tigt wird zum ausf�hren der Seite
  */
 require_once './biblio.inc.php';
+$list='';
+
 /*
  *   Load des Seiten Aufbau Templates (Wein Template)
  *   Seiten Backround Bild unf vorgaben
  */
 
+
 load_tpl('wein.tpl');
+
+
+$template = str_replace('{search}',$search, $template);
 
 /*
  *  Titel der Seite
  */
 $title='Wein Liste';
+$search= search_feld();
+
 /*
  *   Titel Anzeige der Seite
  */
@@ -29,6 +41,12 @@ $template = str_replace('{kunde}', $kunde_Info, $template);
  *  
  */
 $liste_container=list_output('produkt'); 
+if(isset($_GET['filter'])) {
+    $list.='';
+    
+    
+}
+$list.=list_output('produkt',$list,$_GET); 
 /*
  *   Load des Seiten Inhaltes (container)
  *   Seiten inhalt = $erge
