@@ -20,8 +20,6 @@ function operation(zeichen,idNummer) {
         }
     }
 }
-var AngezeigteBreite = 500;
-var GespeicherteBreite = 0;
 
 function BildAnpassen(Bild) {
 var AngezeigteBreite = 500;
