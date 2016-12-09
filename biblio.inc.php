@@ -59,8 +59,6 @@ function login_check() {
     return $kunde;
 }
 
-//concatiniert sql - filters
-//feld kann sein produkt_name,produkt_volumen,name_weintyp,name_weingut,land_name,name_region,name_kontinent
 function filtrator($filter) {
     $filtrator="";
     $filtrator.=filtrator_child($filtrator,$filter,'produkt_name');
@@ -73,25 +71,23 @@ function filtrator($filter) {
     return $filtrator;
 }
 
-//unter funktion nur fur funktion filtrator (generiert SQL)- kontroliert ob ist in $_GET eingestelltest filter und
-//ob ist das Filter erster in der Reihe wenn nein steckt noch AND
+//feld kann sein produkt_name,produkt_volumen,name_weintyp,name_weingut,land_name,name_region,name_kontinent
 function filtrator_child($filtrator,$filter,$feld) {
     $filtrator_child='';
     if(strlen($filtrator)>0) {
         $filtrator_child.=" AND ";
     }
-    if((isset($filter[$feld])) && (strlen($filter[$feld])>0)) {
+    if ((isset($filter[$feld])) && (strlen($filter[$feld])>0)) {
         $filtrator_child.=$feld.' LIKE ';
-    $filtrator_child.='"%'.$filter[$feld].'%"';
-    }
+        $filtrator_child.='"%'.$filter[$feld].'%"';
+        }
     return $filtrator_child;
 }
- 
-//generiert html fur filter formular 
+ //
+
 function filter_div($input_filter) {
     $filter_form='<div class="pro">';
     $filter_form.='<form action="./liste.php" method="GET">';
-    $filter_form.='<input type="hidden" name="filter" value="1">';
     $filter_form.=' Name '.generate_html_form_datalist('produkt_name');;
     $filter_form.=' Typ '.generate_html_form_datalist('name_weintyp');
     $filter_form.=' Weingut '.generate_html_form_datalist('name_weingut');
@@ -140,14 +136,15 @@ function list_output($input_filter) {
     $con = con_db();
     $list="";
     $filter="";
-    if(isset($input_filter['filter'])) {
+    var_dump($input_filter);
+    if(array_filter($input_filter)) {
             $filter.= " WHERE ";
             $filter.=filtrator($input_filter);
     }
     //ich hole inhalt fur filter div kontainer
-    if(isset($_GET['filter'])) {
+    
     $list.=filter_div($input_filter);
-    }
+    
     $sql = 'SELECT produkt_nummer,produkt_name,produkt_beschr,produkt_preis FROM produkt p JOIN '
             . 'weintyp w ON p.weintyp_id=w.id_weintyp JOIN weingut wg ON '
             . 'p.weingut_id=wg.id_weingut JOIN laender l ON wg.land_id=l.id_land JOIN region r ON'
@@ -190,6 +187,7 @@ function list_output($input_filter) {
     uncon_db($con);
     return $list;
 }
+
 //template
 function load_tpl($load) {
     global $template;
@@ -204,12 +202,7 @@ function tpl_output() {
 function display_detail() {
     $id = $_GET['id'];
     $con = con_db();
-    $sql = 'SELECT produkt_nummer,produkt_name,produkt_text,produkt_preis,'
-            . 'land_name,'
-            . 'produkt_volumen,LOWER(land_id) AS land_id '
-            . 'FROM produkt '
-            . 'JOIN weingut ON weingut_id=id_weingut '
-            . 'JOIN laender ON id_land = land_id'
+    $sql = 'SELECT produkt_nummer,produkt_name,produkt_text,produkt_preis FROM produkt'
             .' WHERE produkt_nummer = \''.$id.'\';';
     $res = mysqli_query($con, $sql);
     $detail = '';
@@ -218,15 +211,12 @@ function display_detail() {
         $detail.='<img class="detail_bild" src="images/weinbilder/mittel/w'
                 . $d_bild['produkt_nummer']
                 . '.jpg" onerror="this.src=\'images/weinbilder/mittel/blank.jpg\' ">';
-        $detail.='<h2 class="detail_name">'.$d_bild['produkt_name'].'</h2>'
-                . '<img class="d_flag" src="images/flags/4x3/'.$d_bild['land_id'].'.svg"'
-                . 'title="'.$d_bild['land_name'].'"><br>';
-        $detail.='<br><div class="detail_text">'.$d_bild['produkt_text'].'<br>'
-                .$d_bild['produkt_volumen'].' Liter</div>';
+        $detail.='<h2 class="detail_name">'.$d_bild['produkt_name'].'</h2>';
+        $detail.='<br><div class="detail_text">'.$d_bild['produkt_text'].'</div><br>';
         $detail.= '<div class="detail_waren"><br>';
         $detail.= $d_bild['produkt_preis'] . ' €/stück';
         $detail.= ' <input type="button" class="warenkorp" value="warenkorp">';
-        $detail.= ' <input type="button" class="warenkorp" value="zurück" onClick="history.back()">';
+        $detail.= ' <input type="button" class="warenkorp" value="zurück">';
         $detail.= '<input type="button" class="operation" value="-" onclick="operation(\'-\','
                 . $d_bild['produkt_nummer'] . ')">';
         $detail.= ' <input type="text" name="menge" id="'
@@ -336,47 +326,9 @@ function cryptKennwort($input,$runden = 9) {                                //TO
 
 function search_feld() {
  $code='
-    <form action="liste.php" method="get">
-    <input type="hidden" name="filter" value="1">        
-    <input placeholder="Was mochtest du suchen..." type="search" value="" name="name" id="search">
+    <form action="liste.php" method="get">        
+    <input placeholder="Was mochtest du suchen..." type="search" value="" name="produkt_name" id="search">
     <input type="submit" value="Suchen">  
     </form>';
     return $code;   
 }
-
-function password_vergleichen($pass1,$pass2){
-    if($pass1==$pass2){
-        return TRUE;
-    } else {
-     return FALSE;
-}
-}
-
-
-
-function schaltjahr($datum_jahr) {
-            if (($datum_jahr % 4 == 0 && $datum_jahr % 100 != 0) || $datum_jahr % 400 == 0) {
-                return TRUE;
-            } else {
-                return FALSE;
-            }
-        }
-        function datum_Tag_pruefen($schaltjahr,$datum_monat,$datum_tag){
-         $Monat_30_tag=[4,6,9,11];
-         $Monat_31_tag=[1,3,5,7,8,10,12];
-            if($datum_monat==2 &&(($schaltjahr && $datum_tag==29) || (!$schaltjahr && $datum_tag==28))){
-                return TRUE;
-            }elseif ((in_array($datum_monat,$Monat_30_tag)) && $datum_tag<=30 ) {
-               return TRUE; 
-            }elseif ((in_array($datum_monat,$Monat_31_tag)) && $datum_tag<=31 ) {
-                return TRUE;
-            } else {
-                 return FALSE;
-            }
-           
-      }
-      function datum_pruefen($datum_jahr, $datum_monat, $datum_tag) {
-         $schaltjahr=schaltjahr($datum_jahr);
-        $ergebnis=datum_Tag_pruefen($schaltjahr,$datum_monat,$datum_tag);
-        return $ergebnis;
-      }
