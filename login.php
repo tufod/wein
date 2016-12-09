@@ -37,7 +37,7 @@ $login_container = '<h1>Login</h1>
                     <td id="login">password:</td><td><input id="registry" type="password" size="20" name="password" value="12345" ></td>
                 </tr>  
                 <tr>
-                   <td id="login"></td><td id="login"><input class="button" type="submit" value="Login"></td>
+                   <td id="login"></td><td id="login"><input class="button" type="submit" id="login_buttom" value="Login"></td>
                 </tr>';
 /*
  * Prüfung ob der Benutzer eine exestierende eMail und das richtige Password hat
