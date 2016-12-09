@@ -51,7 +51,7 @@ function login_check() {
     if (isset($_SESSION['id_benutzer']) && $_SESSION['id_benutzer']>0) {
         $kunde = '<div id="kunde"><a class="button" href="#">'
                 . $_SESSION['vorname']
-                . '</a><a class="button" href="#">logout</a><a class="button" href="#">Warenkorp</a></div>';
+                . '</a><a class="button" href="logout.php">logout</a><a class="button" href="#">Warenkorp</a></div>';
     } else {
         $kunde = '<div id="kunde"><a class="button" href="login.php">login</a><a class="button" href="regestrierung.php">regestrierung</a></div>';
     }
