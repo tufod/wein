@@ -1,7 +1,7 @@
    <?php 
 session_start();
 /*
- *  zusätzliche datei die benötigt wird zum ausführen der Seite
+ *  zusätzliche datei die benötigt wird zum ausführen der Seite +
  */
 require_once './biblio.inc.php';
 /*
