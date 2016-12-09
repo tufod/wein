@@ -4,25 +4,34 @@
 session_start();
 require_once './biblio.inc.php';
 $benutzer = benutzer_Email_check($_POST['email']);
+$_SESSION['regestierung']['anrede'] = $_POST['anrede'];
+$_SESSION['regestierung']['vorname'] = $_POST['vorname'];
+$_SESSION['regestierung']['nachname'] = $_POST['nachname'];
+$_SESSION['regestierung']['geburtsdatum_jahr'] = $_POST['geburtsdatum_jahr'];
+$_SESSION['regestierung']['geburtsdatum_monat'] = $_POST['geburtsdatum_monat'];
+$_SESSION['regestierung']['geburtsdatum_tag'] = $_POST['geburtsdatum_tag'];
+$_SESSION['regestierung']['strasse'] = $_POST['strasse'];
+$_SESSION['regestierung']['hausnummer'] = $_POST['hausnummer'];
+$_SESSION['regestierung']['ort'] = $_POST['ort'];
+$_SESSION['regestierung']['plz'] = $_POST['plz'];
+$_SESSION['regestierung']['telefon'] = $_POST['telefon'];
+$_SESSION['regestierung']['email'] = $_POST['email'];
+
 if ($benutzer['id_benutzer'] > 0) {
     $_SESSION['id_benutzer'] = ',email_falsch';
     header('Location: regestrierung.php');
     exit;
-}
-else {
-    $_SESSION['id_benutzer']='';
+} else {
+    $_SESSION['id_benutzer'] = '';
     $anrede = $_POST['anrede'];
     $vorname = $_POST['vorname'];
-   if (preg_match("/^[a-zA-Z .`-\´öäü]*$/", $vorname)==0) {
+    if (preg_match("/^[a-zA-Z .`-\´öäü]*$/", $vorname) == 0) {
         $_SESSION['id_benutzer'] = ',vorname_falsch';
     }
-
     $nachname = $_POST['nachname'];
-    if ( preg_match("/^[a-zA-Z .`-\´öäü]*$/", $nachname)==0) {
-       $_SESSION['id_benutzer'] .= ',nachname_falsch';
+    if (preg_match("/^[a-zA-Z .`-\´öäü]*$/", $nachname) == 0) {
+        $_SESSION['id_benutzer'] .= ',nachname_falsch';
     }
-    
-
     $geburtsdatum_jahr = $_POST['geburtsdatum_jahr'];
     $geburtsdatum_monat = $_POST['geburtsdatum_monat'];
     $geburtsdatum_tag = $_POST['geburtsdatum_tag'];
@@ -30,45 +39,26 @@ else {
     if (!$datum_pruefen) {
         $_SESSION['id_benutzer'] .= ',datum_falsch';
     }
-
-    $ort = $_POST['ort'];
-    if ( preg_match("/^[a-zA-Z .`-\´öäü]*$/", $ort)==0) {
-        $_SESSION['id_benutzer'] .= ',ort_falsch';
-    }
-
-
     $strasse = $_POST['strasse'];
-   
-    if ( preg_match("/^[a-zA-Z öä.ü-]*$/", $strasse)==0) {
+    if (preg_match("/^[a-zA-Z öä.ü-]*$/", $strasse) == 0) {
         $_SESSION['id_benutzer'] .= ',strasse_falsch';
     }
-
-   
     $hausnummer = $_POST['hausnummer'];
-    
-    if ( preg_match("/^[0-9]+[a-z]*$/", $hausnummer) == 0) {
+    if (preg_match("/^[0-9]+[a-z]*$/", $hausnummer) == 0) {
         $_SESSION['id_benutzer'] .= ',hausnummer_falsch';
     }
-    
-    
     $ort = $_POST['ort'];
-    
-    if ( preg_match("/^[a-zA-Z .`-\´öäü]*$/", $ort) == 0) {
+    if (preg_match("/^[a-zA-Z .`-\´öäü]*$/", $ort) == 0) {
         $_SESSION['id_benutzer'] .= ',ort_falsch';
     }
-
-   
-    $plz = $_POST['plz'];  
-    if ( preg_match("/^[0-9]{0,9}$/", $plz) ==0) {
+    $plz = $_POST['plz'];
+    if (preg_match("/^[0-9]{0,9}$/", $plz) == 0) {
         $_SESSION['id_benutzer'] .= ',plz_falsch';
     }
-
-  
-    $telefon = $_POST['telefon'];   
-    if ( preg_match("/^[0-9]{0,15}$/", $telefon) ==0) {
+    $telefon = $_POST['telefon'];
+    if (preg_match("/^[0-9]{0,15}$/", $telefon) == 0) {
         $_SESSION['id_benutzer'] .= ',telefon_falsch';
     }
-
     $email = $_POST['email'];
     $password1 = $_POST['password1'];
     $password2 = $_POST['password2'];
@@ -76,17 +66,19 @@ else {
     if (!$vergleichung) {
         $_SESSION['id_benutzer'] .= ',password_falsch';
     }
-    
-    if($_SESSION['id_benutzer'] !=''){
+    if ($_SESSION['id_benutzer'] != '') {
         header('Location: regestrierung.php');
         exit;
     }
 //    header('Location: regestrierung.php');
 //        exit;
-    $con=con_db();
-     $sql='';
-    //email2benutzer($id_benutzer, 'aktivation');
+    $con = con_db();
+    $sql = '';
    
+
     uncon_db($con);
+     email2benutzer($benutzer['id_benutzer'], 'aktivation');
+     header('Location: regestrierung.php');
+        exit;
 }
 ?>
