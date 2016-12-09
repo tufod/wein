@@ -85,7 +85,7 @@ function filtrator_child($filtrator,$filter,$feld) {
 }
 
 function filter_div($input_filter) {
-    $filter_form='<div class="pro">';
+    $filter_form='<div class="filter">';
     $filter_form.='<form action="./liste.php" method="GET">';
     $filter_form.=' Name '.generate_html_form_datalist('produkt_name');
     $filter_form.=' Typ '.generate_html_form_datalist('name_weintyp');
@@ -164,13 +164,13 @@ function list_output($input_filter) {
                 . '<div class="nameundtext">'.$zeil['produkt_name'].'</a>'
                 . '<img class="l_flag" src="images/flags/1x1/'.$zeil['land_id'].'.svg" '
                 . 'title="'.$zeil['land_name'].'"><br>'
-                . $zeil['produkt_beschr'].'<br>'
-                . $zeil['produkt_volumen'].' Liter';
+                . '<div class="beschreib">'.$zeil['produkt_beschr'].'</div>'
+                . '<div class="liter">'.$zeil['produkt_volumen'].' Liter</div>';
         $list .= '</div>';
         //Preis,Menge und Warenkorp
         $list .= '<div class="mengeUndWarenkorp"><br>';
         $list .= $zeil['produkt_preis'] . ' €/stück';
-        $list .= ' <input type="button" class="warenkorp" value="warenkorp">';
+        $list .= ' <input type="button" class="warenkorp" value="Warenkorb" onClick="warenkorb.php">';
         $list .= '<input type="button" class="operation" value="-" onclick="operation(\'-\','
                 . $zeil['produkt_nummer'] . ')">';
         $list .= ' <input type="text" name="menge" id="'
@@ -203,11 +203,13 @@ function display_detail() {
     $id = $_GET['id'];
     $con = con_db();
     $sql = 'SELECT produkt_nummer,produkt_name,produkt_text,produkt_preis,'
-            . 'land_name,'
+            . 'land_name,name_weintyp,name_region,name_weingut,'
             . 'produkt_volumen,LOWER(land_id) AS land_id '
             . 'FROM produkt '
             . 'JOIN weingut ON weingut_id=id_weingut '
             . 'JOIN laender ON id_land = land_id '
+            . 'JOIN weintyp ON id_weintyp=weintyp_id '
+            . 'JOIN region ON id_region=region_id '
             .' WHERE produkt_nummer = \''.$id.'\';';
     $res = mysqli_query($con, $sql);
     $detail = '';
@@ -218,12 +220,14 @@ function display_detail() {
                 . '.jpg" onerror="this.src=\'images/weinbilder/mittel/blank.jpg\' ">';
         $detail.='<h2 class="detail_name">'.$d_bild['produkt_name'].'</h2>'
                 . '<img class="d_flag" src="images/flags/4x3/'.$d_bild['land_id'].'.svg"'
-                . 'title="'.$d_bild['land_name'].'"><br>';
+                . 'title="'.$d_bild['land_name'].'">';
+        $detail.= '<div class="kategorie"><h4>Weintyp</h4>: '.$d_bild['name_weintyp'].''
+                . ', <h4> Region: </h4>'.$d_bild['name_region'].', <h4> Weingut: </h4>'.$d_bild['name_weingut'].'</div><br>';
         $detail.='<br><div class="detail_text">'.$d_bild['produkt_text'].'<br>'
                 .$d_bild['produkt_volumen'].' Liter</div>';
         $detail.= '<div class="detail_waren"><br>';
         $detail.= $d_bild['produkt_preis'] . ' €/stück';
-        $detail.= ' <input type="button" class="warenkorp" value="warenkorp">';
+        $detail.= ' <input type="button" class="warenkorp" value="Warenkorb">';
         $detail.= ' <input type="button" class="warenkorp" value="zurück" onClick="history.back()">';
         $detail.= '<input type="button" class="operation" value="-" onclick="operation(\'-\','
                 . $d_bild['produkt_nummer'] . ')">';
