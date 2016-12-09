@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Session Start ( Damit die Seite in die Laufende Session eingebunden ist )
+ * Session Start + ( Damit die Seite in die Laufende Session eingebunden ist )
  */
 session_start();
 
