@@ -80,16 +80,13 @@ $erge='<div id="">
                 </table>
                 <table id="kontakt_table">
                 <tr>
-                    <div id="kontakt_Infozeile">
-                    Sie haben eine frage bzw. Anmerkung oder anderes anliegen zu unseren Produkten:</div>
+                    <div id="kontakt_Infozeile">Sie haben eine frage bzw. Anmerkung oder anderes anliegen zu unseren Produkten:</div>
                     <textarea cols="85" rows="10" name="email_nachricht">Bitte geben Sie hier ihr Anliegen ein.</textarea> 
                     <br><!--text bereich zwischen den Textarea zeichen -->
                 </tr>   
-                                    
             </table>
-            
-<!-- Abschicken der Daten zur weinhandel-email ( ) -->
- <input type="submit" value="abschicken">
+            <!-- Abschicken der Daten zur weinhandel-email ( ) -->
+            <input type="submit" value="abschicken">
         </form>
     </div>';     
        
