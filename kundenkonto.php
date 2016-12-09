@@ -43,13 +43,13 @@ $template = str_replace('{kunde}', $kunde_Info, $template);
 /*
  *  $erge = Seiten inhalte
  */
-$regestrierung_container='<div id="">
+$regestrierung_container='<div id="kunden_konto_main">
         
         <h1>Kunden Konto</h1>
-    <div id="leftside">
+    <div id="kunden_konto_leftside">
         <form action="login.php" method="post">
        
-            <h2>Kunden Daten:</h2>
+            <h2>Kunden Haupt Adresse:</h2>
             <table id="registry_table1">
                <tr>
                 <td id="">Anrede:</td> <td id=""> 
@@ -88,14 +88,14 @@ $regestrierung_container='<div id="">
                     <td id="registry">e-Mail adresse:</td><td><input id="registry" type="text" size="20" name="e-mail" value="tina.mueller@gmx.de"></td>
                 </tr>  
                 <tr>
-                    <td id="registry"><input class="button" type="submit" value="ändern">>
+                    <td ><input class="button" type="submit" id="aendern_button" value="ändern">
                 </tr>
             </table>
         </form>
 
  <!-- Passwörter: Kunden Passwort änderungs Bereich -->
         <form action="login.php" method="post">
-            <h2>Kunden Passwort:</h2>
+            <h3>Kunden Passwort:</h3>
             <table id="registry_table1">
                 <tr> 
                     <td id="registry">password:</td><td><input id="registry" type="text" size="20" name="password" value="tanz"></td>
@@ -104,14 +104,32 @@ $regestrierung_container='<div id="">
                     <td id="registry">Password:</td><Td><input id="registry" type="text" size="20" name="password" value="tanz"></td>
                 </tr>
                  <tr>
-                    <td id="registry"><input class="button" type="submit" value="ändern"></td>
+                    <td id="registry"><input class="button" type="submit" id="aendern_button" value="aendern"></td>
                 </tr>
             </table>
         </form>
     </div>
 <!-- Aktive Bestellungen: Kunden Bestellungen die Akiv sind -->
-    <div id="rightside"> 
+    <div id="kunden_konto_rightside"> 
+        <h2>Kunden Liefer Adresse:</h2>
         <form action="login.php" method="post">
+            <table id="registry_table1">
+                <tr>
+                    <td id="registry">Strasse:</td><td><input id="registry" type="text" size="20" name="strasse2" value="Bürgermeister-Smidt-Str."></td>
+                </tr>  
+                <tr>
+                    <td id="registry">Hausnummer:</td><td><input id="registry" type="text" size="20" name="hausnummer2" value="31"></td>
+                </tr>  
+                <tr>
+                    <td id="registry">Ort:</td><td><input id="registry" type="text" size="20" name="ort2" value="Bremen"></td>
+                </tr> 
+                <tr>
+                    <td id="registry">Plz:</td><td><input id="registry" type="text" size="20" name="plz2" value="28195"></td>
+                </tr>
+                <tr>
+                    <td id="registry"><input class="button" type="submit" id="aendern_button" value="aendern"></td>
+                </tr>
+            </table>
             <h2>Aktuelle Bestellungen:</h2>
             <table id="registry_table1">
                 <tr> 
