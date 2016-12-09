@@ -20,3 +20,24 @@ function operation(zeichen,idNummer) {
         }
     }
 }
+var AngezeigteBreite = 500;
+var GespeicherteBreite = 0;
+
+function BildAnpassen(Bild) {
+var AngezeigteBreite = 500;
+var GespeicherteBreite = 0; 
+
+    if (Bild.width > AngezeigteBreite || GespeicherteBreite > AngezeigteBreite)
+    {
+        if (Bild.width == AngezeigteBreite)
+        {
+            Bild.width = GespeicherteBreite;
+        }
+        else
+        {
+            GespeicherteBreite = Bild.width;
+            Bild.style.cursor = "pointer";
+            Bild.width = AngezeigteBreite;
+        }
+    }
+}
