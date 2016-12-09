@@ -58,6 +58,8 @@ function login_check() {
     
     return $kunde;
 }
+
+//concatiniert sql - filters
 //feld kann sein produkt_name,produkt_volumen,name_weintyp,name_weingut,land_name,name_region,name_kontinent
 function filtrator($filter) {
     $filtrator="";
