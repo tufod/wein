@@ -58,44 +58,101 @@ function login_check() {
     
     return $kunde;
 }
-
+//feld kann sein produkt_name,produkt_volumen,name_weintyp,name_weingut,land_name,name_region,name_kontinent
 function filtrator($filter) {
     $filtrator="";
-    if(isset($filter['name'])) {
-        $filtrator.=' produkt_name LIKE "%'.$filter['name'].'%"';
-    }
-    if(isset($filter['weingut'])) {
-        $filtrator.=' weingut = '.$filter["weingut"];
-    }
-    if(isset($filter['land'])) {
-        $filtrator.=' land = '.$filter["land"];
-    }
-    
+    $filtrator.=filtrator_child($filtrator,$filter,'produkt_name');
+    $filtrator.=filtrator_child($filtrator,$filter,'produkt_volumen');
+    $filtrator.=filtrator_child($filtrator,$filter,'name_weintyp');
+    $filtrator.=filtrator_child($filtrator,$filter,'name_weingut');
+    $filtrator.=filtrator_child($filtrator,$filter,'land_name');
+    $filtrator.=filtrator_child($filtrator,$filter,'name_region');
+    $filtrator.=filtrator_child($filtrator,$filter,'name_kontinent');
     return $filtrator;
 }
 
+//unter funktion nur fur funktion filtrator (generiert SQL)- kontroliert ob ist in $_GET eingestelltest filter und
+//ob ist das Filter erster in der Reihe wenn nein steckt noch AND
+function filtrator_child($filtrator,$filter,$feld) {
+    $filtrator_child='';
+    if(strlen($filtrator)>0) {
+        $filtrator_child.=" AND ";
+    }
+    if((isset($filter[$feld])) && (strlen($filter[$feld])>0)) {
+        $filtrator_child.=$feld.' LIKE ';
+    $filtrator_child.='"%'.$filter[$feld].'%"';
+    }
+    return $filtrator_child;
+}
+ 
+//generiert html fur filter formular 
+function filter_div($input_filter) {
+    $filter_form='<div class="pro">';
+    $filter_form.='<form action="./liste.php" method="GET">';
+    $filter_form.='<input type="hidden" name="filter" value="1">';
+    $filter_form.=' Name '.generate_html_form_datalist('produkt_name');;
+    $filter_form.=' Typ '.generate_html_form_datalist('name_weintyp');
+    $filter_form.=' Weingut '.generate_html_form_datalist('name_weingut');
+    $filter_form.=' Volume '.generate_html_form_datalist('produkt_volumen');
+    $filter_form.=' Land '.generate_html_form_datalist('land_name');
+    $filter_form.=' Region '.generate_html_form_datalist('name_region');
+    $filter_form.=' Kontinent '.generate_html_form_datalist('name_kontinent');
+    $filter_form.='<input type="submit" value="filter">';
+    $filter_form.='</form></div>';
+    return $filter_form;
+}
 
-function list_output($table,$list,$input_filter) {
+//$feld kann sein produkt_name,produkt_volumen,name_weintyp,name_weingut,land_name,name_region,name_kontinent
+function generate_html_form_datalist($feld) {
     $con = con_db();
+    $select='<input list="'.$feld.'" name="'.$feld.'"><datalist id="'.$feld.'">';
+    $sql = 'SELECT DISTINCT '.$feld.' '
+            . 'FROM produkt p JOIN weintyp w ON p.weintyp_id=w.id_weintyp JOIN weingut wg ON '
+            . 'p.weingut_id=wg.id_weingut JOIN laender l ON wg.land_id=l.id_land JOIN region r ON'
+            . ' wg.region_id=r.id_region JOIN kontinent k ON l.kontinent_id=k.id_kontinent ORDER BY '.$feld.' ASC';
+    $res = mysqli_query($con, $sql);
+    while ($zeil = mysqli_fetch_assoc($res)) {
+        $select.='<option value="'.$zeil["$feld"].'">';
+    }
+    $select.='</datalist>';
+return $select; 
+}
+
+//$feld kann sein produkt_name,produkt_volumen,name_weintyp,name_weingut,land_name,name_region,name_kontinent
+function generate_html_form_select($feld) {
+    $con = con_db();
+    $select='<select>';
+    $sql = 'SELECT DISTINCT '.$feld.' '
+            . 'FROM produkt p JOIN weintyp w ON p.weintyp_id=w.id_weintyp JOIN weingut wg ON '
+            . 'p.weingut_id=wg.id_weingut JOIN laender l ON wg.land_id=l.id_land JOIN region r ON'
+            . ' wg.region_id=r.id_region JOIN kontinent k ON l.kontinent_id=k.id_kontinent ORDER BY '.$feld.' ASC';
+    $res = mysqli_query($con, $sql);
+    while ($zeil = mysqli_fetch_assoc($res)) {
+        $select.='<option value="'.$zeil["$feld"].'">'.$zeil["$feld"].'</option>';
+    }
+    $select.='</select>';
+return $select; 
+}
+
+function list_output($input_filter) {
+    $con = con_db();
+    $list="";
     $filter="";
     if(isset($input_filter['filter'])) {
-            $filter.= " WHERE";
+            $filter.= " WHERE ";
             $filter.=filtrator($input_filter);
     }
-    if ($table == 'produkt') {
-        $sql = 'SELECT produkt_nummer,produkt_name,produkt_beschr,'
-                . 'land_name,'
-                . 'produkt_preis,produkt_volumen,LOWER(land_id) AS land_id '
-                . 'FROM produkt '
-                . 'JOIN weingut ON weingut_id = id_weingut '
-                . 'JOIN laender ON id_land = land_id '
-                . ' LIMIT 20';
-    } else {
-        
+    //ich hole inhalt fur filter div kontainer
+    if(isset($_GET['filter'])) {
+    $list.=filter_div($input_filter);
     }
+    $sql = 'SELECT produkt_nummer,produkt_name,produkt_beschr,produkt_preis FROM produkt p JOIN '
+            . 'weintyp w ON p.weintyp_id=w.id_weintyp JOIN weingut wg ON '
+            . 'p.weingut_id=wg.id_weingut JOIN laender l ON wg.land_id=l.id_land JOIN region r ON'
+            . ' wg.region_id=r.id_region JOIN kontinent k ON l.kontinent_id=k.id_kontinent'.$filter;
     echo $sql;
     $res = mysqli_query($con, $sql);
-    $list = '';
+   
     while ($zeil = mysqli_fetch_assoc($res)) {
         $list .= '<div class="pro">';
 
@@ -108,12 +165,9 @@ function list_output($table,$list,$input_filter) {
 
         //name und kürzbeschreibung
         $list .= '<a href="detail.php?id='
-                . $zeil['produkt_nummer'].'"></div>'
-                . '<div class="nameundtext">'.$zeil['produkt_name'].'</a>'
-                . '<img class="l_flag" src="images/flags/1x1/'.$zeil['land_id'].'.svg" '
-                . 'title="'.$zeil['land_name'].'"><br>'
-                . $zeil['produkt_beschr'].'<br>'
-                . $zeil['produkt_volumen'].' Liter';
+                . $zeil['produkt_nummer'].'">'
+                . $zeil['produkt_name'].'</a><br>'
+                . $zeil['produkt_beschr'];
         $list .= '</div>';
         //Preis,Menge und Warenkorp
         $list .= '<div class="mengeUndWarenkorp"><br>';
@@ -134,7 +188,6 @@ function list_output($table,$list,$input_filter) {
     uncon_db($con);
     return $list;
 }
-
 //template
 function load_tpl($load) {
     global $template;
