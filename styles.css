@@ -12,12 +12,36 @@ body {
 .pro {
     background-color: rgba(255,255,255,0.6);
     border: 3px solid #b9462d;
+    height: 85px;
+    width: 95%;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    padding: 3px 20px;
+    border-collapse: collapse;
+}
+
+.liter {
+    margin-left: 25px;
+}
+
+.beschreib {
+    margin-left: 25px;
+}
+
+.filter {
+    color: white;
+    background-color: rgba(171,33,53,0.8);
+    border: 3px solid #b9462d;
     height: 80px;
     width: 95%;
     border-radius: 8px;
     margin-bottom: 5px;
     padding: 3px 20px;
     border-collapse: collapse;
+}
+
+.kategorie {
+    padding-left: 185px;
 }
 
 .detail {
@@ -51,9 +75,18 @@ body {
     clear: both;
 }
 
+h4 {
+    color:#ac2135;
+    margin: 0 0 0.2em 0;
+    font-size: 1.0em;
+    display: inline-block;
+}
+
 .l_flag {
+    margin: 5px;
     width: 15px;
     height: 15px;
+    clear: both;
 }
 
 .d_flag {
