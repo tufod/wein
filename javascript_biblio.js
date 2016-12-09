@@ -39,3 +39,5 @@ var GespeicherteBreite = 0;
         }
     }
 }
+
+"*"
