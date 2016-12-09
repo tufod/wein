@@ -74,7 +74,7 @@ function filtrator($filter) {
 //feld kann sein produkt_name,produkt_volumen,name_weintyp,name_weingut,land_name,name_region,name_kontinent
 function filtrator_child($filtrator,$filter,$feld) {
     $filtrator_child='';
-    if(strlen($filtrator)>0) {
+    if((strlen($filtrator)>0) && (strlen($filter[$feld])>0)) {
         $filtrator_child.=" AND ";
     }
     if ((isset($filter[$feld])) && (strlen($filter[$feld])>0)) {
@@ -88,7 +88,7 @@ function filtrator_child($filtrator,$filter,$feld) {
 function filter_div($input_filter) {
     $filter_form='<div class="pro">';
     $filter_form.='<form action="./liste.php" method="GET">';
-    $filter_form.=' Name '.generate_html_form_datalist('produkt_name');;
+    $filter_form.=' Name '.generate_html_form_datalist('produkt_name');
     $filter_form.=' Typ '.generate_html_form_datalist('name_weintyp');
     $filter_form.=' Weingut '.generate_html_form_datalist('name_weingut');
     $filter_form.=' Volume '.generate_html_form_datalist('produkt_volumen');
