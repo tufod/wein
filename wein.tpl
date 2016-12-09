@@ -16,7 +16,7 @@
     </div>
     <div id="navi">
         <ul>
-            <li><a href="#">Startseite</a></li>
+            <li><a href="index.php">Startseite</a></li>
             <li><a href="liste.php">Weine</a></li>
             <li><a href="history.php">Über uns</a></li>
             <li><a href="kontakt.php">Kontakt</a></li>
