@@ -222,8 +222,8 @@ function display_detail() {
                 . '<img class="d_flag" src="images/flags/4x3/'.$d_bild['land_id'].'.svg"'
                 . 'title="'.$d_bild['land_name'].'">';
         $detail.= '<div class="kategorie"><h4>Weintyp</h4>: '.$d_bild['name_weintyp'].''
-                . ', <h4> Region: </h4>'.$d_bild['name_region'].', <h4> Weingut: </h4>'.$d_bild['name_weingut'].'</div><br>';
-        $detail.='<br><div class="detail_text">'.$d_bild['produkt_text'].'<br>'
+                . ', <h4> Region: </h4>'.$d_bild['name_region'].', <h4> Weingut: </h4>'.$d_bild['name_weingut'].'</div>';
+        $detail.='<br><div class="detail_text">'.$d_bild['produkt_text'].'</div><br><div class="liter">'
                 .$d_bild['produkt_volumen'].' Liter</div>';
         $detail.= '<div class="detail_waren"><br>';
         $detail.= $d_bild['produkt_preis'] . ' €/stück';
