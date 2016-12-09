@@ -5,15 +5,16 @@
 session_start();
 
 /*
- *  zusatzliche datei die benotigt wird zum ausfuhren der Seite
+ *  zus�tzliche datei die ben�tigt wird zum ausf�hren der Seite
  */
 require_once './biblio.inc.php';
-
+$list='';
 
 /*
  *   Load des Seiten Aufbau Templates (Wein Template)
  *   Seiten Backround Bild unf vorgaben
  */
+
 
 load_tpl('wein.tpl');
 
@@ -45,7 +46,7 @@ if(isset($_GET['filter'])) {
     
     
 }
-$list=list_output($_GET); 
+$list.=list_output('produkt',$list,$_GET); 
 /*
  *   Load des Seiten Inhaltes (container)
  *   Seiten inhalt = $erge
