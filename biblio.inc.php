@@ -164,9 +164,12 @@ function list_output($input_filter) {
 
         //name und kürzbeschreibung
         $list .= '<a href="detail.php?id='
-                . $zeil['produkt_nummer'].'">'
-                . $zeil['produkt_name'].'</a><br>'
-                . $zeil['produkt_beschr'];
+                . $zeil['produkt_nummer'].'"></div>'
+                . '<div class="nameundtext">'.$zeil['produkt_name'].'</a>'
+                . '<img class="l_flag" src="images/flags/1x1/'.$zeil['land_id'].'.svg" '
+                . 'title="'.$zeil['land_name'].'"><br>'
+                . $zeil['produkt_beschr'].'<br>'
+                . $zeil['produkt_volumen'].' Liter';
         $list .= '</div>';
         //Preis,Menge und Warenkorp
         $list .= '<div class="mengeUndWarenkorp"><br>';
@@ -202,7 +205,12 @@ function tpl_output() {
 function display_detail() {
     $id = $_GET['id'];
     $con = con_db();
-    $sql = 'SELECT produkt_nummer,produkt_name,produkt_text,produkt_preis FROM produkt'
+    $sql = 'SELECT produkt_nummer,produkt_name,produkt_text,produkt_preis,'
+            . 'land_name,'
+            . 'produkt_volumen,LOWER(land_id) AS land_id '
+            . 'FROM produkt '
+            . 'JOIN weingut ON weingut_id=id_weingut '
+            . 'JOIN laender ON id_land = land_id'
             .' WHERE produkt_nummer = \''.$id.'\';';
     $res = mysqli_query($con, $sql);
     $detail = '';
@@ -211,12 +219,15 @@ function display_detail() {
         $detail.='<img class="detail_bild" src="images/weinbilder/mittel/w'
                 . $d_bild['produkt_nummer']
                 . '.jpg" onerror="this.src=\'images/weinbilder/mittel/blank.jpg\' ">';
-        $detail.='<h2 class="detail_name">'.$d_bild['produkt_name'].'</h2>';
-        $detail.='<br><div class="detail_text">'.$d_bild['produkt_text'].'</div><br>';
+        $detail.='<h2 class="detail_name">'.$d_bild['produkt_name'].'</h2>'
+                . '<img class="d_flag" src="images/flags/4x3/'.$d_bild['land_id'].'.svg"'
+                . 'title="'.$d_bild['land_name'].'"><br>';
+        $detail.='<br><div class="detail_text">'.$d_bild['produkt_text'].'<br>'
+                .$d_bild['produkt_volumen'].' Liter</div>';
         $detail.= '<div class="detail_waren"><br>';
         $detail.= $d_bild['produkt_preis'] . ' €/stück';
         $detail.= ' <input type="button" class="warenkorp" value="warenkorp">';
-        $detail.= ' <input type="button" class="warenkorp" value="zurück">';
+        $detail.= ' <input type="button" class="warenkorp" value="zurück" onClick="history.back()">';
         $detail.= '<input type="button" class="operation" value="-" onclick="operation(\'-\','
                 . $d_bild['produkt_nummer'] . ')">';
         $detail.= ' <input type="text" name="menge" id="'
@@ -332,3 +343,40 @@ function search_feld() {
     </form>';
     return $code;   
 }
+
+function password_vergleichen($pass1,$pass2){
+    if($pass1==$pass2){
+        return TRUE;
+    } else {
+     return FALSE;
+}
+}
+
+
+
+function schaltjahr($datum_jahr) {
+            if (($datum_jahr % 4 == 0 && $datum_jahr % 100 != 0) || $datum_jahr % 400 == 0) {
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        }
+        function datum_Tag_pruefen($schaltjahr,$datum_monat,$datum_tag){
+         $Monat_30_tag=[4,6,9,11];
+         $Monat_31_tag=[1,3,5,7,8,10,12];
+            if($datum_monat==2 &&(($schaltjahr && $datum_tag==29) || (!$schaltjahr && $datum_tag==28))){
+                return TRUE;
+            }elseif ((in_array($datum_monat,$Monat_30_tag)) && $datum_tag<=30 ) {
+               return TRUE; 
+            }elseif ((in_array($datum_monat,$Monat_31_tag)) && $datum_tag<=31 ) {
+                return TRUE;
+            } else {
+                 return FALSE;
+            }
+           
+      }
+      function datum_pruefen($datum_jahr, $datum_monat, $datum_tag) {
+         $schaltjahr=schaltjahr($datum_jahr);
+        $ergebnis=datum_Tag_pruefen($schaltjahr,$datum_monat,$datum_tag);
+        return $ergebnis;
+      }
