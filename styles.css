@@ -1,3 +1,10 @@
+
+
+
+
+
+
+
 body {
     margin: 0;
     padding: 0;
@@ -97,11 +104,15 @@ h4 {
     
 }
 
+/*
+ * regestrierung und Login Button rechts
+ */
 #kunde {
-    background-color: rgba(255,255,255,0.5);
+    background-color: rgba(255,255,255,0.9);
+    background-color:#AC1828;
     float: right;
-    height: 40px;
-    width: 250px;
+    height: 24px;
+    width: 186px;
     margin-right: 20px;
     margin-top: 20px;
 }
@@ -192,7 +203,28 @@ h4 {
     padding:auto;
     background-position: center;
 }
-#registry_table, #login_table, #kontakt_table
+#kunden_registry_main {
+    padding: 10px;
+    background-color: rgba(255,255,255,0.5);
+}
+#kunden_registry_main h1{
+    font-size: 1.5em;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-left: 287px;
+}
+#kunden_registry_main h2{
+    font-size: 1.0em;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-left: 167px;
+}
+
+#kunden_registry_table{
+    margin-left: 287px;
+}
+
+#login_table, #kontakt_table
 {
     margin: 0px auto;
 }
@@ -201,6 +233,54 @@ h4 {
    
    /* margin: 0px auto; */
 }
+#kunden_konto_main {
+    padding: 10px;
+    background-color: rgba(255,255,255,0.5);
+}
+#kunden_konto_main h1{
+    font-size: 1.5em;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+#kunden_konto_leftside h1{
+    font-size: 1.5em;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+#kunden_konto_leftside h2{
+    padding: 1px;
+    font-size: 1.2em;
+    background-color: rgba(255,255,255,0.5);
+    margin-right: 244px;
+    margin-top: 20px;
+}
+#kunden_konto_leftside h3{
+    padding: 1px;
+    font-size: 1.2em;
+    background-color: rgba(255,255,255,0.5);
+    margin-right: 292px;
+    margin-top: 20px;
+}
+
+#kunden_konto_leftside {
+                padding: 10px;
+                float:left;
+                width: 47%;
+                overflow: auto;
+            }
+           
+#kunden_konto_rightside {
+                
+                padding: 10px;
+                width: 47%; 
+                float: right;
+            }
+#registry_button, #aendern_button, #login_button, #kontakt_button {
+                color: #FFFFFF;
+                BACKGROUND-COLOR: #B52136;
+                cursor: pointer;
+            }
+/* style="color: #FFFFFF; BACKGROUND-COLOR: #B52136" */
 
 
 #main h1a {
@@ -258,8 +338,189 @@ font-size: 1.2em;
             padding: 0px;
             margin: 0px;
             text-align: justify;
+            padding-right: 10px;
             } 
-
+			
+#history_table1{
+     width: 100%;
+     border: 0; 
+     align: left;
+     background-color: rgba(255,255,255,0.5);
+   /* margin-bottom: 20px;
+   margin-left: 20px;
+    float: right; */
+    
+}           
+#history_bild_01{
+   
+    margin-bottom: 20px;
+    margin-left: 20px;
+    
+    float: left;
+    width: 285;
+    height: 384;
+     background-color: rgba(255,255,255,0.5);
+}
+#history_bild_02{
+    
+    margin-bottom: 20px;
+    margin-left: 20px;
+    float: right;
+    width: 285;
+    height: 411; 
+}
+#history_bild_03{
+    
+    margin-bottom: 20px;
+    margin-left: 20px;
+    float: right;
+    width: 285;
+    height: 199;
+}
+#history_bild_04{
+    
+    margin-bottom: 20px;
+    margin-left: 20px;
+    float: right;
+    width: 285;
+    height: 380;
+}
+#history_bild_05{
+    
+    margin-bottom: 20px;
+    margin-left: 20px;
+    float: right;
+    width: 285; 
+    height: 200;
+}
+#history_bild_06{
+    
+    margin-bottom: 20px;
+    margin-left: 20px;
+    float: right;
+    width: 285; 
+    height: 199;
+}
+#history_bild_07{
+    
+    margin-bottom: 20px;
+    margin-left: 20px;
+    float: right;
+    width: 285;
+    height: 199; 
+}
+#history_bild_08{
+    
+    margin-bottom: 20px;
+    margin-left: 20px;
+    float: right;
+    width: 285; 
+    height: 200;
+}
+#history_bild_01{
+    
+    margin-bottom: 20px;
+    margin-left: 20px;
+    float: right;
+    width: 285; 
+    height: 200;
+}
+#history_bild_10{
+    
+    margin-bottom: 20px;
+    margin-left: 20px;
+    float: right;
+    width: 285; 
+    height: 215;
+}
+#history_bild_11{
+    
+    margin-bottom: 20px;
+    margin-left: 20px;
+    float: right;
+    width: 285; 
+    height: 188;
+}
+#history_bild_12{
+    
+    margin-bottom: 20px;
+    margin-left: 20px;
+    float: right;
+    width: 285; 
+    height: 188;
+}
+#history_bild_13{
+    
+    margin-bottom: 20px;
+    margin-left: 20px;
+    float: right;
+    width: 285; 
+    height: 183;
+}
+#history_bild_14{
+    
+    margin-bottom: 40px;
+    margin-left: 20px;
+    float: right;
+    width: 285; 
+    height: 430;
+}
+#history_bild_15{
+    
+    margin-bottom: 20px;
+    margin-left: 20px;
+    float: right;
+    width: 285; 
+    height: 397;
+}
+#history_bild_16{
+    
+    margin-bottom: 20px;
+    margin-left: 20px;
+    float: right;
+    width: 285; 
+    height: 429; 
+}
+#history_bild_17{
+    
+    margin-bottom: 20px;
+    margin-left: 20px;
+    float: right;
+    width: 285; 
+    height: 182;
+}
+#history_bild_18{
+    
+    margin-bottom: 20px;
+    margin-left: 20px;
+    float: right;
+    width: 285; 
+    height: 183;
+}
+#history_bild_19{
+    
+    margin-bottom: 20px;
+    margin-left: 20px;
+    float: right;
+    width: 285; 
+    height: 218;
+}
+#history_bild_20{
+    
+    margin-bottom: 20px;
+    margin-left: 20px;
+    float: right;
+    width: 285; 
+    height: 183; 
+}
+#history_h1 {
+    color:#ac2135;
+    background-color: rgba(255,255,255,0);
+    margin: 0 0 0.2em 0;
+    font-size: 1.5em;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
 
 
 
@@ -285,12 +546,11 @@ font-size: 1.2em;
     color:#fff;
     background-color: rgba(172,33,53,0.6);
 }
-
-
 #footer a{
     color: #fff;
     text-decoration: none;
 }
+
 #copyright{
     margin: 5px 5px 5px 5px;
    text-align: center;
@@ -346,3 +606,4 @@ input[type=button][class=warenkorp]{
     float: left;
     width: 50%;
 }
+
