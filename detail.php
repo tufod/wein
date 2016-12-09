@@ -1,6 +1,6 @@
 <?php
 /*
- * Session Start 
+ * Session Start +
 */
 session_start();
 require_once './biblio.inc.php';
