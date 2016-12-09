@@ -215,7 +215,11 @@ function display_detail() {
     $detail = '';
     while ($d_bild = mysqli_fetch_assoc($res)) {
         $detail.= '<div class="detail">';
-        $detail.='<img onClick="BildAnpassen(this)" onLoad="BildAnpassen(this)" src="images/weinbilder/mittel/w'.$d_bild['produkt_nummer'].'.jpg" title="Klicken zum Vergrößern/Verkleinern" class="detail_bild" src="images/weinbilder/gross/w'
+        $detail.='<img class="detail_bild" src="images/weinbilder/mittel/w'
+                . $d_bild['produkt_nummer'].'.jpg"'
+                . ' onClick= "src="images/weinbilder/gross/w'
+                . $d_bild['produkt_nummer'].'.jpg" onerror="this.src=\'images/weinbilder/mittel/blank.jpg">';
+        $detail.='<img class="detail_bild" src="images/weinbilder/mittel/w'
                 . $d_bild['produkt_nummer']
                 . '.jpg" onerror="this.src=\'images/weinbilder/mittel/blank.jpg\' ">';
         $detail.='<h2 class="detail_name">'.$d_bild['produkt_name'].'</h2>'
