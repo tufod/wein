@@ -45,12 +45,12 @@ $template = str_replace('{kunde}', $kunde, $template);
  *  Textfeld für eingaben vom Kunden
  * 
  */
-$erge='<div id="">
+$erge='<div id="kunden_kontakt_main">
         
         <h1>Kontakt Seite</h1>
         <form action="kontakt.php" method="post">
             <h2></h2>
-            <table id="kontakt_table1">
+            <table id="kunden_kontakt_table">
                <tr>
                 <td id="">Anrede:</td> 
                 <td id=""> 
@@ -73,9 +73,9 @@ $erge='<div id="">
                     <td id="kontakt">e-Mail adresse:</td><td><input id="kontakt" type="text" size="20" name="e-mail" value="tina.mueller@gmx.de"><br></td>
                 </tr>  
                 </table>
-                <table id="kontakt_table">
+                <table id="kunden_kontakt_table1">
                 <tr>
-                    <div id="kontakt_Infozeile">
+                    <div id="kunden_kontakt_Infozeile">
                     Sie haben eine frage bzw. Anmerkung oder anderes anliegen zu unseren Produkten:</div>
                     <textarea cols="85" rows="10" name="email_nachricht">Bitte geben Sie hier ihr Anliegen ein.</textarea> 
                     <br><!--text bereich zwischen den Textarea zeichen -->
