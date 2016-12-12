@@ -47,12 +47,12 @@ $template = str_replace('{kunde}', $kunde, $template);
  *  Textfeld für eingaben vom Kunden
  * 
  */
-$erge='<div id="main">
+$erge='<div id="history_main">
         <h1>Historie</h1>
         <form action="kontakt.php" method="post">
-               <table id="kontakt_table1">
+               <table id="history_table1">
                <tr>
-               <td valign="top">
+               <td>
                 <p>&nbsp;</p>
                 <p><a name="Historieoben"></a>Handel und Seefahrt haben die Hansestadt Bremen entscheidend geprägt: 
                 Es waren Bremer Kaufleute,
@@ -220,9 +220,9 @@ $erge='<div id="main">
                         Weine und Lagerräume nach Blumen zu benennen. Die höchstgeschätzten Weine benannte man gerne nach der schönsten Blume,
                         und als solche galt zu jener Zeit die Rose.
                     </span>
-                    <br /> <br /> <br />
+                    <br /> <br /> <br /><br />
                     <span>
-                        <img id="history_bild_04" title="16. Jahrhundert VinoVeritas Ratskeller Bremen" src="./images/stories/geschichte-4.jpg" alt="16. Jahrhundert VinoVeritas Ratskeller Bremen"  />
+                        <img id="history_bild_04" title="16. Jahrhundert VinoVeritas Ratskeller Bremen" src="./images/stories/geschichte-4.jpg" alt="16. Jahrhundert VinoVeritas Ratskeller Bremen" />
                     </span>
                     <br />
                     <span>Der Schütting,
@@ -281,6 +281,7 @@ $erge='<div id="main">
                         Die hier eingelagerten Weine werden im Bremer VinoVeritas Ratskeller erstmals nach Herkunft, Lage und Jahrgang differenziert.
                         Zunächst tauchen überwiegend Rüdesheimer, Hochheimer und allgemein Rheingauer Weine auf.
                         Lange Zeit galt der Bremer VinoVeritas Ratskeller als fast reines „Rheingau-Lager“.
+                        <br /><br /><br />
                         <img id="history_bild_06" title="17. Jahrhundert Bremer VinoVeritas Ratskeller" src="./images/stories/geschichte-6.jpg" alt="17. Jahrhundert Bremer VinoVeritas Ratskeller" />
                         Die Weine wurden überwiegend durch den VinoVeritas Ratskellermeister in den Anbaugebieten eingekauft,
                         entweder beim Produzenten direkt oder auf den Messen und bei den Agenten in Frankfurt und Mainz.
@@ -340,11 +341,12 @@ $erge='<div id="main">
                         dass die vornehmen Bremer Bürger ihren Hauswein aus dem VinoVeritas Ratskeller auf Kredit bezogen.
                         Zu diesem Zweck hatte jeder in seinem Keller ein Kerbholz, in das die geschuldete 
                         <strong>
-                            <img id="history_bild_8" title="18. Jahrhundert Bremer VinoVeritas Ratskeller" src="./images/stories/geschichte-8.jpg" alt="18. Jahrhundert Bremer VinoVeritas Ratskeller"  />
+                        
+                            
                         </strong>Summe eingeschnitten wurde.
                         Der Weinhandel erstreckte sich zu dieser Zeit auch auf das weitere Bremer Umland.
                         Sogar nach England, Petersburg und bis in die Vereinigten Staaten wurde VinoVeritas Ratskellerwein versandt.
-                    </span>
+                    </span><img id="history_bild_8" title="18. Jahrhundert Bremer VinoVeritas Ratskeller" src="./images/stories/geschichte-8.jpg" alt="18. Jahrhundert Bremer VinoVeritas Ratskeller"  />
                 </p>
                 <p id="history">&nbsp;</p>
                 <p>&nbsp;</p>
