@@ -4,6 +4,11 @@
 <title>{title}</title>
 <meta charset="utf-8">
 <link rel="stylesheet" href="styles.css" media="screen">
+<script type="text/javascript" src="javascript_biblio.js"></script>
+<script src="http://stellatest.de/js/prototype.js" type="text/javascript"></script>
+<script src="http://stellatest.de/js/scriptaculous.js?load=effects,builder" type="text/javascript"></script>
+<script src="http://stellatest.de/js/lightbox.js" type="text/javascript"></script>
+<link href="http://stellatest.de/css/lightbox.css" rel="stylesheet" type="text/css" media="screen" />
 </head>
 <body>
 {kunde}
@@ -26,6 +31,6 @@
     <div id="footer">
         <div id="copyright">InVinoVeritas.de Copyright © 2016 All Rights Reserved <a href="  impressum.php">impressum</a></div></div>
 </div>
- <script type="text/javascript" src="javascript_biblio.js"></script>  
+   
 </body>
 </html>
