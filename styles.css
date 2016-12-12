@@ -1,4 +1,10 @@
 
+
+
+
+
+
+
 body {
     margin: 0;
     padding: 0;
@@ -46,6 +52,10 @@ body {
     padding-left: 185px;
 }
 
+
+/*
+ * Detail php Seite
+ */
 .detail {
     background-color: rgba(255,255,255,0.7);
     border: 3px solid #b9462d;
@@ -191,13 +201,18 @@ h4 {
 
 
 /*
- * Regestrierungs und Login und Kunden Konto Seite 
- * - Tabellen
+ * Regestrierungs, Login und Kunden Konto Seite 
+ * 
  */
 #registry, #login, #kontakt {
     padding:auto;
     background-position: center;
 }
+
+/*
+ * Regestrierungs php Seite  
+ * 
+ */
 #kunden_registry_main {
     padding: 10px;
     background-color: rgba(255,255,255,0.5);
@@ -214,20 +229,74 @@ h4 {
     letter-spacing: 0.1em;
     margin-left: 167px;
 }
-
 #kunden_registry_table{
     margin-left: 287px;
 }
+#kunden_registry_table1{
+    /* margin: 0px auto; */
+}
 
-#login_table, #kontakt_table
-{
+/*
+ * Login php Seite  
+ * 
+ */
+#kunden_login_main {
+    padding: 10px;
+    background-color: rgba(255,255,255,0.5);
+}
+#kunden_login_main h1{
+    font-size: 1.5em;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;}
+#kunden_login_main_table{
     margin: 0px auto;
 }
-#registry_table1, #login_table1, #kontakt_table1
-{
+#kunden_login_main_table1{
    
    /* margin: 0px auto; */
 }
+
+/*
+ * Kontakt php Seite  
+ * 
+ */
+#kunden_kontakt_main {
+    padding: 10px;
+    background-color: rgba(255,255,255,0.5);
+}
+#kunden_kontakt_main h1{
+    font-size: 1.5em;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;}
+#kunden_kontakt_table{
+    /* margin: 0px auto; */
+}
+#kunden_kontakt_table1{
+   margin: 0px auto;
+   
+}
+
+/*
+ * Kontakt Seite
+ * Info Zeile über Eingabe Feld (textarea)
+ */
+#kunden_kontakt_Infozeile{
+    /* padding:auto; */
+    /* background-position: center; */
+    background-color:rgba(255,255,255,0.7);
+    width: 500px;
+    height: 20px;
+    color:#ac2135;
+    background-color: rgba(255,255,255,0.5);
+    margin: 0 0 0.2em 0;
+    font-size: 0.9em;
+    
+            }         
+
+/*
+ * Kunden Konto php Seite  
+ * 
+ */
 #kunden_konto_main {
     padding: 10px;
     background-color: rgba(255,255,255,0.5);
@@ -237,6 +306,12 @@ h4 {
     text-transform: uppercase;
     letter-spacing: 0.1em;
 }
+#kunden_konto_leftside {
+                padding: 10px;
+                float:left;
+                width: 47%;
+                overflow: auto;
+            }
 #kunden_konto_leftside h1{
     font-size: 1.5em;
     text-transform: uppercase;
@@ -256,82 +331,94 @@ h4 {
     margin-right: 292px;
     margin-top: 20px;
 }
+#kunden_konto_leftside_table{
+    margin-right:  0px auto;
+}
 
-#kunden_konto_leftside {
-                padding: 10px;
-                float:left;
-                width: 47%;
-                overflow: auto;
-            }
-           
+
 #kunden_konto_rightside {
-                
                 padding: 10px;
                 width: 47%; 
                 float: right;
             }
+#kunden_konto_rightside h1{
+    font-size: 1.5em;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+#kunden_konto_rightside h2{
+    padding: 1px;
+    font-size: 1.2em;
+    background-color: rgba(255,255,255,0.5);
+    margin-right: 244px;
+    margin-top: 20px;
+}
+#kunden_konto_rightside h3{
+    padding: 1px;
+    font-size: 1.2em;
+    background-color: rgba(255,255,255,0.5);
+    margin-right: 292px;
+    margin-top: 20px;
+}
+#kunden_login_rightside_table{
+   
+   /* margin: 0px auto; */
+}   
+    
+/*
+ * aenderungs Buttons der regestrierung, login, kontakt php Seite  
+ * 
+ */
 #registry_button, #aendern_button, #login_button, #kontakt_button {
                 color: #FFFFFF;
                 background-color: #B52136;
                 cursor: pointer;
             }
-/* style="color: #FFFFFF; BACKGROUND-COLOR: #B52136" */
-
-
-#main h1a {
-    margin: 0 0 0.2em 0; 
-    font-size: 1.5em;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    text-align: center;
-    background-position: center;
-}
-#main h2a {
-color:#ac2135;
-margin: 0 0 0.2em 0;
-font-size: 1.2em;
-}
 
 /*
- * Kunden Konto Seite 
- * Tabellen links und rechts
+ * History php Seite  
+ * 
  */
-#leftside {
-                padding: 10px;
-                float:left;
-                width: 47%;
-                overflow: auto;
-            }
-           
-#rightside {
-                
-                padding: 10px;
-                width: 47%; 
-                float: right;
-            }
-            
-/*
- * Kontakt Seite
- * Info Zeile über Eingabe Feld (textarea)
- */
-#kontakt_Infozeile{
-                
-    /* padding:auto; */
-    /* background-position: center; */
-    background-color:rgba(255,255,255,0.7);
-    width: 500px;
-    height: 20px;
-    color:#ac2135;
-    background-color: rgba(255,255,255,0.5);
-    margin: 0 0 0.2em 0;
-    font-size: 0.9em;
-    
-            }            
-         #main {
+#history{
+            text-decoration: none;
+            padding: 0px;
+            margin: 0px;
+            text-align: justify;
+            padding-right: 10px;
+            } 
+#history_main {
     padding: 20px;
     background-color: rgba(255,255,255,0.5);
 }
 
+/*
+ * Jahrhundert Zeile ( Auswahl ) 
+ */
+#history_main_table_sprungzeile{
+    padding: 5px;
+    border: 0px; 
+    vertical-align: top;
+    text-transform: uppercase;
+    text-align: center;
+    padding-right: 47px;
+    background-position: center;
+    background-color: rgba(255,255,255,0.5);
+}
+#history_zeile{
+    text-decoration: none;
+    padding: 0px;
+    margin: 0px;
+    text-align: justify;
+    padding-right: 43px;
+} 
+            
+/*
+ * History ueberschriften 
+ */         
+#history_main span1{
+font-size: 10pt;
+font-family: arial,helvetica,sans-serif;
+}
 #history_main h1, #history_main h2, #history_main h3 {
     color:#ac2135;
     background-color: rgba(255,255,255,0);
@@ -348,202 +435,75 @@ font-size: 1.2em;
 #history_main h3 {
     font-size: 1em;
 }
-
 #history_main p {
     margin: 0 0 0.4em 0;
 }
+#history_main_table{
+    width: 100%;
+    border: 0px; 
+}
+/*
+ * History php Seite  
+ * Bilder einpassen
+ */
 #history_main img {
     float: right;
     max-width: 40%;
 }
-   
-#history{
-            text-decoration: none;
-            padding: 0px;
-            margin: 0px;
-            text-align: justify;
-            padding-right: 10px;
-            } 
-			
-#history_table1{
-     width: 100%;
-     border: 0px; 
-     vertical-align: top;
-     text-align: left;
-     background-color: rgba(255,255,255,0.5);
-   /* margin-bottom: 20px;
-   margin-left: 20px;
-    float: right; */
-    
-}           
-#history_bild_01{
-   
+
+/*
+ * History php Seite  
+ * die einzelnen Bilder einpassen
+ */
+#history_bild_01,#history_bild_02,#history_bild_03,#history_bild_04,#history_bild_05,#history_bild_06,#history_bild_07,#history_bild_08,#history_bild_09,#history_bild_10,#history_bild_11,#history_bild_12,#history_bild_13,#history_bild_15,#history_bild_16,#history_bild_17,#history_bild_18,#history_bild_19,#history_bild_20{
     margin-bottom: 20px;
     margin-left: 20px;
-    float: right;
-    
     width: 285px;
+}
+#history_bild_01{
+    float: right;
     height: 384px;
-     background-color: rgba(255,255,255,0.5);
+    background-color: rgba(255,255,255,0.5);
 }
 #history_bild_02{
-    
-    margin-bottom: 20px;
-    margin-left: 20px;
-   
-    width: 285px;
     height: 411px; 
 }
-#history_bild_03{
-    
-    margin-bottom: 20px;
-    margin-left: 20px;
-    
-    width: 285px;
+#history_bild_03,#history_bild_06,#history_bild_07{
     height: 199px;
 }
 #history_bild_04{
-    
-    margin-bottom: 20px;
-    margin-left: 20px;
-    width: 285px;
     height: 380px;
 }
-#history_bild_05{
-    
-    margin-bottom: 20px;
-    margin-left: 20px;
-    width: 285px; 
-    height: 200px;
-}
-#history_bild_06{
-    
-    margin-bottom: 20px;
-    margin-left: 20px;
-    width: 285px; 
-    height: 199px;
-}
-#history_bild_07{
-    
-    margin-bottom: 20px;
-    margin-left: 20px;
-    width: 285px;
-    height: 199px; 
-}
-#history_bild_08{
-    
-    margin-bottom: 20px;
-    margin-left: 20px;
-    width: 285px; 
-    height: 200px;
-}
-#history_bild_09{
-    
-    margin-bottom: 20px;
-    margin-left: 20px;
-    width: 285px; 
+#history_bild_05,#history_bild_08, #history_bild_09{
     height: 200px;
 }
 #history_bild_10{
-    
-    margin-bottom: 20px;
-    margin-left: 20px;
-   
-    width: 285px; 
     height: 215px;
 }
-#history_bild_11{
-    
-    margin-bottom: 20px;
-    margin-left: 20px;
-    
-    width: 285px; 
+#history_bild_11, #history_bild_12{
     height: 188px;
 }
-#history_bild_12{
-    
-    margin-bottom: 20px;
-    margin-left: 20px;
-   
-    width: 285px; 
-    height: 188px;
-}
-#history_bild_13{
-    
-    margin-bottom: 20px;
-    margin-left: 20px;
-    
-    width: 285px; 
+#history_bild_13, #history_bild_18, #history_bild_20{
     height: 183px;
 }
 #history_bild_14{
-    
     margin-bottom: 40px;
     margin-left: 20px;
-    
     width: 285px; 
     height: 430px;
 }
 #history_bild_15{
-    
-    margin-bottom: 20px;
-    margin-left: 20px;
-   
-    width: 285px; 
     height: 397px;
 }
 #history_bild_16{
-    
-    margin-bottom: 20px;
-    margin-left: 20px;
-   
-    width: 285px; 
     height: 429px; 
 }
 #history_bild_17{
-    
-    margin-bottom: 20px;
-    margin-left: 20px;
-   
-    width: 285px; 
     height: 182px;
 }
-#history_bild_18{
-    
-    margin-bottom: 20px;
-    margin-left: 20px;
-    
-    width: 285px; 
-    height: 183px;
-}
 #history_bild_19{
-    
-    margin-bottom: 20px;
-    margin-left: 20px;
-    
-    width: 285px; 
     height: 218px;
 }
-#history_bild_20{
-    
-    margin-bottom: 20px;
-    margin-left: 20px;
-    
-    width: 285px; 
-    height: 183px; 
-}
-#history_h1 {
-    color:#ac2135;
-    background-color: rgba(255,255,255,0);
-    margin: 0 0 0.2em 0;
-    font-size: 1.5em;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-}
-
-
-
-
 
 
 
