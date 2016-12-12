@@ -7,6 +7,7 @@ session_start();
 require_once './biblio.inc.php';
 $benutzer = benutzer_EmailUndPassword_check($_POST['e_mail'], $_POST['password']);
 if ($benutzer['id_benutzer'] == 1) {
+     $_SESSION['id_benutzer'] = $benutzer['id_benutzer'];
     header('Location: liste.php');
 }
 else {
