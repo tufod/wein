@@ -149,7 +149,7 @@ function list_output($input_filter) {
             . 'weintyp w ON p.weintyp_id=w.id_weintyp JOIN weingut wg ON '
             . 'p.weingut_id=wg.id_weingut JOIN laender l ON wg.land_id=l.id_land JOIN region r ON'
             . ' wg.region_id=r.id_region JOIN kontinent k ON l.kontinent_id=k.id_kontinent' . $filter;
-    echo $sql;
+    //echo $sql;
 
     $res = mysqli_query($con, $sql);
     while ($zeil = mysqli_fetch_assoc($res)) {
