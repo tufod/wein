@@ -1,6 +1,12 @@
 <?php
 
+/*
+ * Server der Verwendung findet
+ */
 $_SERVER = 'localhost';
+/*
+ * Datenbank zugriff ( con db
+ */
 
 // database
 
@@ -20,14 +26,7 @@ function benutzer_EmailUndPassword_check($email, $password) {
         $password_hash = md5($password);
         $con = con_db();
         $sql = 'SELECT id_benutzer,
-                 anrede,
-                 vorname,
-                 nachname,
-                 geburtsdatum,
-                 telefon,
-                 email
-                 
-
+                 vorname 
                  FROM benutzer
                  JOIN zugang ON benutzer.id_benutzer=zugang.benutzer_id 
                  WHERE (email=\'' . $email . '\' AND PASSWORD=\'' . $password_hash . '\');';
@@ -41,7 +40,8 @@ function benutzer_EmailUndPassword_check($email, $password) {
 function benutzer_Email_check($email) {
     if (isset($email)) {
         $con = con_db();
-        $sql = 'SELECT id_benutzer,email
+        $sql = 'SELECT id_benutzer,
+                       email 
                  FROM benutzer
                  WHERE email=\'' . $email . ' \';';
         $res = mysqli_query($con, $sql);
@@ -122,6 +122,7 @@ function generate_html_form_datalist($feld) {
 //$feld kann sein produkt_name,produkt_volumen,name_weintyp,name_weingut,land_name,name_region,name_kontinent
 function generate_html_form_select($feld) {
     $con = con_db();
+    
     $select = '<select>';
     $sql = 'SELECT DISTINCT ' . $feld . ' '
             . 'FROM produkt p JOIN weintyp w ON p.weintyp_id=w.id_weintyp JOIN weingut wg ON '
@@ -144,12 +145,18 @@ function list_output($input_filter) {
         $filter .= " WHERE ";
         $filter .= filtrator($input_filter);
     }
+    
+    /*
+     * Select Anweisung die erstellt die Produktnummer, die Produkt beschreibung, 
+     * den Produkt Preis und das land zur verfügung für filter auf der listen seite
+     *
+     */
     $sql = 'SELECT produkt_nummer,produkt_name,produkt_beschr,produkt_preis,LOWER(land_id) AS land_id,land_name,produkt_volumen'
             . ' FROM produkt p JOIN '
             . 'weintyp w ON p.weintyp_id=w.id_weintyp JOIN weingut wg ON '
             . 'p.weingut_id=wg.id_weingut JOIN laender l ON wg.land_id=l.id_land JOIN region r ON'
             . ' wg.region_id=r.id_region JOIN kontinent k ON l.kontinent_id=k.id_kontinent' . $filter;
-    //echo $sql;
+    echo $sql;
 
     $res = mysqli_query($con, $sql);
     while ($zeil = mysqli_fetch_assoc($res)) {
@@ -174,13 +181,7 @@ function list_output($input_filter) {
         //Preis,Menge und Warenkorp
         $list .= '<div class="mengeUndWarenkorp"><br>';
         $list .= $zeil['produkt_preis'] . ' €/stück';
-        
-        if($_SESSION['id_benutzer'] == '1'){
-            $list .= ' <input type="button" class="warenkorp" value="bearbeitetn" onClick="admin.php">';
-        }
-        else {
-            $list .= ' <input type="button" class="warenkorp" value="Warenkorb" onClick="warenkorb.php">';
-        }
+        $list .= ' <input type="button" class="warenkorp" value="Warenkorb" onClick="warenkorb.php">';
         $list .= '<input type="button" class="operation" value="-" onclick="operation(\'-\','
                 . $zeil['produkt_nummer'] . ')">';
         $list .= ' <input type="text" name="menge" id="'
@@ -193,16 +194,25 @@ function list_output($input_filter) {
         $list .= '</div>';
         $list .= '</div>';
     }
+    
+    /*
+     * Datenbank schließung
+     */
     uncon_db($con);
     return $list;
 }
-
+/*
+ *   Load des template
+ */
 //template
 function load_tpl($load) {
     global $template;
     $template = file_get_contents($load);
 }
 
+/*
+ * Template Ausgabe
+ */
 function tpl_output() {
     global $template;
     echo $template;
@@ -221,41 +231,42 @@ function display_detail() {
             . 'JOIN laender ON id_land = land_id '
             . 'JOIN weintyp ON id_weintyp=weintyp_id '
             . 'JOIN region ON id_region=region_id '
-            . ' WHERE produkt_nummer = \'' . $id . '\';';
+            .' WHERE produkt_nummer = \''.$id.'\';';
     $res = mysqli_query($con, $sql);
     $detail = '';
     while ($d_bild = mysqli_fetch_assoc($res)) {
-        $detail .= '<div class="detail">';
-        
-        $detail .= '<a href="images/weinbilder/gross/w'
+        $detail.= '<div class="detail">';
+        $detail.='<img class="detail_bild" src="images/weinbilder/mittel/w'
+                . $d_bild['produkt_nummer'].'.jpg"'
+                . ' onClick= "src="images/weinbilder/gross/w'
+                . $d_bild['produkt_nummer'].'.jpg" onerror="this.src=\'images/weinbilder/mittel/blank.jpg">';
+        $detail.='<img class="detail_bild" src="images/weinbilder/mittel/w'
                 . $d_bild['produkt_nummer']
-                . '.jpg" rel="lightbox" title="'.$d_bild['produkt_name'].'" onerror="this.src=\'images/weinbilder/gross/blank.jpg\'">'
-                . '<img class="detail_bild" src="images/weinbilder/mittel/w'.$d_bild['produkt_nummer'].'.jpg" '
-                . 'onerror="this.src=\'images/weinbilder/mittel/blank.jpg\'"></a>';
-        $detail .= '<h2 class="detail_name">' . $d_bild['produkt_name'] . '</h2>'
-                . '<img class="d_flag" src="images/flags/4x3/' . $d_bild['land_id'] . '.svg"'
-                . 'title="' . $d_bild['land_name'] . '">';
-        $detail .= '<div class="kategorie"><h4>Weintyp</h4>: ' . $d_bild['name_weintyp'] . ''
-                . ', <h4> Region: </h4>' . $d_bild['name_region'] . ', <h4> Weingut: </h4>' . $d_bild['name_weingut'] . '</div>';
-        $detail .= '<br><div class="detail_text">' . $d_bild['produkt_text'] . '<br>'
-                . $d_bild['produkt_volumen'] . ' Liter</div>';
-        $detail .= '<div class="detail_waren"><br>';
-        $detail .= $d_bild['produkt_preis'] . ' €/stück';
-        $detail .= ' <input type="button" class="warenkorp" value="Warenkorb">';
-        $detail .= ' <input type="button" class="warenkorp" value="zurück" onClick="history.back()">';
-        $detail .= '<input type="button" class="operation" value="-" onclick="operation(\'-\','
+                . '.jpg" onerror="this.src=\'images/weinbilder/mittel/blank.jpg\' ">';
+        $detail.='<h2 class="detail_name">'.$d_bild['produkt_name'].'</h2>'
+                . '<img class="d_flag" src="images/flags/4x3/'.$d_bild['land_id'].'.svg"'
+                . 'title="'.$d_bild['land_name'].'">';
+        $detail.= '<div class="kategorie"><h4>Weintyp</h4>: '.$d_bild['name_weintyp'].''
+                . ', <h4> Region: </h4>'.$d_bild['name_region'].', <h4> Weingut: </h4>'.$d_bild['name_weingut'].'</div>';
+        $detail.='<br><div class="detail_text">'.$d_bild['produkt_text'].'</div><br><div class="liter">'
+                .$d_bild['produkt_volumen'].' Liter</div>';
+        $detail.= '<div class="detail_waren"><br>';
+        $detail.= $d_bild['produkt_preis'] . ' €/stück';
+        $detail.= ' <input type="button" class="warenkorp" value="Warenkorb">';
+        $detail.= ' <input type="button" class="warenkorp" value="zurück" onClick="history.back()">';
+        $detail.= '<input type="button" class="operation" value="-" onclick="operation(\'-\','
                 . $d_bild['produkt_nummer'] . ')">';
-        $detail .= ' <input type="text" name="menge" id="'
+        $detail.= ' <input type="text" name="menge" id="'
                 . $d_bild['produkt_nummer']
                 . '" size="3" value="1" onkeyup="menge_pruefen('
                 . $d_bild['produkt_nummer'] . ')">';
-        $detail .= '<input type="button" class="operation" value="+" onclick="operation(\'+\','
+        $detail.= '<input type="button" class="operation" value="+" onclick="operation(\'+\','
                 . $d_bild['produkt_nummer'] . ')">';
 
-        $detail .= '</div>';
-        $detail .= '</div>';
+        $detail.= '</div>';
+        $detail.= '</div>';
     }
-
+    
     return $detail;
 }
 
@@ -360,6 +371,10 @@ function search_feld() {
     return $code;
 }
 
+/*
+ * Password Prüfung ob gleich oder nicht
+ * 
+ */
 function password_vergleichen($pass1, $pass2) {
     if ($pass1 == $pass2) {
         return TRUE;
@@ -368,9 +383,21 @@ function password_vergleichen($pass1, $pass2) {
     }
 }
 
+/*
+ * Forumular Datums erzeugung
+ * 
+ */
 function datumFormola_erzeugen($container) {
     $aktuell_datum_jahr = date("Y");
+    
+    /*
+     * Setzen des Geburtsdatums ab 18 Jahre
+     */
     $jahr = intval($aktuell_datum_jahr) - 18;
+    
+    /*
+     * Setzen des Jahress
+     */
     $container = '<select name="geburtsdatum_jahr">';
     for ($i = 1; $i < 112; $i++) {
         $container .= '<option value="' . $jahr . '" ';
@@ -382,7 +409,9 @@ function datumFormola_erzeugen($container) {
     }
     $container .= '</select>';
 
-
+    /*
+     * Setzen des Monats
+     */
     $container .= '<select name="geburtsdatum_monat">';
     for ($i = 1; $i < 13; $i++) {
         $container .= '<option value="' . $i . '" ';
@@ -393,7 +422,9 @@ function datumFormola_erzeugen($container) {
     }
     $container .= '</select>';
 
-
+    /*
+     * Setzen des Tages
+     */
     $container .= '<select name="geburtsdatum_tag">';
     for ($i = 1; $i <= 31; $i++) {
         $container .= '<option value="' . $i . '" ';
@@ -406,6 +437,11 @@ function datumFormola_erzeugen($container) {
     return $container;
 }
 
+/*
+ *  Prüfung der Session Anrede ob gesetzt oder nicht gesetzt 
+ *  Prüfung der Session Geschlecht ob gesetzt oder nicht gesetzt 
+ *  wenn nicht gestezt = leer
+ */
 function Checked_Anrede_setzen($container, $Geschlecht) {
     if (isset($_SESSION['anrede']) && $_SESSION['anrede'] == $Geschlecht) {
         $container = '  checked="checked" ';
@@ -415,6 +451,11 @@ function Checked_Anrede_setzen($container, $Geschlecht) {
     return $container;
 }
 
+/*
+ *  Wert von Session setzen ($container) wenn sie vorhanden ist
+ *  wenn nicht dann lasse den ($container) leer
+ *  rückgabe wert = return $container
+ */
 function Value_Von_Session_setzen($container, $Element_Name) {
     if (isset($_SESSION[$Element_Name])) {
         $container = $_SESSION[$Element_Name];
@@ -424,9 +465,13 @@ function Value_Von_Session_setzen($container, $Element_Name) {
     return $container;
 }
 
+/*
+ *  Prüfung der eingabe Forumlare auf richtigkeit und Verinderung der Falscheingabe
+ */
 function Element_inArryFehler_Suchen($container, $element,$fehler) {
     if (preg_match("$element", $fehler) == 1) {
-        if ($element == "/Email/") {
+        $element=  trim($element, '/');
+        if ($element == "Email") {
             $container = $element . ' existiert';
         } else {
             $container = $element . ' ist falsch';
