@@ -1,9 +1,23 @@
 <?php
-
+/*
+ * Session Start ( Damit die Seite in die Laufende Session eingebunden ist )
+ */
 //ini_set('session.use_trans_sid', 1);
 session_start();
+
+/*
+ *  zusätzliche datei die benötigt wird zum ausführen der Seite
+ */
 require_once './biblio.inc.php';
+/*
+ *  Prüfung der benutzer e-Mail
+ */
+
 $benutzer = benutzer_Email_check($_POST['email']);
+
+/*
+ *  Session inhalte 
+ */
 $_SESSION['anrede'] = $_POST['anrede'];
 $_SESSION['vorname'] = $_POST['vorname'];
 $_SESSION['nachname'] = $_POST['nachname'];
@@ -17,11 +31,17 @@ $_SESSION['plz'] = $_POST['plz'];
 $_SESSION['telefon'] = $_POST['telefon'];
 $_SESSION['email'] = $_POST['email'];
 $_SESSION['fehler'] = '';
+
+/*
+ *  id_benutzer >0 = Fehler Ausgabe
+ */
+
 if ($benutzer['id_benutzer'] > 0) {
     $_SESSION['fehler'] = 'Email';
     header('Location: regestrierung.php');
     exit;
-} else {    
+} 
+else {    
     $anrede = $_POST['anrede'];
     $vorname = $_POST['vorname'];
     if (preg_match("/^[a-zA-Z .`-\´öäü]*$/", $vorname) == 0) {
@@ -71,6 +91,10 @@ if ($benutzer['id_benutzer'] > 0) {
     }
 //    header('Location: regestrierung.php');
 //        exit;
+    
+/*
+ *  Datenbank zugriff 
+ */
     $con = con_db();
     $sql = 'INSERT INTO benutzer (anrede,nachname,vorname,geburtsdatum,telefon,email,email_aktiv) 
         VALUES (\''
@@ -117,6 +141,7 @@ VALUES ('
 mysqli_query($con, $sql);
     uncon_db($con);
     //email2benutzer($benutzer['id_benutzer'], 'aktivation');
+    // zum history seite
     header('Location: liste.php');
     exit;
 }
