@@ -28,7 +28,7 @@ body {
 }
 
 .liter {
-    margin-left: 130px;
+    margin-left: 25px;
 }
 
 .beschreib {
@@ -590,6 +590,7 @@ a[class=button]:link, a[class=button]:visited, a[class=button]:focus, a[class=bu
     background-image: url(images/header_bg.png);
     border-radius: 3px;
     color:#fff;
+    
     
 
 }
