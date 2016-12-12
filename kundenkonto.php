@@ -43,7 +43,7 @@ $kundeKonto_container = '<div id="kunden_konto_main">
     <div id="kunden_konto_leftside">
         <form action="kundenkonto.inc.php" method="post">       
             <h2>Haupt Adresse:</h2>
-            <table id="registry_table1">
+            <table id="kunden_konto_leftside_table">
                <tr>
                 <td id="">
                 Anrede:
@@ -65,12 +65,12 @@ $kundeKonto_container .= '  required="required" > Herr
                     Nachname:
                     </td>
                     <td>
-                    <input id="registry" type="text" size="20" name="nachname" value="';
+                    <input id="registry" type="text" size="20" name="nachname" value=" ';
 $kundeKonto_container .= Value_Von_Session_setzen($kundeKonto_container, 'nachname');
-$kundeKonto_container .= '"  required="required" >
+$kundeKonto_container .= '"  pattern="^[a-z A-Z´ö`äü.-]*$"  required="required" >
                     </td>
                     <td>';
-$kundeKonto_container .= Element_inArryFehler_Suchen($kundeKonto_container, "/Nachname/",$fehler);
+$kundeKonto_container .= Element_inArryFehler_Suchen($kundeKonto_container, "/Nachname/", $fehler);
 $kundeKonto_container .= '</td>
                 </tr> 
                 <tr>
@@ -80,10 +80,10 @@ $kundeKonto_container .= '</td>
                     <td>
                     <input id="registry" type="text" size="20" name="vorname" value="';
 $kundeKonto_container .= Value_Von_Session_setzen($kundeKonto_container, 'vorname');
-$kundeKonto_container .= '"  required="required" >
+$kundeKonto_container .= '"  pattern="^[a-z A-Z´ö`äü.-]*$"  required="required" >
                     </td>
                     <td>';
-$kundeKonto_container .= Element_inArryFehler_Suchen($kundeKonto_container, "/Vorname/",$fehler);
+$kundeKonto_container .= Element_inArryFehler_Suchen($kundeKonto_container, "/Vorname/", $fehler);
 $kundeKonto_container .= '</td>
                 </tr>  
                 <tr>
@@ -92,16 +92,15 @@ $kundeKonto_container .= '</td>
                     Geburtsdatum:
                     </td>
                     <td>';
-
 $kundeKonto_container .= datumFormola_erzeugen($kundeKonto_container);
 $kundeKonto_container .= '</td>
                     <td>';
-$kundeKonto_container .= Element_inArryFehler_Suchen($kundeKonto_container, "/Geburtsdatum/",$fehler);
+$kundeKonto_container .= Element_inArryFehler_Suchen($kundeKonto_container, "/Geburtsdatum/", $fehler);
 $kundeKonto_container .='</td>
                  </tr>
                 </table>
                 <h2>Rechnung Adresse:</h2>
-                <table> 
+                <table id="kunden_konto_leftside_table"> 
                 <tr>
                     <td id="registry">
                     Strasse:
@@ -109,10 +108,10 @@ $kundeKonto_container .='</td>
                     <td>
                     <input id="registry" type="text" size="20" name="rechnung_strasse" value="';
 $kundeKonto_container .= Value_Von_Session_setzen($kundeKonto_container, 'rechnung_strasse');
-$kundeKonto_container .= '"  required="required" >
+$kundeKonto_container .= '"  pattern="^[a-z A-Zöäü.-]*$" required="required" >
                         </td>
                         <td>';
-$kundeKonto_container .= Element_inArryFehler_Suchen($kundeKonto_container,"/Rechnung Strasse/",$fehler);
+$kundeKonto_container .= Element_inArryFehler_Suchen($kundeKonto_container, "/Rechnung Strasse/", $fehler);
 $kundeKonto_container .= '</td>
                 </tr>  
                 <tr>
@@ -122,10 +121,10 @@ $kundeKonto_container .= '</td>
                     <td>
                     <input id="registry" type="text" size="20" name="rechnung_hausnummer" value="';
 $kundeKonto_container .= Value_Von_Session_setzen($kundeKonto_container, 'rechnung_hausnummer');
-$kundeKonto_container .= '" required="required" >
+$kundeKonto_container .= '"  pattern="^[0-9]+[a-z]?$" required="required" >
                         </td>
                 <td>';
-$kundeKonto_container .= Element_inArryFehler_Suchen($kundeKonto_container,"/Rechnung Hausnummer/",$fehler);
+$kundeKonto_container .= Element_inArryFehler_Suchen($kundeKonto_container, "/Rechnung Hausnummer/", $fehler);
 $kundeKonto_container .= '</td>               
                </tr>  
                 <tr>
@@ -135,10 +134,10 @@ $kundeKonto_container .= '</td>
                     <td>
                     <input id="registry" type="text" size="20" name="rechnung_ort" value="';
 $kundeKonto_container .= Value_Von_Session_setzen($kundeKonto_container, 'rechnung_ort');
-$kundeKonto_container .= '" required="required" >
+$kundeKonto_container .= '" pattern="^[a-z A-Z´ö`äü.-]*$" required="required" >
                         </td>
                         <td>';
-$kundeKonto_container .= Element_inArryFehler_Suchen($kundeKonto_container,"/Rechnung Ort/",$fehler);
+$kundeKonto_container .= Element_inArryFehler_Suchen($kundeKonto_container, "/Rechnung Ort/", $fehler);
 $kundeKonto_container .= '</td>
                 </tr> 
                 <tr>
@@ -148,13 +147,12 @@ $kundeKonto_container .= '</td>
                     <td>
                     <input id="registry" type="text" size="20" name="rechnung_plz" value="';
 $kundeKonto_container .= Value_Von_Session_setzen($kundeKonto_container, 'rechnung_plz');
-$kundeKonto_container .= '" required="required" >
+$kundeKonto_container .= '" pattern="^[0-9]{3,9}$" required="required" >
                         </td>
                         <td>';
-$kundeKonto_container .= Element_inArryFehler_Suchen($kundeKonto_container,"/Rechnung Plz/",$fehler);
+$kundeKonto_container .= Element_inArryFehler_Suchen($kundeKonto_container, "/Rechnung Plz/", $fehler);
 $kundeKonto_container .= '</td>
-                </tr>  
-                
+                </tr> 
                 <tr>
                     <td id="registry">
                     Telefon für rückfragen:
@@ -162,10 +160,10 @@ $kundeKonto_container .= '</td>
                     <td>
                     <input id="registry" type="text" size="20" name="telefon" value="';
 $kundeKonto_container .= Value_Von_Session_setzen($kundeKonto_container, 'telefon');
-$kundeKonto_container .= '" required="required" >
+$kundeKonto_container .= '"   pattern="^[0-9]{3,16}$"  >
                         </td>
                         <td>';
-$kundeKonto_container .= Element_inArryFehler_Suchen($kundeKonto_container,"/Telefon/",$fehler);
+$kundeKonto_container .= Element_inArryFehler_Suchen($kundeKonto_container, "/Telefon/", $fehler);
 $kundeKonto_container .= '</td>
                 </tr>  
                 <tr> 
@@ -173,21 +171,19 @@ $kundeKonto_container .= '</td>
                     e-Mail adresse:
                     </td>
                     <td>
-                    <input id="registry" type="text" size="20" name="email" value="';
+                    <input id="registry" type="email" size="20" name="email" value="';
 $kundeKonto_container .= Value_Von_Session_setzen($kundeKonto_container, 'email');
 $kundeKonto_container .= '" required="required" >
                         </td>
                         <td>';
-$kundeKonto_container .= Element_inArryFehler_Suchen($kundeKonto_container,"/Email/",$fehler);
+$kundeKonto_container .= Element_inArryFehler_Suchen($kundeKonto_container, "/Email/", $fehler);
 $kundeKonto_container .= '</td>
                 </tr>                  
             </table>
-       
-
  <!-- Passwörter: Kunden Passwort änderungs Bereich -->
     
             <h3>Passwort:</h3>
-            <table id="registry_table1">
+            <table id="kunden_konto_leftside_table">
                 <tr> 
                     <td id="registry">
                     password:
@@ -206,18 +202,16 @@ $kundeKonto_container .= '</td>
                     <input id="registry" type="password" size="20" name="password2" value="">
                     </td>
                     <td>';
-$kundeKonto_container .= Element_inArryFehler_Suchen($kundeKonto_container,"/Password/",$fehler);
+$kundeKonto_container .= Element_inArryFehler_Suchen($kundeKonto_container, "/Password/", $fehler);
 $kundeKonto_container .= '</td>
                 </tr>
-                 
             </table>
-       
     </div>
 <!-- Aktive Bestellungen: Kunden Bestellungen die Akiv sind -->
     <div id="kunden_konto_rightside"> 
         <h2>Kunden Liefer Adresse:</h2>
         
-            <table id="registry_table1">
+            <table id="kunden_login_rightside_table">
                 <tr>
                     <td id="registry">
                     Strasse:
@@ -225,10 +219,10 @@ $kundeKonto_container .= '</td>
                     <td>
                     <input id="registry" type="text" size="20" name="lieferung_strasse" value="';
 $kundeKonto_container .= Value_Von_Session_setzen($kundeKonto_container, 'lieferung_strasse');
-$kundeKonto_container .= '" required="required" >
+$kundeKonto_container .= '"  pattern="^[a-z A-Zöäü.-]*$" required="required" >
                         </td>
                         <td>';
-$kundeKonto_container .= Element_inArryFehler_Suchen($kundeKonto_container,"/Lieferung Strasse/",$fehler);
+$kundeKonto_container .= Element_inArryFehler_Suchen($kundeKonto_container, "/Lieferung Strasse/", $fehler);
 $kundeKonto_container .= '</td>
                 </tr>  
                 <tr>
@@ -238,10 +232,10 @@ $kundeKonto_container .= '</td>
                     <td>
                     <input id="registry" type="text" size="20" name="lieferung_hausnummer" value="';
 $kundeKonto_container .= Value_Von_Session_setzen($kundeKonto_container, 'lieferung_hausnummer');
-$kundeKonto_container .= '" required="required" >
+$kundeKonto_container .= '"  pattern="^[0-9]+[a-z]?$" required="required" >
                         </td>
                         <td>';
-$kundeKonto_container .= Element_inArryFehler_Suchen($kundeKonto_container,"/Lieferung Hausnummer/",$fehler);
+$kundeKonto_container .= Element_inArryFehler_Suchen($kundeKonto_container, "/Lieferung Hausnummer/", $fehler);
 $kundeKonto_container .= '</td>
                 </tr>  
                 <tr>
@@ -251,10 +245,10 @@ $kundeKonto_container .= '</td>
                     <td>
                     <input id="registry" type="text" size="20" name="lieferung_ort" value="';
 $kundeKonto_container .= Value_Von_Session_setzen($kundeKonto_container, 'lieferung_ort');
-$kundeKonto_container .= '" required="required" >
+$kundeKonto_container .= '"  pattern="^[a-z A-Z´ö`äü.-]*$" required="required" >
                         </td>
                         <td>';
-$kundeKonto_container .= Element_inArryFehler_Suchen($kundeKonto_container,"/Lieferung Ort/",$fehler);
+$kundeKonto_container .= Element_inArryFehler_Suchen($kundeKonto_container, "/Lieferung Ort/", $fehler);
 $kundeKonto_container .= '</td>
                 </tr> 
                 <tr>
@@ -264,10 +258,10 @@ $kundeKonto_container .= '</td>
                     <td>
                     <input id="registry" type="text" size="20" name="lieferung_plz" value="';
 $kundeKonto_container .= Value_Von_Session_setzen($kundeKonto_container, 'lieferung_plz');
-$kundeKonto_container .= '" required="required" >
+$kundeKonto_container .= '"  pattern="^[0-9]{3,9}$" required="required" >
                         </td>
                         <td>';
-$kundeKonto_container .= Element_inArryFehler_Suchen($kundeKonto_container,"/Lieferung Plz/",$fehler);
+$kundeKonto_container .= Element_inArryFehler_Suchen($kundeKonto_container, "/Lieferung Plz/", $fehler);
 $kundeKonto_container .= '</td>
                 </tr>
                 <tr>
@@ -279,7 +273,7 @@ $kundeKonto_container .= '</td>
                 </tr>
             </table>
             <h2>Aktuelle Bestellungen:</h2>
-            <table id="registry_table1">
+            <table id="kunden_login_rightside_table">
                 <tr> 
                     <td id=""></td><td></td>
                 </tr>  
@@ -289,10 +283,9 @@ $kundeKonto_container .= '</td>
                  <tr>
                 </tr>
             </table>
-<!-- Abgeschlossene Bestellungen: Kunden Bestellungen die Abgeschlossen sind -->
-       
+<!-- Abgeschlossene Bestellungen: Kunden Bestellungen die Abgeschlossen sind -->    
             <h2>Abgeschlossene Bestellungen:</h2>
-            <table id="registry_table1">
+            <table id="kunden_login_rightside_table">
                 <tr> 
                     <td id=""></td><td></td>
                 </tr>  
