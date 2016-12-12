@@ -1,6 +1,5 @@
-<!-- <link rel="stylesheet" href="pixsearch_default.css"> -->
 <?php
- /*
+/*
  * Session Start ( Damit die Seite in die Laufende Session eingebunden ist )
  */
   session_start();
@@ -8,8 +7,6 @@
 /*
  *  zusätzliche datei die benötigt wird zum ausführen der Seite
  */
- 
-
  require_once './list.inc.php';
 
 $template='';
@@ -18,7 +15,7 @@ $kunde=login_check();
 /*
  *  Ausgabe des Titels der Seite
  */
-$titel='Kontakt Seite';
+$titel='Über uns History';
 
 /*
  *  Load des Wein Template 
@@ -36,21 +33,14 @@ $template = str_replace('{title}', $titel, $template);
 $template = str_replace('{kunde}', $kunde, $template);
 
 
-
 /*
  *  $erge = Seiten inhalte
- *  Anrede
- *  Nachname
- *  Vorname
- *  Telefon für rückfragen
- *  e-Mail adresse
- *  Textfeld für eingaben vom Kunden
- * 
+ *  inhalt der Seite History 
  */
 $erge='<div id="history_main">
         <h1>Historie</h1>
         <form action="kontakt.php" method="post">
-               <table id="history_table1">
+               <table id="history_main_table">
                <tr>
                <td>
                 <p>&nbsp;</p>
@@ -66,32 +56,32 @@ $erge='<div id="history_main">
                 Mit den hier nachfolgenden historischen Schlaglichtern laden wir Sie zu einem Streifzug durch 600 Jahre Weinkultur an der Weser ein.</p>
                 <p>&nbsp;</p>
                 <p>&nbsp;</p>
-                <table id="history_table1">
+                <table id="history_main_table_sprungzeile">
                 <tbody>
                 <tr>
                     <td>
-                        <h3><a id="history" title="14. Jahrhundert" href="#vierzehnjhd" target="_self">14. Jhdt.</a></h3>
+                        <h3><a id="history_zeile" title="14. Jahrhundert" href="#vierzehnjhd" target="_self">14. Jhdt.</a></h3>
                     </td>
                     <td>
-                        <h3><a id="history" title="15. Jahrhundert" href="#fuenfzehnjhd" target="_self">15. Jhdt.</a></h3>
+                        <h3><a id="history_zeile" title="15. Jahrhundert" href="#fuenfzehnjhd" target="_self">15. Jhdt.</a></h3>
                     </td>
                     <td>
-                        <h3><a id="history" title="16. Jahrhundert" href="#sechszehnjhd" target="_self">16. Jhdt.</a></h3>
+                        <h3><a id="history_zeile" title="16. Jahrhundert" href="#sechszehnjhd" target="_self">16. Jhdt.</a></h3>
                     </td>
                     <td>
-                        <h3><a id="history" title="17. Jahrhundert" href="#siebzehnjhd" target="_self">17. Jhdt.</a></h3>
+                        <h3><a id="history_zeile" title="17. Jahrhundert" href="#siebzehnjhd" target="_self">17. Jhdt.</a></h3>
                     </td>
                     <td>
-                        <h3><a id="history" title="18. Jahrhundert" href="#achtzehnjhd" target="_self">18. Jhdt.</a></h3>
+                        <h3><a id="history_zeile" title="18. Jahrhundert" href="#achtzehnjhd" target="_self">18. Jhdt.</a></h3>
                     </td>
                     <td>
-                        <h3><a id="history" title="19. Jahrhundert" href="#neunzehnjhd" target="_self">19. Jhdt.</a></h3>
+                        <h3><a id="history_zeile" title="19. Jahrhundert" href="#neunzehnjhd" target="_self">19. Jhdt.</a></h3>
                     </td>
                     <td>
-                        <h3><a id="history" title="20. Jahrhundert" href="#zwanzigjhd" target="_self">20. Jhdt.</a></h3>
+                        <h3><a id="history_zeile" title="20. Jahrhundert" href="#zwanzigjhd" target="_self">20. Jhdt.</a></h3>
                     </td>
                     <td>
-                        <h3><a id="history" title="21. Jahrhundert" href="#einundzwanzigjhd" target="_self">21. Jhdt.</a></h3>
+                        <h3><a id="history_zeile" title="21. Jahrhundert" href="#einundzwanzigjhd" target="_self">21. Jhdt.</a></h3>
                     </td>
                     </tr>
                 </tbody>
@@ -169,7 +159,7 @@ $erge='<div id="history_main">
                     <br /> <br />
                     <span>
                         <strong>
-                            <img id="history_bild_02"" title="15. Jahrhunder Bremer VinoVeritas Ratskeller" src="./images/stories/geschichte-2.jpg" alt="15. Jahrhunder Bremer Ratskeller" />
+                            <img id="history_bild_02" title="15. Jahrhunder Bremer VinoVeritas Ratskeller" src="./images/stories/geschichte-2.jpg" alt="15. Jahrhunder Bremer Ratskeller" />
                         </strong>
                         Mit dem Bau des Rathauses im Jahr 1405 wird auch der Stadtweinkeller in die neu entstandenen Kellerräume unter dem Rathaus verlegt,
                         „um die Bürger wohlfeil mit Wein zu versorgen.”
@@ -326,33 +316,36 @@ $erge='<div id="history_main">
                 <p>
                     <br /> 
                     <span>
-                        <img id="history_bild07" title="18. Jahrhundert Bremer VinoVeritas Ratskeller" src="./images/stories/geschichte-7.jpg" alt="18. Jahrhundert Bremer VinoVeritas Ratskeller" />
+                       
+                       
                     </span>
                 </p>
-                <p id="history">
-                    <span>Die imposanten Prunkfässer aus dem 18. Jahrhundert,
-                        die sich heute in der historischen Säulenhalle des VinoVeritas Ratskellers befinden und dessen größtes 37.000 Flaschen fasst,
-                        wurden von den Bremer Bürgermeistern in ihrer besonderen Eigenschaft als Weinherren gestiftet.
-                        Die vier großen Zierfässer wurden wegen ihrer eingeschnitzten Bildornamente entsprechendmit eigenen Namen bedacht:
-                        „Löwenfass“ – das älteste der Zierfässer aus dem Jahr 1723 –, „Delphinfass“ (1737), sowie Drachenfass“ und „Affenfass“ (1760).
-                    </span>
+                <p id="history"></span><img id="history_bild07" title="18. Jahrhundert Bremer VinoVeritas Ratskeller" src="./images/stories/geschichte-7.jpg" alt="18. Jahrhundert Bremer VinoVeritas Ratskeller" />
+                    <span><p>&nbsp;</p>Die imposanten Prunkfässer aus dem 18. Jahrhundert,die sich heute in der historischen Säulenhalle des VinoVeritas Ratskellers befinden
+                    und dessen größtes 37.000 Flaschen fasst,
+                        wurden von den Bremer Bürgermeistern in ihrer 
+                        <br /> besonderen Eigenschaft als Weinherren gestiftet.
+                        Die vier großen Zierfässer
+                        <br /> wurden wegen ihrer eingeschnitzten Bildornamente entsprechend mit 
+                        <br /> eigenen Namen bedacht: „Löwenfass“ – das älteste der Zierfässer aus dem 
+                         <br />Jahr 1723 –, „Delphinfass“ (1737), sowie Drachenfass“ und „Affenfass“ (1760).
                     <br /> <br />
                     <span> Bis Ende des Jahrhunderts war es üblich,
                         dass die vornehmen Bremer Bürger ihren Hauswein aus dem VinoVeritas Ratskeller auf Kredit bezogen.
                         Zu diesem Zweck hatte jeder in seinem Keller ein Kerbholz, in das die geschuldete 
                         <strong>
-                        
-                            
-                        </strong>Summe eingeschnitten wurde.
-                        Der Weinhandel erstreckte sich zu dieser Zeit auch auf das weitere Bremer Umland.
-                        Sogar nach England, Petersburg und bis in die Vereinigten Staaten wurde VinoVeritas Ratskellerwein versandt.
+                        </strong>Summe eingeschnitten wurde.Der Weinhandel erstreckte sich zu dieser Zeit
+                        <br /> auch auf das weitere Bremer Umland. Sogar nach England, Petersburg und
+                        <br />bis in die Vereinigten Staaten wurde VinoVeritas Ratskellerwein versandt.
                     </span><img id="history_bild_8" title="18. Jahrhundert Bremer VinoVeritas Ratskeller" src="./images/stories/geschichte-8.jpg" alt="18. Jahrhundert Bremer VinoVeritas Ratskeller"  />
+                    <br />
+                    
                 </p>
                 <p id="history">&nbsp;</p>
                 <p>&nbsp;</p>
-                <p id="history"">
+                <p id="history">
                     <span>
-                        <span style="font-size: 10pt; font-family: arial,helvetica,sans-serif;">
+                        <span id="history_main span1"><p>&nbsp;</p>
                             <em>Historische Zeugen: Die Prunkfässer in der Säulenhalle des VinoVeritas Ratskellers wurden im 18. Jahrhundert von den Weinherren der Stadt gestiftet.
                                 Die teilweise bizarre Bildornamentik ist wohl eine frühe Reminiszenz an die Erfahrungen der Kaufmannschaft aus dem Asienhandel.
                             </em>
@@ -389,9 +382,10 @@ $erge='<div id="history_main">
                         Die Erträge wurden unter anderem zur Unterhaltung von Festungsanlagen (bist 1811) und auch des Rathauses verwendet.
                         Die wirtschaftliche Bedeutung Bremens führte 1827 mit dem Bau eines zweiten Tochterhafens am offenen Meer,
                         dem heutigen Bremerhaven, zu der ernsten
-                        <img id="history_bild_11" title="19. Jahrhundert Bremer VinoVeritas Ratskeller" src="./images/stories/geschichte-11.jpg" alt="19. Jahrhundert Bremer VinoVeritas Ratskeller"  />
                         Überlegung, den VinoVeritas Ratskeller zu verkaufen, die städtischen Weinvorräte zu versteigern,
-                        beziehungsweise in einer europaweiten Lotterie zu verspielen. Der Senat ließ dies aber nicht zu und erklärte, 
+                        beziehungsweise in einer europaweiten Lotterie zu verspielen.
+                        <img id="history_bild_11" title="19. Jahrhundert Bremer VinoVeritas Ratskeller" src="./images/stories/geschichte-11.jpg" alt="19. Jahrhundert Bremer VinoVeritas Ratskeller"  />
+                        Der Senat ließ dies aber nicht zu und erklärte, 
                         der VinoVeritas Ratskeller solle ein für allemal eine Zierde Bremens sein und bleiben.
                     </span>
                     <br /><br />
@@ -526,6 +520,7 @@ $erge='<div id="history_main">
                     </span>
                         <br />
                     <span>
+                    <img id="history_bild_17" title="20. Jahrhundert Bremer VinoVeritas Ratskeller" src="./images/stories/geschichte-17.jpg" alt="20. Jahrhundert Bremer VinoVeritas Ratskeller" />
                         <em>Rechenexempel: Postkarte mit der Wertberechnung des 1653er Rüdesheimer Roseweins Anfang der 1930er Jahre.
                             Die Karte wurde zu jener Zeit an die Besucher des Bremer VinoVeritas Ratskellers verkauft.
                         </em>
@@ -533,7 +528,7 @@ $erge='<div id="history_main">
                 </p>
                 <p id="history">
                     <span>
-                        <img id="history_bild_17" title="20. Jahrhundert Bremer VinoVeritas Ratskeller" src="./images/stories/geschichte-17.jpg" alt="20. Jahrhundert Bremer VinoVeritas Ratskeller" />
+                        
                     </span>
                 </p>
                 <p id="history">
@@ -578,7 +573,7 @@ $erge='<div id="history_main">
                     <br /> <br />
                     <span> 2001 verleiht der Gault Millau dem VinoVeritas Ratskeller,
                         der auch heute noch über das weltweit größte Angebot an deutschen Weinen verfügt,
-                        die Auszeichnung: „Beste Deutsche Weinkarte”.
+                        die Auszeichnung: „Beste Deutsche Weinkarte”.<br />
                         <img id="history_bild_19" title="21. Jahrhundert Bremer VinoVeritas Ratskeller" src="./images/stories/geschichte-19.jpg" alt="21. Jahrhundert Bremer VinoVeritas Ratskeller" />
                     </span>
                     <br /> <br />
