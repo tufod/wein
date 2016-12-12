@@ -25,9 +25,17 @@ $template = str_replace('{kunde}', $kunde_Info, $template);
 /*
  *  $regestrierung_container = Seiten inhalte
  */
+if (!isset($_SESSION['id_benutzer'])) {
+    $_SESSION['id_benutzer'] = 0;
+}
+if (isset($_SESSION['fehler'])) {
+    $fehler = $_SESSION['fehler'];
+} else {
+    $fehler = '';
+}
 $regestrierung_container = '<div id="kunden_registry_main">
         <h1>Benutzer Registrierung</h1>
-        <h2>Bitte Registrieren sie sich bitte hier mit ihren Persönlichen Daten</h2>
+        <h2>Registrieren sie sich bitte hier mit ihren Persönlichen Daten</h2>
         <form action="regestrierung_check.inc.php" method="post">
             <table id="kunden_registry_table">
                <tr>
@@ -36,26 +44,12 @@ $regestrierung_container = '<div id="kunden_registry_main">
                   </td> 
                 <td id="registry"> 
                 <!-- durch die radio Bottons ist die Auswahl möglich -->
-                <input type="radio" name="anrede" value="female" required ';
-if (isset($_SESSION['regestierung']['anrede']) && $_SESSION['regestierung']['anrede'] == 'female') {
-    $regestrierung_container .= '  checked="checked" ';
-}
-
+                <input type="radio" name="anrede" value="Frau" required ';
+$regestrierung_container .= Checked_Anrede_setzen($regestrierung_container, 'Frau');
 $regestrierung_container .= '> Frau
-                <input type="radio" name="anrede" selected  value="male" required  ';
-if (isset($_SESSION['regestierung']['anrede']) && $_SESSION['regestierung']['anrede'] == 'male') {
-    $regestrierung_container .= '  checked="checked" ';
-}
-
-
-$regestrierung_container .= '> Herr
-                <input type="radio" name="anrede" value="neutral" required  ';
-if (isset($_SESSION['regestierung']['anrede']) && $_SESSION['regestierung']['anrede'] == 'neutral') {
-    $regestrierung_container .= '  checked="checked" ';
-}
-
-
-$regestrierung_container .= '> Firma
+                <input type="radio" name="anrede" selected  value="Herr" required  ';
+$regestrierung_container .= Checked_Anrede_setzen($regestrierung_container, 'Herr');
+$regestrierung_container .= '> Herr              
                 </td>
                 <td>
                 </td>
@@ -66,19 +60,11 @@ $regestrierung_container .= '> Firma
                     </td>
                     <td>
                     <input id="registry" type="text" size="20" name="nachname" value="';
-if (isset($_SESSION['regestierung']['nachname'])) {
-    $regestrierung_container .= $_SESSION['regestierung']['nachname'];
-}
-
+$regestrierung_container .= Value_Von_Session_setzen($regestrierung_container, 'nachname');
 $regestrierung_container .= '" required="required" >
                     </td>                    
                     <td>';
-$fehler = $_SESSION['id_benutzer'];
-//var_dump($_SESSION);
-if (preg_match("/nachname_falsch/", $fehler) == 1) {
-    $regestrierung_container .= 'nachname falsch';
-}
-
+$regestrierung_container .= Element_inArryFehler_Suchen($regestrierung_container, "/Nachname/",$fehler);
 $regestrierung_container .= '</td>
                 </tr> 
                 <tr>
@@ -87,19 +73,12 @@ $regestrierung_container .= '</td>
                     </td>
                     <td>
                     <input id="registry" type="text" size="20" name="vorname" value="';
-if (isset($_SESSION['regestierung']['vorname'])) {
-    $regestrierung_container .= $_SESSION['regestierung']['vorname'];
-}
+$regestrierung_container .= Value_Von_Session_setzen($regestrierung_container, 'vorname');
 
 $regestrierung_container .= '" required="required" >
                     </td>
                     <td>';
-if (preg_match("/vorname_falsch/", $fehler) == 1) {
-    $regestrierung_container .= 'vorname falsch';
-}
-
-
-
+$regestrierung_container .= Element_inArryFehler_Suchen($regestrierung_container, "/Vorname/",$fehler);
 $regestrierung_container .= '</td>
                 </tr>  
                 <tr>
@@ -108,38 +87,12 @@ $regestrierung_container .= '</td>
                     Geburtsdatum:
                     </td>
                     <td>';
-$aktuell_datum_jahr = date("Y");
-$jahr = intval($aktuell_datum_jahr) - 17;
-$regestrierung_container .= '<select name="geburtsdatum_jahr">';
-for ($i = 1; $i < 112; $i++) {
-    $regestrierung_container .= '<option value="' . $jahr-- . '" ';
-    if (isset($_SESSION['regestierung']['geburtsdatum_jahr']) && $_SESSION['regestierung']['geburtsdatum_jahr'] == $jahr) {
-        $regestrierung_container .= ' selected="selected" ';
-    }
-    $regestrierung_container .= '>' . $jahr . '</option>';
-}
-$regestrierung_container .= '</select>';
-$regestrierung_container .= '<select name="geburtsdatum_monat">';
-for ($i = 1; $i < 13; $i++) {
-    $regestrierung_container .= '<option value="' . $i . '" ';
-    if (isset($_SESSION['regestierung']['geburtsdatum_monat']) && $_SESSION['regestierung']['geburtsdatum_monat'] == $i) {
-        $regestrierung_container .= ' selected="selected" ';
-    }
-    $regestrierung_container .= '>' . $i . '</option>';
-}
-$regestrierung_container .= '</select>';
-$regestrierung_container .= '<select name="geburtsdatum_tag">';
-for ($i = 1; $i <= 31; $i++) {
-    $regestrierung_container .= '<option value="' . $i . '" ';
-    if (isset($_SESSION['regestierung']['geburtsdatum_tag']) && $_SESSION['regestierung']['geburtsdatum_tag'] == $i) {
-        $regestrierung_container .= ' selected="selected" ';
-    }
-    $regestrierung_container .= '>' . $i . '</option>';
-}
-$regestrierung_container .= '</select>';
+
+$regestrierung_container .= datumFormola_erzeugen($regestrierung_container);
 $regestrierung_container .= '</td>
-                    <td>
-                    </td>
+                    <td>';
+$regestrierung_container .= Element_inArryFehler_Suchen($regestrierung_container, "/Geburtsdatum/",$fehler);
+$regestrierung_container .= '</td>
                 </tr>
                 <tr>
                     <td id="registry">
@@ -147,17 +100,11 @@ $regestrierung_container .= '</td>
                     </td>
                     <td>
                     <input id="registry" type="text" size="20" name="strasse" value="';
-if (isset($_SESSION['regestierung']['strasse'])) {
-    $regestrierung_container .= $_SESSION['regestierung']['strasse'];
-}
+$regestrierung_container .= Value_Von_Session_setzen($regestrierung_container, 'strasse');
 $regestrierung_container .= '" required="required" >
                     </td>
                     <td>';
-if (preg_match("/strasse_falsch/", $fehler) == 1) {
-    $regestrierung_container .= 'strasse falsch';
-}
-
-
+$regestrierung_container .= Element_inArryFehler_Suchen($regestrierung_container, "/Strasse/",$fehler);
 $regestrierung_container .= '</td>
                 </tr>  
                 <tr>
@@ -166,18 +113,11 @@ $regestrierung_container .= '</td>
                     </td>
                     <td>
                     <input id="registry" type="text" size="20" name="hausnummer" value="';
-if (isset($_SESSION['regestierung']['hausnummer'])) {
-    $regestrierung_container .= $_SESSION['regestierung']['hausnummer'];
-}
+$regestrierung_container .= Value_Von_Session_setzen($regestrierung_container, 'hausnummer');
 $regestrierung_container .= '" required="required" >
                     </td>
                     <td>';
-if (preg_match("/hausnummer_falsch/", $fehler) == 1) {
-    $regestrierung_container .= 'hausnummer falsch';
-}
-
-
-
+$regestrierung_container .= Element_inArryFehler_Suchen($regestrierung_container, "/Hausnummer/",$fehler);
 $regestrierung_container .= '</td>
                 </tr>  
                 <tr>
@@ -186,17 +126,11 @@ $regestrierung_container .= '</td>
                     </td>
                     <td>
                     <input id="registry" type="text" size="20" name="ort" value="';
-if (isset($_SESSION['regestierung']['ort'])) {
-    $regestrierung_container .= $_SESSION['regestierung']['ort'];
-}
+$regestrierung_container .= Value_Von_Session_setzen($regestrierung_container, 'ort');
 $regestrierung_container .= '" required="required" >
                     </td>
                     <td>';
-if (preg_match("/ort_falsch/", $fehler) == 1) {
-    $regestrierung_container .= 'ort falsch';
-}
-
-
+$regestrierung_container .= Element_inArryFehler_Suchen($regestrierung_container, "/Ort/",$fehler);
 $regestrierung_container .= '</td>
                 </tr> 
                 <tr>
@@ -205,17 +139,11 @@ $regestrierung_container .= '</td>
                     </td>
                     <td>
                     <input id="registry" type="text" size="20" name="plz" value="';
-if (isset($_SESSION['regestierung']['plz'])) {
-    $regestrierung_container .= $_SESSION['regestierung']['plz'];
-}
+$regestrierung_container .= Value_Von_Session_setzen($regestrierung_container, 'plz');
 $regestrierung_container .= '" required="required" >
                     </td>
                     <td>';
-
-if (preg_match("/plz_falsch/", $fehler) == 1) {
-    $regestrierung_container .= 'plz falsch';
-}
-
+$regestrierung_container .= Element_inArryFehler_Suchen($regestrierung_container, "/Plz/",$fehler);
 $regestrierung_container .= '</td>
                 </tr>  
                 <tr>
@@ -224,17 +152,11 @@ $regestrierung_container .= '</td>
                     </td>
                     <td>
                     <input id="registry" type="text" size="20" name="telefon" value="';
-if (isset($_SESSION['regestierung']['telefon'])) {
-    $regestrierung_container .= $_SESSION['regestierung']['telefon'];
-}
+$regestrierung_container .= Value_Von_Session_setzen($regestrierung_container, 'telefon');
 $regestrierung_container .= '">
                     </td>
                     <td>';
-if (preg_match("/telefon_falsch/", $fehler) == 1) {
-    $regestrierung_container .= 'telefon falsch';
-}
-
-
+$regestrierung_container .= Element_inArryFehler_Suchen($regestrierung_container, "/Telefon/",$fehler);
 $regestrierung_container .= '</td>
                 </tr>  
                 <tr> 
@@ -243,15 +165,11 @@ $regestrierung_container .= '</td>
                     </td>
                     <td>
                     <input id="registry" type="email" size="20" name="email" value="';
-if (isset($_SESSION['regestierung']['email'])) {
-    $regestrierung_container .= $_SESSION['regestierung']['email'];
-}
+$regestrierung_container .= Value_Von_Session_setzen($regestrierung_container, 'email');
 $regestrierung_container .= ' " required="required" >
                     </td>
                     <td>';
-if (preg_match("/email_falsch/", $fehler) == 1) {
-    $regestrierung_container .= 'Email existiert ';
-}
+$regestrierung_container .= Element_inArryFehler_Suchen($regestrierung_container, "/Email/",$fehler);
 $regestrierung_container .= '</td>
                 </tr> 
                 <tr>
@@ -272,21 +190,18 @@ $regestrierung_container .= '</td>
                     <input id="registry2" type="password" size="20" name="password2" required="required" value="">
                     </td>
                     <td>';
-if (preg_match("/password_falsch/", $fehler) == 1) {
+if (preg_match("/Password/", $fehler) == 1) {
     $regestrierung_container .= 'password nicht gleich ';
 }
-
-
-
 $regestrierung_container .= '</td>
                 </tr>
                 <tr>
+                <td>
+                </td>
                     <td id="registry">
-                    <input class="button" type="submit" id="aendern_button" value="ändern">
                     <input class="button" type="submit" id="registry_button" value="regestrieren">
                     </td>';
-
-if (preg_match("/email_falsch/", $fehler) == 1) {
+if (preg_match("/Email/", $fehler) == 1) {
     $regestrierung_container .= '<td><a class="button" href="login.php">login</a></td>';
 }
 $regestrierung_container .= '</tr>
@@ -297,7 +212,7 @@ $regestrierung_container .= '</tr>
  *   Load des Seiten Inhaltes (container)
  *   Seiten inhalt = $erge
  */
-$_SESSION['id_benutzer'] = 0;
+$_SESSION['fehler'] = '';
 $template = str_replace('{container}', $regestrierung_container, $template);
 /*
  * Seiten Ausgabe
