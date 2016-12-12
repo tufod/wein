@@ -22,7 +22,7 @@ $sql = 'SELECT
         liefer_oder_rechnung 
 FROM benutzer be
 JOIN adressen ad ON ad.benutzer_id=be.id_benutzer
-WHERE be.id_benutzer=43 
+WHERE be.id_benutzer='.$_SESSION['id_benutzer'].' 
 ORDER BY ad.liefer_oder_rechnung;';
 $res = mysqli_query($con, $sql);
 $benutzer = mysqli_fetch_assoc($res);
@@ -39,23 +39,11 @@ $_SESSION['lieferung_strasse'] = $benutzer['strasse'];
 $_SESSION['lieferung_hausnummer'] = $benutzer['hausnummer'];
 $_SESSION['lieferung_ort'] = $benutzer['ort'];
 $_SESSION['lieferung_plz'] = $benutzer['plz'];
-
-
-if ($benutzer['liefer_oder_rechnung'] == 'liefer_und_rechnung') {
-$_SESSION['rechnung_strasse'] = $_SESSION['lieferung_strasse'];
-$_SESSION['rechnung_hausnummer'] = $_SESSION['lieferung_hausnummer'];
-$_SESSION['rechnung_ort'] = $_SESSION['lieferung_ort'];
-$_SESSION['rechnung_plz'] = $_SESSION['lieferung_plz'];
-} else {
 $benutzer = mysqli_fetch_assoc($res);
 $_SESSION['rechnung_strasse'] = $benutzer['strasse'];
 $_SESSION['rechnung_hausnummer'] = $benutzer['hausnummer'];
 $_SESSION['rechnung_ort'] = $benutzer['ort'];
 $_SESSION['rechnung_plz'] = $benutzer['plz'];
-}
-
-
-
 uncon_db($con);
 header('Location: kundenkonto.php');
 exit;
@@ -123,9 +111,7 @@ $_SESSION['fehler'] .= ',Password';
 if ($_SESSION['fehler'] != '') {
 header('Location: kundenkonto.php');
 exit;
-
 } else {
-
 $con = con_db();
 $sql = 'UPDATE benutzer SET 
         anrede=\''.$_POST['anrede'].'\',
@@ -135,10 +121,8 @@ $sql = 'UPDATE benutzer SET
         telefon='.$_POST['telefon'].',
         email=\''.$_POST['email'].'\',email_aktiv=\'ja\'
 WHERE id_benutzer='.$_SESSION['id_benutzer'].';';
-
 mysqli_query($con, $sql);
 // $last_id=mysql_insert_id();
-
 $sql = 'UPDATE adressen SET 
     strasse=\''.$_POST['lieferung_strasse'].'\',
     hausnummer=\''. $_POST['lieferung_hausnummer'].'\',
