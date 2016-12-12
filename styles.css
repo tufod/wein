@@ -277,7 +277,7 @@ h4 {
             }
 #registry_button, #aendern_button, #login_button, #kontakt_button {
                 color: #FFFFFF;
-                BACKGROUND-COLOR: #B52136;
+                background-color: #B52136;
                 cursor: pointer;
             }
 /* style="color: #FFFFFF; BACKGROUND-COLOR: #B52136" */
@@ -332,7 +332,36 @@ font-size: 1.2em;
     font-size: 0.9em;
     
             }            
-            
+         #main {
+    padding: 20px;
+    background-color: rgba(255,255,255,0.5);
+}
+
+#history_main h1, #history_main h2, #history_main h3 {
+    color:#ac2135;
+    background-color: rgba(255,255,255,0);
+    margin: 0 0 0.2em 0;
+}
+#history_main h1 {
+    font-size: 1.5em;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+#history_main h2 {
+    font-size: 1.2em;
+}
+#history_main h3 {
+    font-size: 1em;
+}
+
+#history_main p {
+    margin: 0 0 0.4em 0;
+}
+#history_main img {
+    float: right;
+    max-width: 40%;
+}
+   
 #history{
             text-decoration: none;
             padding: 0px;
@@ -343,8 +372,9 @@ font-size: 1.2em;
 			
 #history_table1{
      width: 100%;
-     border: 0; 
-     align: left;
+     border: 0px; 
+     vertical-align: top;
+     text-align: left;
      background-color: rgba(255,255,255,0.5);
    /* margin-bottom: 20px;
    margin-left: 20px;
@@ -355,163 +385,157 @@ font-size: 1.2em;
    
     margin-bottom: 20px;
     margin-left: 20px;
+    float: right;
     
-    float: left;
-    width: 285;
-    height: 384;
+    width: 285px;
+    height: 384px;
      background-color: rgba(255,255,255,0.5);
 }
 #history_bild_02{
     
     margin-bottom: 20px;
     margin-left: 20px;
-    float: right;
-    width: 285;
-    height: 411; 
+   
+    width: 285px;
+    height: 411px; 
 }
 #history_bild_03{
     
     margin-bottom: 20px;
     margin-left: 20px;
-    float: right;
-    width: 285;
-    height: 199;
+    
+    width: 285px;
+    height: 199px;
 }
 #history_bild_04{
     
     margin-bottom: 20px;
     margin-left: 20px;
-    float: right;
-    width: 285;
-    height: 380;
+    width: 285px;
+    height: 380px;
 }
 #history_bild_05{
     
     margin-bottom: 20px;
     margin-left: 20px;
-    float: right;
-    width: 285; 
-    height: 200;
+    width: 285px; 
+    height: 200px;
 }
 #history_bild_06{
     
     margin-bottom: 20px;
     margin-left: 20px;
-    float: right;
-    width: 285; 
-    height: 199;
+    width: 285px; 
+    height: 199px;
 }
 #history_bild_07{
     
     margin-bottom: 20px;
     margin-left: 20px;
-    float: right;
-    width: 285;
-    height: 199; 
+    width: 285px;
+    height: 199px; 
 }
 #history_bild_08{
     
     margin-bottom: 20px;
     margin-left: 20px;
-    float: right;
-    width: 285; 
-    height: 200;
+    width: 285px; 
+    height: 200px;
 }
-#history_bild_01{
+#history_bild_09{
     
     margin-bottom: 20px;
     margin-left: 20px;
-    float: right;
-    width: 285; 
-    height: 200;
+    width: 285px; 
+    height: 200px;
 }
 #history_bild_10{
     
     margin-bottom: 20px;
     margin-left: 20px;
-    float: right;
-    width: 285; 
-    height: 215;
+   
+    width: 285px; 
+    height: 215px;
 }
 #history_bild_11{
     
     margin-bottom: 20px;
     margin-left: 20px;
-    float: right;
-    width: 285; 
-    height: 188;
+    
+    width: 285px; 
+    height: 188px;
 }
 #history_bild_12{
     
     margin-bottom: 20px;
     margin-left: 20px;
-    float: right;
-    width: 285; 
-    height: 188;
+   
+    width: 285px; 
+    height: 188px;
 }
 #history_bild_13{
     
     margin-bottom: 20px;
     margin-left: 20px;
-    float: right;
-    width: 285; 
-    height: 183;
+    
+    width: 285px; 
+    height: 183px;
 }
 #history_bild_14{
     
     margin-bottom: 40px;
     margin-left: 20px;
-    float: right;
-    width: 285; 
-    height: 430;
+    
+    width: 285px; 
+    height: 430px;
 }
 #history_bild_15{
     
     margin-bottom: 20px;
     margin-left: 20px;
-    float: right;
-    width: 285; 
-    height: 397;
+   
+    width: 285px; 
+    height: 397px;
 }
 #history_bild_16{
     
     margin-bottom: 20px;
     margin-left: 20px;
-    float: right;
-    width: 285; 
-    height: 429; 
+   
+    width: 285px; 
+    height: 429px; 
 }
 #history_bild_17{
     
     margin-bottom: 20px;
     margin-left: 20px;
-    float: right;
-    width: 285; 
-    height: 182;
+   
+    width: 285px; 
+    height: 182px;
 }
 #history_bild_18{
     
     margin-bottom: 20px;
     margin-left: 20px;
-    float: right;
-    width: 285; 
-    height: 183;
+    
+    width: 285px; 
+    height: 183px;
 }
 #history_bild_19{
     
     margin-bottom: 20px;
     margin-left: 20px;
-    float: right;
-    width: 285; 
-    height: 218;
+    
+    width: 285px; 
+    height: 218px;
 }
 #history_bild_20{
     
     margin-bottom: 20px;
     margin-left: 20px;
-    float: right;
-    width: 285; 
-    height: 183; 
+    
+    width: 285px; 
+    height: 183px; 
 }
 #history_h1 {
     color:#ac2135;
