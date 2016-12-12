@@ -223,8 +223,9 @@ function display_detail() {
         
         $detail .= '<a href="images/weinbilder/gross/w'
                 . $d_bild['produkt_nummer']
-                . '.jpg" rel="lightbox" title="'.$d_bild['produkt_name'].'" onerror="this.src=\'images/weinbilder/mittel/blank.jpg\'">'
-                . '<img class="detail_bild" src="images/weinbilder/mittel/w'.$d_bild['produkt_nummer'].'.jpg"></a>';
+                . '.jpg" rel="lightbox" title="'.$d_bild['produkt_name'].'" onerror="this.src=\'images/weinbilder/gross/blank.jpg\'">'
+                . '<img class="detail_bild" src="images/weinbilder/mittel/w'.$d_bild['produkt_nummer'].'.jpg" '
+                . 'onerror="this.src=\'images/weinbilder/mittel/blank.jpg\'"></a>';
         $detail .= '<h2 class="detail_name">' . $d_bild['produkt_name'] . '</h2>'
                 . '<img class="d_flag" src="images/flags/4x3/' . $d_bild['land_id'] . '.svg"'
                 . 'title="' . $d_bild['land_name'] . '">';
