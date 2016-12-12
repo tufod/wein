@@ -31,10 +31,10 @@ $login_container = '<h1>Login</h1>
         <form action="login_check.inc.php" method="post">
             <table id="login_table">
                 <tr>
-                    <td id="login">e-Mail adresse:</td><td><input id="registry" type="email" size="20" name="e_mail" value="khaled@hotmail.com"></td>
+                    <td id="login">e-Mail adresse:</td><td><input id="registry" type="email" size="20" name="e_mail" value=""></td>
                 </tr>  
                 <tr> 
-                    <td id="login">password:</td><td><input id="registry" type="password" size="20" name="password" value="12345" ></td>
+                    <td id="login">password:</td><td><input id="registry" type="password" size="20" name="password" value="" ></td>
                 </tr>  
                 <tr>
                    <td id="login"></td><td id="login"><input class="button" type="submit" id="login_buttom" value="Login"></td>
