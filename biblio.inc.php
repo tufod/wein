@@ -156,7 +156,7 @@ function list_output($input_filter) {
             . 'weintyp w ON p.weintyp_id=w.id_weintyp JOIN weingut wg ON '
             . 'p.weingut_id=wg.id_weingut JOIN laender l ON wg.land_id=l.id_land JOIN region r ON'
             . ' wg.region_id=r.id_region JOIN kontinent k ON l.kontinent_id=k.id_kontinent' . $filter;
-    echo $sql;
+    //echo $sql;
 
     $res = mysqli_query($con, $sql);
     while ($zeil = mysqli_fetch_assoc($res)) {
@@ -231,42 +231,41 @@ function display_detail() {
             . 'JOIN laender ON id_land = land_id '
             . 'JOIN weintyp ON id_weintyp=weintyp_id '
             . 'JOIN region ON id_region=region_id '
-            .' WHERE produkt_nummer = \''.$id.'\';';
+            . ' WHERE produkt_nummer = \'' . $id . '\';';
     $res = mysqli_query($con, $sql);
     $detail = '';
     while ($d_bild = mysqli_fetch_assoc($res)) {
-        $detail.= '<div class="detail">';
-        $detail.='<img class="detail_bild" src="images/weinbilder/mittel/w'
-                . $d_bild['produkt_nummer'].'.jpg"'
-                . ' onClick= "src="images/weinbilder/gross/w'
-                . $d_bild['produkt_nummer'].'.jpg" onerror="this.src=\'images/weinbilder/mittel/blank.jpg">';
-        $detail.='<img class="detail_bild" src="images/weinbilder/mittel/w'
+        $detail .= '<div class="detail">';
+        
+        $detail .= '<a href="images/weinbilder/gross/w'
                 . $d_bild['produkt_nummer']
-                . '.jpg" onerror="this.src=\'images/weinbilder/mittel/blank.jpg\' ">';
-        $detail.='<h2 class="detail_name">'.$d_bild['produkt_name'].'</h2>'
-                . '<img class="d_flag" src="images/flags/4x3/'.$d_bild['land_id'].'.svg"'
-                . 'title="'.$d_bild['land_name'].'">';
-        $detail.= '<div class="kategorie"><h4>Weintyp</h4>: '.$d_bild['name_weintyp'].''
-                . ', <h4> Region: </h4>'.$d_bild['name_region'].', <h4> Weingut: </h4>'.$d_bild['name_weingut'].'</div>';
-        $detail.='<br><div class="detail_text">'.$d_bild['produkt_text'].'</div><br><div class="liter">'
-                .$d_bild['produkt_volumen'].' Liter</div>';
-        $detail.= '<div class="detail_waren"><br>';
-        $detail.= $d_bild['produkt_preis'] . ' €/stück';
-        $detail.= ' <input type="button" class="warenkorp" value="Warenkorb">';
-        $detail.= ' <input type="button" class="warenkorp" value="zurück" onClick="history.back()">';
-        $detail.= '<input type="button" class="operation" value="-" onclick="operation(\'-\','
+                . '.jpg" rel="lightbox" title="'.$d_bild['produkt_name'].'" onerror="this.src=\'images/weinbilder/gross/blank.jpg\'">'
+                . '<img class="detail_bild" src="images/weinbilder/mittel/w'.$d_bild['produkt_nummer'].'.jpg" '
+                . 'onerror="this.src=\'images/weinbilder/mittel/blank.jpg\'"></a>';
+        $detail .= '<h2 class="detail_name">' . $d_bild['produkt_name'] . '</h2>'
+                . '<img class="d_flag" src="images/flags/4x3/' . $d_bild['land_id'] . '.svg"'
+                . 'title="' . $d_bild['land_name'] . '">';
+        $detail .= '<div class="kategorie"><h4>Weintyp</h4>: ' . $d_bild['name_weintyp'] . ''
+                . ', <h4> Region: </h4>' . $d_bild['name_region'] . ', <h4> Weingut: </h4>' . $d_bild['name_weingut'] . '</div>';
+        $detail .= '<br><div class="detail_text">' . $d_bild['produkt_text'] . '<br>'
+                . $d_bild['produkt_volumen'] . ' Liter</div>';
+        $detail .= '<div class="detail_waren"><br>';
+        $detail .= $d_bild['produkt_preis'] . ' €/stück';
+        $detail .= ' <input type="button" class="warenkorp" value="Warenkorb">';
+        $detail .= ' <input type="button" class="warenkorp" value="zurück" onClick="history.back()">';
+        $detail .= '<input type="button" class="operation" value="-" onclick="operation(\'-\','
                 . $d_bild['produkt_nummer'] . ')">';
-        $detail.= ' <input type="text" name="menge" id="'
+        $detail .= ' <input type="text" name="menge" id="'
                 . $d_bild['produkt_nummer']
                 . '" size="3" value="1" onkeyup="menge_pruefen('
                 . $d_bild['produkt_nummer'] . ')">';
-        $detail.= '<input type="button" class="operation" value="+" onclick="operation(\'+\','
+        $detail .= '<input type="button" class="operation" value="+" onclick="operation(\'+\','
                 . $d_bild['produkt_nummer'] . ')">';
 
-        $detail.= '</div>';
-        $detail.= '</div>';
+        $detail .= '</div>';
+        $detail .= '</div>';
     }
-    
+
     return $detail;
 }
 
