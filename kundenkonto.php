@@ -200,7 +200,7 @@ $kundeKonto_container .= '</td>
                     password:
                     </td>
                     <td>
-                    <input id="registry" type="password" size="20" name="password1" value="">
+                    <input id="password1" type="password" size="20" name="password1" value="">
                     </td>
                     <td>
                 </td>
@@ -210,9 +210,9 @@ $kundeKonto_container .= '</td>
                     Password:
                     </td>
                     <td>
-                    <input id="registry" type="password" size="20" name="password2" value="">
+                    <input id="password2" type="password" size="20" name="password2" value="">
                     </td>
-                    <td>';
+                    <td id="pass">';
 $kundeKonto_container .= Element_inArryFehler_Suchen($kundeKonto_container, "/Password/", $fehler);
 $kundeKonto_container .= '</td>
                 </tr>
@@ -277,7 +277,7 @@ $kundeKonto_container .= '</td>
                 </tr>
                 <tr>
                     <td id="registry">
-                    <input class="button" type="submit" id="kunden_aendern_button" value="ändern">
+                    <input class="button" type="submit" id="kunden_aendern_button" value="ändern" onclick="vergleichung()" >
                     </td>
                     <td>
                 </td>
@@ -308,6 +308,21 @@ $kundeKonto_container .= '</td>
 if (isset($_SESSION['fehler'])) {
     $_SESSION['fehler'] = '';
 }
+$_SESSION['anrede'] ='';
+$_SESSION['nachname'] = '';
+$_SESSION['geburtsdatum_jahr'] ='';
+$_SESSION['geburtsdatum_monat'] ='';
+$_SESSION['geburtsdatum_tag'] ='';
+$_SESSION['telefon'] ='';
+$_SESSION['email'] ='';
+$_SESSION['lieferung_strasse'] ='' ;
+$_SESSION['lieferung_hausnummer'] ='';
+$_SESSION['lieferung_ort'] = '';
+$_SESSION['lieferung_plz'] = '';
+$_SESSION['rechnung_strasse'] ='' ;
+$_SESSION['rechnung_hausnummer'] ='' ;
+$_SESSION['rechnung_ort'] = '';
+$_SESSION['rechnung_plz'] = '';
 /*
  *   Load des Seiten Inhaltes (container)
  *   Seiten inhalt = $erge
