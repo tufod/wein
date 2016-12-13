@@ -18,10 +18,20 @@ load_tpl('wein.tpl');
 $titel = 'regestrierung';
 
 /*
+ *  Style CSS Angabe für die regestrierung  Seite 
+ */
+$style='<link rel="stylesheet" href="./styles/kunden_registry.css" media="screen">';
+
+/*
  *  Ausgabe des Titels der Seite
  */
 $template = str_replace('{title}', $titel, $template);
 $kunde_Info = '';
+
+/*
+ *  CSS für die regestrierung übergabe an wein Tamplate {style} 
+ */
+$template = str_replace('{style}', $style, $template);
 
 /*
  * Anzeige Kunde rechts oben auf der Seite
