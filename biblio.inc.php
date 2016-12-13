@@ -185,7 +185,7 @@ function list_output($input_filter) {
         if(isset($_SESSION['id_benutzer'])) {
                if ($_SESSION['id_benutzer'] == '1'){
             $list .= '';
-            $list .= ' <a href="admin.php"><input type="button" class="warenkorp" value="bearbeiten"></a>';
+            $list .= ' <a href="admin.php?id='.$zeil['produkt_nummer'].'"><input type="button" class="warenkorp" value="bearbeiten"></a>';
         }
         }
         else {
