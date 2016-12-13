@@ -19,6 +19,12 @@ $kunde=login_check();
 $titel='Kontakt Seite';
 
 /*
+ *  Style CSS Angabe für die kontakt Seite 
+ */
+$style='<link rel="stylesheet" href="./styles/kunden_kontakt.css" media="screen">';
+
+
+/*
  *  Load des Wein Template 
  */
 load_tpl('wein.tpl');
@@ -27,6 +33,11 @@ load_tpl('wein.tpl');
  *   Titel Anzeige der Seite
  */
 $template = str_replace('{title}', $titel, $template);
+
+/*
+ *  CSS für die kontakt übergabe an wein Tamplate {style} 
+ */
+$template = str_replace('{style}', $style, $template);
 
 /*
  * Anzeige Kunde rechts oben auf der Seite
