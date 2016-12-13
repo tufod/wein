@@ -182,9 +182,11 @@ function list_output($input_filter) {
         $list .= '<div class="mengeUndWarenkorp"><br>';
         $list .= $zeil['produkt_preis'] . ' €/stück';
         
-        if($_SESSION['id_benutzer'] == '1'){
+        if(isset($_SESSION['id_benutzer'])) {
+               if ($_SESSION['id_benutzer'] == '1'){
             $list .= '';
             $list .= ' <a href="admin.php"><input type="button" class="warenkorp" value="bearbeiten"></a>';
+        }
         }
         else {
             $list .= ' <input type="button" class="warenkorp" value="Warenkorb" onClick="warenkorb.php">';
@@ -259,6 +261,14 @@ function display_detail() {
                 . $d_bild['produkt_volumen'] . ' Liter</div>';
         $detail .= '<div class="detail_waren"><br>';
         $detail .= $d_bild['produkt_preis'] . ' €/stück';
+        if(isset($_SESSION['id_benutzer'])) {
+               if ($_SESSION['id_benutzer'] == '1'){
+            $detail .= '';
+            $detail .= ' <a href="admin.php"><input type="button" class="warenkorp" value="bearbeiten"></a>';
+            $detail .= ' <input type="button" class="warenkorp" value="zurück" onClick="history.back()">';
+        }
+        }
+        else {
         $detail .= ' <input type="button" class="warenkorp" value="Warenkorb">';
         $detail .= ' <input type="button" class="warenkorp" value="zurück" onClick="history.back()">';
         $detail .= '<input type="button" class="operation" value="-" onclick="operation(\'-\','
@@ -269,6 +279,7 @@ function display_detail() {
                 . $d_bild['produkt_nummer'] . ')">';
         $detail .= '<input type="button" class="operation" value="+" onclick="operation(\'+\','
                 . $d_bild['produkt_nummer'] . ')">';
+        }
 
         $detail .= '</div>';
         $detail .= '</div>';
