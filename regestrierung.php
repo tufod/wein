@@ -1,111 +1,281 @@
-  <?php  
-  
-/*
- * Session Start ( Damit die Seite in die Laufende Session eingebunden ist )
- */
-  session_start();
-// session_set_cookie_params($lifetime=3);
-//session_status(2);
-echo'Session-Name:',session_name(),'<br>';
-echo'Session-ID (SID):',session_id(),'<br>';
-// echo'session-LifeTime:', session_set_cookie_params(),'<br>';
-echo'session-status:', session_status(),'<br>';
- 
-/*
- *  zusätzliche datei die benötigt wird zum ausführen der Seite
- */
+<?php
 
-  
-  require_once './biblio.inc.php';
-  
-  
-$template='';
-$kunde=login_check();
+session_start();
 
 /*
- *  Ausgabe des Titels der Seite
+ *  zusätzliche datei die benötigt wird zum ausfuehren der Seite
  */
-$titel='regestrierung';
+require_once './biblio.inc.php';
 
 /*
  *  Load des Wein Template 
  */
-load_tpl('wein.tpl'); 
+load_tpl('wein.tpl');
 
+/*
+ *  Ausgabe des Titels der Seite
+ */
+$titel = 'regestrierung';
 
-$kunde='';
+/*
+ *  Style CSS Angabe für die regestrierung  Seite 
+ */
+$style='<link rel="stylesheet" href="./styles/kunden_registry.css" media="screen">';
 
+/*
+ *  Ausgabe des Titels der Seite
+ */
+$template = str_replace('{title}', $titel, $template);
+$kunde_Info = '';
+
+/*
+ *  CSS für die regestrierung übergabe an wein Tamplate {style} 
+ */
+$template = str_replace('{style}', $style, $template);
 
 /*
  * Anzeige Kunde rechts oben auf der Seite
  */
-$template = str_replace('{kunde}', $kunde, $template);
+$template = str_replace('{kunde}', $kunde_Info, $template);
 
 /*
- *  $erge = Seiten inhalte
+ *  Prüfung der Session und id_Benutzer
  */
-$erge='<div id="main">
-        <h1>Registrierung</h1>
-        <form action="regestrierung_check.inc.php" method="post">
-            <table id="registry_table">
-               <tr>
-                <td id="registry">Anrede:</td> <td id="registry"> 
-                <!-- durch die radio Bottons ist die Auswahl möglich -->
-                <input type="radio" name="anrede" value="female" required> Frau
-                <input type="radio" name="anrede" value="male" required> Herr
-                <input type="radio" name="anrede" value="neutral" required> -
-                </select></td>
-                </tr>
-                <tr>
-                    <td id="registry">Nachname:</td><td><input id="registry" type="text" size="20" name="nachname" value="Müller"></td>
-                </tr> 
-                <tr>
-                    <td id="registry">Vorname:</td><td><input id="registry" type="text" size="20" name="vorname" value="Tina"></td>
-                </tr>  
-                <tr>
-                <tr> 
-                    <td id="registry">Geburtsdatum:</td><td><input id="registry" type="text" size="20" name="geburtsdatum" value="24.08.1995"></td>
-                </tr>
-                <tr>
-                    <td id="registry">Strasse:</td><td><input id="registry" type="text" size="20" name="strasse" value="Bürgermeister-Smidt-Str."></td>
-                </tr>  
-                <tr>
-                    <td id="registry">Hausnummer:</td><td><input id="registry" type="text" size="20" name="hausnummer" value="31"></td>
-                </tr>  
-                <tr>
-                    <td id="registry">Ort:</td><td><input id="registry" type="text" size="20" name="ort" value="Bremen"></td>
-                </tr> 
-                <tr>
-                    <td id="registry">Plz:</td><td><input id="registry" type="text" size="20" name="plz" value="28195"></td>
-                </tr>  
-                <tr>
-                    <td id="registry">Telefon für rückfragen:</td><td><input id="registry" type="text" size="20" name="telefon" value="0421554321"></td>
-                </tr>  
-                <tr> 
-                    <td id="registry">e-Mail adresse:</td><td><input id="registry" type="email" size="20" name="email" value="khaled@hotmail.com"></td>
-                </tr>  
-                <tr> 
-                    <td id="registry">password:</td><td><input id="registry1" type="password" size="20" name="password" value="tanz"></td>
-                </tr>  
-                <tr>
-                    <td id="registry">Password:</td><Td><input id="registry2" type="password" size="20" value="tanz"></td>
-                </tr>
-                 <tr>
-                    <td id="registry"><input class="button" type="submit" value="ändern"><input class="button" type="submit" value="regestrieren" onclick="password_vergleichung()></td>
-                    <script type="text/javascript" src="javascript_biblio.js"></script>
-                </tr>
-                </table>
-               
-        </form>     
-       </div>';
+if (!isset($_SESSION['id_benutzer'])) {
+    $_SESSION['id_benutzer'] = 0;
+}
+/*
+ *  Prüfung ob es bereits eine Session gibt
+ *  und wenn nicht erzeuge eine Session
+ */
+if (isset($_SESSION['fehler'])) {
+    $fehler = $_SESSION['fehler'];
+} else {
+    $fehler = '';
+}
 
+/*
+ *  $regestrierung_container = Seiten inhalte
+ */
+$regestrierung_container = '<div id="kunden_registry_main">
+        <h1>Benutzer Registrierung</h1>
+        <h2>Registrieren sie sich bitte hier mit ihren Persönlichen Daten</h2>
+        <form action="regestrierung_check.inc.php" method="post">
+            <table id="kunden_registry_table">
+               <tr>
+                  <td id="registry">
+                  Anrede:
+                  </td> 
+                <td id="registry"> 
+                <!-- durch die radio Bottons ist die Auswahl möglich -->
+                <input type="radio" name="anrede" value="Frau" required ';
+
+/*
+ *  Check der Anrede ob gesetzt oder nicht gesetzt
+ */
+$regestrierung_container .= Checked_Anrede_setzen($regestrierung_container, 'Frau');
+$regestrierung_container .= '> Frau
+                <input type="radio" name="anrede" selected  value="Herr" required  ';
+$regestrierung_container .= Checked_Anrede_setzen($regestrierung_container, 'Herr');
+$regestrierung_container .= '> Herr              
+                </td>
+                <td>
+                </td>
+                </tr>
+                <tr>
+                    <td id="registry">
+                    Nachname:
+                    </td>
+                    <td>
+                    <input id="registry" type="text" size="20" name="nachname"  value="';
+/*
+ *  Session wert (nachname setzen) oder leer 
+ */
+$regestrierung_container .= Value_Von_Session_setzen($regestrierung_container, 'nachname');
+$regestrierung_container .= '" pattern="^[a-z A-Z´ö`äü.-]*$" required="required" >
+                    </td>                    
+                    <td>';
+/*
+ *  Fehler Prüfung (nachname) oder leer 
+ */
+$regestrierung_container .= Element_inArryFehler_Suchen($regestrierung_container, "/Nachname/",$fehler);
+$regestrierung_container .= '</td>
+                </tr> 
+                <tr>
+                    <td id="registry">
+                    Vorname:
+                    </td>
+                    <td>
+                    <input id="registry" type="text" size="20" name="vorname" value="';
+$regestrierung_container .= Value_Von_Session_setzen($regestrierung_container, 'vorname');
+
+$regestrierung_container .= '"   pattern="^[a-z A-Z´ö`äü.-]*$"  required="required" >
+                    </td>
+                    <td>';
+$regestrierung_container .= Element_inArryFehler_Suchen($regestrierung_container, "/Vorname/",$fehler);
+$regestrierung_container .= '</td>
+                </tr>  
+                <tr>
+                <tr> 
+                    <td id="registry">
+                    Geburtsdatum:
+                    </td>
+                    <td>';
+
+/*
+ *  Hier wird das Datums Forular erzeugt
+ */
+$regestrierung_container .= datumFormola_erzeugen($regestrierung_container);
+$regestrierung_container .= '</td>
+                    <td>';
+$regestrierung_container .= Element_inArryFehler_Suchen($regestrierung_container, "/Geburtsdatum/",$fehler);
+$regestrierung_container .= '</td>
+                </tr>
+                <tr>
+                    <td id="registry">
+                    Strasse:
+                    </td>
+                    <td>
+                    <input id="registry" type="text" size="20" name="strasse" value="';
+$regestrierung_container .= Value_Von_Session_setzen($regestrierung_container, 'strasse');
+$regestrierung_container .= '" pattern="^[a-z A-Zöäü.-]*$" required="required" >
+                    </td>
+                    <td>';
+$regestrierung_container .= Element_inArryFehler_Suchen($regestrierung_container, "/Strasse/",$fehler);
+$regestrierung_container .= '</td>
+                </tr>  
+                <tr>
+                    <td id="registry">
+                    Hausnummer:
+                    </td>
+                    <td>
+                    <input id="registry" type="text" size="20" name="hausnummer" value="';
+$regestrierung_container .= Value_Von_Session_setzen($regestrierung_container, 'hausnummer');
+$regestrierung_container .= '" pattern="^[0-9]+[a-z]?$" required="required" >
+                    </td>
+                    <td>';
+$regestrierung_container .= Element_inArryFehler_Suchen($regestrierung_container, "/Hausnummer/",$fehler);
+$regestrierung_container .= '</td>
+                </tr>  
+                <tr>
+                    <td id="registry">
+                    Ort:
+                    </td>
+                    <td>
+                    <input id="registry" type="text" size="20" name="ort" value="';
+$regestrierung_container .= Value_Von_Session_setzen($regestrierung_container, 'ort');
+$regestrierung_container .= '"  pattern="^[a-z A-Z´ö`äü.-]*$" required="required" >
+                    </td>
+                    <td>';
+$regestrierung_container .= Element_inArryFehler_Suchen($regestrierung_container, "/Ort/",$fehler);
+$regestrierung_container .= '</td>
+                </tr> 
+                <tr>
+                    <td id="registry">
+                    Plz:
+                    </td>
+                    <td>
+                    <input id="registry" type="text" size="20" name="plz" value="';
+$regestrierung_container .= Value_Von_Session_setzen($regestrierung_container, 'plz');
+$regestrierung_container .= '"  pattern="^[0-9]{3,9}$" required="required" >
+                    </td>
+                    <td>';
+$regestrierung_container .= Element_inArryFehler_Suchen($regestrierung_container, "/Plz/",$fehler);
+$regestrierung_container .= '</td>
+                </tr>  
+                <tr>
+                    <td id="registry">
+                    Telefon für rückfragen:
+                    </td>
+                    <td>
+                    <input id="registry" type="text" size="20" name="telefon" value="';
+$regestrierung_container .= Value_Von_Session_setzen($regestrierung_container, 'telefon');
+$regestrierung_container .= '"  pattern="^[0-9]{3,16}$" >
+                    </td>
+                    <td>';
+$regestrierung_container .= Element_inArryFehler_Suchen($regestrierung_container, "/Telefon/",$fehler);
+$regestrierung_container .= '</td>
+                </tr>  
+                <tr> 
+                    <td id="registry">
+                    e-Mail adresse:
+                    </td>
+                    <td>
+                    <input id="registry" type="email" size="20" name="email" value="';
+$regestrierung_container .= Value_Von_Session_setzen($regestrierung_container, 'email');
+$regestrierung_container .= ' " required="required" >
+                    </td>
+                    <td>';
+$regestrierung_container .= Element_inArryFehler_Suchen($regestrierung_container, "/Email/",$fehler);
+$regestrierung_container .= '</td>
+                </tr> 
+                <tr>
+                    <td id="registry">
+                    password:
+                    </td>
+                    <td>
+                    <input id="password1" type="password" size="20" name="password1" required="required" value="">
+                    </td>
+                    <td>
+                    </td>
+                </tr>  
+                <tr>
+                    <td id="registry">
+                    Password:
+                    </td>
+                    <td>
+                    <input id="password2" type="password" size="20" name="password2" required="required" value="">
+                    </td>
+                    <td id="pass">';
+
+/*
+ *  Fehler Prüfung ob das Password gleich ist oder nicht
+ */
+if (preg_match("/Password/", $fehler) == 1) {
+    $regestrierung_container .= 'password nicht gleich ';
+}
+$regestrierung_container .= '</td>
+                </tr>
+                <tr>
+                <td>
+                </td>
+                    <td id="registry">
+                    <input class="button" type="submit" id="registry_button" value="regestrieren"  onclick="vergleichung()" >
+                    ';
+/*
+ *  Fehler Prüfung ob die e-Mail gleich ist oder nicht
+ */
+if (preg_match("/Email/", $fehler) == 1) {
+    $regestrierung_container .= '<a class="button" href="login.php">login</a></td>';
+}
+$regestrierung_container .= '</tr>
+                </table>   
+        </form>     
+    </div>';
+
+/*
+ *   Session inhalte die abgefragt oder gesetzt werden
+ * 
+ */
+$_SESSION['anrede'] ='';
+$_SESSION['vorname'] ='';
+$_SESSION['nachname'] = '';
+$_SESSION['geburtsdatum_jahr'] = '';
+$_SESSION['geburtsdatum_monat'] = '';
+$_SESSION['geburtsdatum_tag'] = '';
+$_SESSION['strasse'] = '';
+$_SESSION['hausnummer'] = '';
+$_SESSION['ort'] = '';
+$_SESSION['plz'] = '';
+$_SESSION['telefon'] = '';
+$_SESSION['email'] = '';
+$_SESSION['fehler'] = '';
 
 /*
  *   Load des Seiten Inhaltes (container)
- *   Seiten inhalt = $erge
+ *   Seiten inhalt = $regestrierung
  */
-$template = str_replace('{container}', $erge, $template);
-
+$template = str_replace('{container}', $regestrierung_container, $template);
 /*
  * Seiten Ausgabe
  */

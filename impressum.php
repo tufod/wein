@@ -1,45 +1,27 @@
    <?php 
-   
-   /*
-    * Session Start ( Damit die Seite in die Laufende Session eingebunden ist )
-    */
 session_start();
-// session_set_cookie_params($lifetime=3);
-//session_status(2);
-echo'Session-Name:',session_name(),'<br>';
-echo'Session-ID (SID):',session_id(),'<br>';
-// echo'session-LifeTime:', session_set_cookie_params(),'<br>';
-echo'session-status:', session_status(),'<br>';
-
 /*
- *  zusätzliche datei die benötigt wird zum ausführen der Seite
+ *  zusätzliche datei die benötigt wird zum ausführen der Seite +
  */
 require_once './biblio.inc.php';
-  
-$template='';
-$kunde=login_check();
-
-/*
- *  Titel der Seite
- */
-$titel='Impressum';
-
 /*
  *   Load des Seiten Aufbau Templates (Wein Template)
  *   Seiten Backround Bild unf vorgaben
  */
 load_tpl('wein.tpl');
-
+/*
+ *  Titel der Seite
+ */
+$titel='Impressum';
 /*
  *   Titel Anzeige der Seite
  */
 $template = str_replace('{title}', $titel, $template);
-
+$kunde_Info=login_check();
 /*
  * Anzeige Kunde rechts oben auf der Seite
  */
-$template = str_replace('{kunde}', $kunde, $template);
-
+$template = str_replace('{kunde}', $kunde_Info, $template);
 /* 
  * Impressum
  * Überschrift
@@ -47,7 +29,7 @@ $template = str_replace('{kunde}', $kunde, $template);
  * Impressums Text Inhalt
  * 
  */
-$erge='<div id="main">
+$impressum_container='<div id="main">
         <h2>Impressum</h2>
         <main>
             <section>
@@ -101,21 +83,11 @@ $erge='<div id="main">
             </section>
         </main>
     </div>';
-
-
-
-
-/*
- *   Load  ... (produkt)
- *  
- */
-$list=list_output('produkt'); 
-
 /*
  *   Load des Seiten Inhaltes (container)
  *   Seiten inhalt = $erge
  */
-$template = str_replace('{container}', $erge, $template);
+$template = str_replace('{container}',$impressum_container, $template);
 
 /*
  * Seiten Ausgabe

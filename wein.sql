@@ -1,8 +1,8 @@
 -- --------------------------------------------------------
--- Host:                         localhost
+-- Host:                         127.0.0.1
 -- Server Version:               10.1.16-MariaDB - mariadb.org binary distribution
 -- Server Betriebssystem:        Win32
--- HeidiSQL Version:             9.4.0.5133
+-- HeidiSQL Version:             9.4.0.5125
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -18,46 +18,56 @@ USE `weinhandel_test`;
 
 -- Exportiere Struktur von Tabelle weinhandel_test.adressen
 CREATE TABLE IF NOT EXISTS `adressen` (
-  `id_adresse` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `id_adresse` int(5) unsigned NOT NULL AUTO_INCREMENT,
+  `benutzer_id` int(5) unsigned NOT NULL DEFAULT '0',
   `strasse` varchar(250) DEFAULT NULL,
   `hausnummer` varchar(50) DEFAULT NULL,
-  `land_id` int(11) DEFAULT NULL,
-  `plz_id` int(20) DEFAULT NULL,
+  `ort` varchar(50) DEFAULT NULL,
+  `plz` int(20) DEFAULT NULL,
+  `liefer_oder_rechnung` char(20) DEFAULT NULL,
   PRIMARY KEY (`id_adresse`),
-  KEY `plz_id` (`plz_id`),
-  KEY `land_id` (`land_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  KEY `benutzer_id` (`benutzer_id`),
+  CONSTRAINT `benutzer` FOREIGN KEY (`benutzer_id`) REFERENCES `benutzer` (`id_benutzer`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle weinhandel_test.adressen: ~0 rows (ungefähr)
+-- Exportiere Daten aus Tabelle weinhandel_test.adressen: ~8 rows (ungefähr)
 /*!40000 ALTER TABLE `adressen` DISABLE KEYS */;
+INSERT INTO `adressen` (`id_adresse`, `benutzer_id`, `strasse`, `hausnummer`, `ort`, `plz`, `liefer_oder_rechnung`) VALUES
+	(31, 49, 'lange', '2k', 'bremen', 232343, 'lieferung'),
+	(32, 49, 'lange', '2k', 'bremen', 232343, 'rechnung'),
+	(33, 50, 'k', '2k', 'kk', 232343, 'lieferung'),
+	(34, 50, 'k', '2k', 'kk', 232343, 'rechnung'),
+	(35, 51, 'lange', '6u', 'bremen', 232343, 'lieferung'),
+	(36, 51, 'lange', '6u', 'bremen', 232343, 'rechnung'),
+	(37, 52, 'k', '2k', 'bremen', 232343, 'lieferung'),
+	(38, 52, 'k', '2k', 'bremen', 232343, 'rechnung');
 /*!40000 ALTER TABLE `adressen` ENABLE KEYS */;
 
 -- Exportiere Struktur von Tabelle weinhandel_test.benutzer
 CREATE TABLE IF NOT EXISTS `benutzer` (
-  `id_benutzer` int(4) NOT NULL AUTO_INCREMENT,
-  `zugang_id` int(11) DEFAULT NULL,
-  `anrede` int(11) DEFAULT NULL,
-  `vorname` varchar(100) DEFAULT NULL,
-  `nachname` varchar(100) DEFAULT NULL,
+  `id_benutzer` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `anrede` char(5) NOT NULL,
+  `vorname` varchar(100) NOT NULL,
+  `nachname` varchar(100) NOT NULL,
   `geburtsdatum` date DEFAULT NULL,
   `telefon` varchar(50) DEFAULT NULL,
   `email` varchar(80) DEFAULT NULL,
-  `email_aktiv` int(10) unsigned DEFAULT '0',
+  `email_aktiv` char(4) DEFAULT '0',
   `warenkorb_id` int(11) DEFAULT NULL,
-  `lief_adresse_id` int(11) DEFAULT NULL,
-  `rech_adresse_id` int(11) DEFAULT NULL,
   `regis_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `change_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `login_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_benutzer`),
-  KEY `lief_adresse_id` (`lief_adresse_id`),
-  KEY `rech_adresse_id` (`rech_adresse_id`),
-  KEY `zugang_id` (`zugang_id`),
   KEY `warenkorb_id` (`warenkorb_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle weinhandel_test.benutzer: ~0 rows (ungefähr)
+-- Exportiere Daten aus Tabelle weinhandel_test.benutzer: ~3 rows (ungefähr)
 /*!40000 ALTER TABLE `benutzer` DISABLE KEYS */;
+INSERT INTO `benutzer` (`id_benutzer`, `anrede`, `vorname`, `nachname`, `geburtsdatum`, `telefon`, `email`, `email_aktiv`, `warenkorb_id`, `regis_date`, `change_date`, `login_date`) VALUES
+	(49, 'Herr', 'mo', 'kh', '1983-09-17', '017665565', 'k1@k1.com', 'nein', NULL, '2016-12-11 19:22:07', '2016-12-11 19:22:07', '2016-12-11 19:22:07'),
+	(50, 'Frau', 'k', 'k', '1998-01-01', '12343434', 'n2@v2.com', 'nein', NULL, '2016-12-11 19:27:00', '2016-12-11 19:27:00', '2016-12-11 19:27:00'),
+	(51, 'Herr', 'maia', 'muller', '1996-06-02', '12343434', 'n4@v2.com', 'nein', NULL, '2016-12-11 19:38:16', '2016-12-11 19:38:16', '2016-12-11 19:38:16'),
+	(52, 'Herr', 'j', 'h', '1998-01-01', '12343434', 'k@k.com', 'nein', NULL, '2016-12-11 22:33:49', '2016-12-11 22:33:49', '2016-12-11 22:33:49');
 /*!40000 ALTER TABLE `benutzer` ENABLE KEYS */;
 
 -- Exportiere Struktur von Tabelle weinhandel_test.kontinent
@@ -343,17 +353,6 @@ INSERT INTO `laender` (`id_land`, `land_name`, `kontinent_id`) VALUES
 	('ZM', 'Sambia', 2),
 	('ZW', 'Simbabwe', 2);
 /*!40000 ALTER TABLE `laender` ENABLE KEYS */;
-
--- Exportiere Struktur von Tabelle weinhandel_test.plz
-CREATE TABLE IF NOT EXISTS `plz` (
-  `id_plz` int(4) NOT NULL AUTO_INCREMENT,
-  `plz` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`id_plz`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- Exportiere Daten aus Tabelle weinhandel_test.plz: ~0 rows (ungefähr)
-/*!40000 ALTER TABLE `plz` DISABLE KEYS */;
-/*!40000 ALTER TABLE `plz` ENABLE KEYS */;
 
 -- Exportiere Struktur von Tabelle weinhandel_test.produkt
 CREATE TABLE IF NOT EXISTS `produkt` (
@@ -848,11 +847,15 @@ INSERT INTO `produkt` (`id_produkt`, `produkt_nummer`, `produkt_name`, `produkt_
 
 -- Exportiere Struktur von Tabelle weinhandel_test.rechnung
 CREATE TABLE IF NOT EXISTS `rechnung` (
-  `id_rechnung` int(11) NOT NULL AUTO_INCREMENT,
-  `Spalte 2` int(11) DEFAULT NULL,
-  `Spalte 3` int(11) DEFAULT NULL,
-  `Spalte 4` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_rechnung`)
+  `id_rechnung` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `warenkorb_id` int(11) unsigned NOT NULL,
+  `lief_adresse_id` int(5) unsigned NOT NULL,
+  `rech_adresse_id` int(5) unsigned NOT NULL,
+  `rechnung_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_rechnung`),
+  KEY `lief_adresse_id` (`lief_adresse_id`),
+  KEY `rech_adresse_id` (`rech_adresse_id`),
+  KEY `warenkorb_id` (`warenkorb_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Exportiere Daten aus Tabelle weinhandel_test.rechnung: ~0 rows (ungefähr)
@@ -927,17 +930,18 @@ INSERT INTO `region` (`id_region`, `name_region`) VALUES
 
 -- Exportiere Struktur von Tabelle weinhandel_test.warenkorb
 CREATE TABLE IF NOT EXISTS `warenkorb` (
-  `id_warenkorb` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `benutzer_id` int(11) unsigned NOT NULL,
-  `produkt_id` int(11) unsigned NOT NULL,
-  `menge` int(11) unsigned NOT NULL DEFAULT '0' COMMENT 'Artikel Anzahl',
-  `preis` int(11) unsigned NOT NULL DEFAULT '0' COMMENT 'Artikel Einzelpreis ',
-  `status` tinyint(4) unsigned NOT NULL DEFAULT '0',
+  `id_warenkorb` int(5) unsigned NOT NULL AUTO_INCREMENT,
+  `benutzer_id` int(4) unsigned NOT NULL,
+  `produkt_id` int(4) unsigned NOT NULL,
+  `menge` int(4) unsigned DEFAULT '0' COMMENT 'Artikel Anzahl',
+  `preis` decimal(10,2) unsigned NOT NULL COMMENT 'Aktuelles Einzelpreis ',
+  `rechung_id` int(10) unsigned DEFAULT NULL,
   `eintrag_datum` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `aenderung_datum` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_warenkorb`),
   KEY `kunden_id` (`benutzer_id`),
-  KEY `produkte_id` (`produkt_id`)
+  KEY `produkte_id` (`produkt_id`),
+  KEY `rechung_id` (`rechung_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Exportiere Daten aus Tabelle weinhandel_test.warenkorb: ~0 rows (ungefähr)
@@ -1149,16 +1153,22 @@ INSERT INTO `weintyp` (`id_weintyp`, `name_weintyp`) VALUES
 
 -- Exportiere Struktur von Tabelle weinhandel_test.zugang
 CREATE TABLE IF NOT EXISTS `zugang` (
-  `id_zugang` int(4) NOT NULL AUTO_INCREMENT,
-  `benutzer_id` int(11) DEFAULT NULL,
+  `id_zugang` int(4) unsigned NOT NULL AUTO_INCREMENT,
+  `benutzer_id` int(4) unsigned NOT NULL DEFAULT '0',
   `password` varchar(50) DEFAULT NULL,
   `sessionid` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_zugang`),
-  KEY `benutzer_id` (`benutzer_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  KEY `password` (`benutzer_id`),
+  CONSTRAINT `password` FOREIGN KEY (`benutzer_id`) REFERENCES `benutzer` (`id_benutzer`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle weinhandel_test.zugang: ~0 rows (ungefähr)
+-- Exportiere Daten aus Tabelle weinhandel_test.zugang: ~4 rows (ungefähr)
 /*!40000 ALTER TABLE `zugang` DISABLE KEYS */;
+INSERT INTO `zugang` (`id_zugang`, `benutzer_id`, `password`, `sessionid`) VALUES
+	(22, 49, 'c4ca4238a0b923820dcc509a6f75849b', NULL),
+	(23, 50, 'c4ca4238a0b923820dcc509a6f75849b', NULL),
+	(24, 51, 'c4ca4238a0b923820dcc509a6f75849b', NULL),
+	(25, 52, 'c4ca4238a0b923820dcc509a6f75849b', NULL);
 /*!40000 ALTER TABLE `zugang` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

@@ -1,10 +1,16 @@
 
+
+
+
+
+
+
 body {
     margin: 0;
     padding: 0;
     font-family: Calibri,sans-serif;
     background-color: #96C2DD;
-    background-image: url(images/background/white3.jpg);
+    background-image: url(../images/background/white3.jpg);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -47,61 +53,7 @@ body {
 }
 
 
-/*
- * Detail php Seite
- */
-.detail {
-    background-color: rgba(255,255,255,0.7);
-    border: 3px solid #b9462d;
-    min-height: 100%;
-    width: 95%;
-    border-radius: 8px;
-    margin-bottom: 5px;
-    padding: 20px 20px;
-    border-collapse: collapse;
-    display: inline-block;
-}
 
-.detail_name {
-    padding-left: 130px;
-    padding-bottom: 15px;
-   
-}
-
-.detail_bild {
-     display: inline-block;
-}
-
-.detail_text {
-    padding-left: 130px;
-}
-
-.detail_waren {
-    padding-left: 130px;
-    float: right;
-    clear: both;
-}
-
-h4 {
-    color:#ac2135;
-    margin: 0 0 0.2em 0;
-    font-size: 1.0em;
-    display: inline-block;
-}
-
-.l_flag {
-    margin: 5px;
-    width: 15px;
-    height: 15px;
-    clear: both;
-}
-
-.d_flag {
-    width: 40px;
-    height: 30px;
-    padding-left: 15px;
-    
-}
 
 /*
  * regestrierung und Login Button rechts
@@ -140,7 +92,7 @@ h4 {
  */
 #navi {
     overflow: auto;
-    background-image: url(images/header_bg.png);
+    background-image: url(../images/header_bg.png);
 }
 #navi ul {
     list-style-type: none;
@@ -150,7 +102,7 @@ h4 {
 #navi a:link, #navi a:visited, #navi a:focus, #navi a:active {
     float: left; 
     padding:15px 15px;
-    background-image: url(images/menu_sep.png);
+    background-image: url(../images/menu_sep.png);
     background-position: center right;
     background-repeat: no-repeat;
     color:#fff;    
@@ -225,13 +177,13 @@ h4 {
    text-align: center;
 }
 /*
- * Schaltfl�chen
+ * Schaltflächen
  */
 a[class=button]:link, a[class=button]:visited, a[class=button]:focus, a[class=button]:active {
     float: right;
     padding:0.1em 1em;
     text-decoration: none;
-    background-image: url(images/header_bg.png);
+    background-image: url(../images/header_bg.png);
     border-radius: 3px;
     color:#fff;
     
@@ -239,7 +191,7 @@ a[class=button]:link, a[class=button]:visited, a[class=button]:focus, a[class=bu
 
 }
 a[class=button]:hover {
-    background-image: url(images/menu_hover.png);
+    background-image: url(../images/menu_hover.png);
 }
 /*
  * Allgemeine Links
@@ -259,7 +211,7 @@ a:hover {
 input[type=button][class=warenkorp]{
     float: right;
     padding:0.1em 1em;
-    background-image: url(images/header_bg.png);
+    background-image: url(../images/header_bg.png);
     border-radius: 3px;
     color:#fff;
     

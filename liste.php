@@ -1,15 +1,16 @@
 <?php
  /*
-  * Session Start ( Damit die Seite in die Laufende Session eingebunden ist )
+  * Session Start + ( Damit die Seite in die Laufende Session eingebunden ist )
   */
 session_start();
 
 /*
- *  zusÃ¤tzliche datei die benÃ¶tigt wird zum ausfÃ¼hren der Seite
+ *  zusatzliche datei die benotigt wird zum ausfuhren der Seite
  */
 require_once './biblio.inc.php';
 
 $template='';
+
 $kunde=login_check();
 
 /*
@@ -17,16 +18,28 @@ $kunde=login_check();
  */
 $title='Wein Liste';
 
+$search= search_feld();
+/*
+ *  Style CSS Angabe für die Listen Seite 
+ */
+$style='<link rel="stylesheet" href="./styles/wein_liste.css" media="screen">';
+
 /*
  *   Load des Seiten Aufbau Templates (Wein Template)
  *   Seiten Backround Bild unf vorgaben
- */
+ */  
 load_tpl('wein.tpl');
 
+$template = str_replace('{search}',$search, $template);
 /*
  *   Titel Anzeige der Seite
  */
 $template = str_replace('{title}', $title, $template);
+
+/*
+ *  CSS für die Listen Seite übergabe an wein Tamplate {style} 
+ */
+$template = str_replace('{style}', $style, $template);
 
 /*
  * Anzeige Kunde rechts oben auf der Seite
@@ -34,10 +47,9 @@ $template = str_replace('{title}', $title, $template);
 $template = str_replace('{kunde}', $kunde, $template);
 
 /*
- *   Load  ... (produkt)
- *  
+ *   Load produktlist mit filter 
  */
-$list=list_output('produkt'); 
+$list=list_output($_GET); 
 
 /*
  *   Load des Seiten Inhaltes (container)
@@ -51,4 +63,3 @@ $template = str_replace('{container}', $list, $template);
  */
 tpl_output();
 ?>
-
