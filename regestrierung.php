@@ -214,7 +214,7 @@ $regestrierung_container .= '</td>
                     password:
                     </td>
                     <td>
-                    <input id="registry1" type="password" size="20" name="password1" required="required" value="">
+                    <input id="password1" type="password" size="20" name="password1" required="required" value="">
                     </td>
                     <td>
                     </td>
@@ -224,9 +224,9 @@ $regestrierung_container .= '</td>
                     Password:
                     </td>
                     <td>
-                    <input id="registry2" type="password" size="20" name="password2" required="required" value="">
+                    <input id="password2" type="password" size="20" name="password2" required="required" value="">
                     </td>
-                    <td>';
+                    <td id="pass">';
 
 /*
  *  Fehler Prüfung ob das Password gleich ist oder nicht
@@ -240,7 +240,7 @@ $regestrierung_container .= '</td>
                 <td>
                 </td>
                     <td id="registry">
-                    <input class="button" type="submit" id="registry_button" value="regestrieren">
+                    <input class="button" type="submit" id="registry_button" value="regestrieren"  onclick="vergleichung()" >
                     ';
 /*
  *  Fehler Prüfung ob die e-Mail gleich ist oder nicht
