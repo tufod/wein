@@ -3,7 +3,13 @@
 <head>
 <title>{title}</title>
 <meta charset="utf-8">
-<link rel="stylesheet" href="styles.css" media="screen">
+<link rel="stylesheet" href="./styles/styles.css" media="screen">
+
+<link rel="stylesheet" href="./styles/kunden_kontakt.css" media="screen">
+<link rel="stylesheet" href="./styles/kunden_konto.css" media="screen">
+<link rel="stylesheet" href="./styles/kunden_login.css" media="screen">
+<link rel="stylesheet" href="./styles/kunden_registry" media="screen">
+
 <script type="text/javascript" src="javascript_biblio.js"></script>
 <script src="http://stellatest.de/js/prototype.js" type="text/javascript"></script>
 <script src="http://stellatest.de/js/scriptaculous.js?load=effects,builder" type="text/javascript"></script>
