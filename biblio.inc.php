@@ -264,7 +264,7 @@ function display_detail() {
         if(isset($_SESSION['id_benutzer'])) {
                if ($_SESSION['id_benutzer'] == '1'){
             $detail .= '';
-            $detail .= ' <a href="admin.php"><input type="button" class="warenkorp" value="bearbeiten"></a>';
+            $detail .= ' <a href="admin.php?id='.$d_bild['produkt_nummer'].'"><input type="button" class="warenkorp" value="bearbeiten"></a>';
             $detail .= ' <input type="button" class="warenkorp" value="zurück" onClick="history.back()">';
         }
         }
