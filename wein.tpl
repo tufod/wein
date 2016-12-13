@@ -4,7 +4,7 @@
 <title>{title}</title>
 <meta charset="utf-8">
 <link rel="stylesheet" href="./styles/styles.css" media="screen">
-
+<link rel="stylesheet" href="./styles/listen_detail.css" media="screen">
 <link rel="stylesheet" href="./styles/kunden_kontakt.css" media="screen">
 <link rel="stylesheet" href="./styles/kunden_konto.css" media="screen">
 <link rel="stylesheet" href="./styles/kunden_login.css" media="screen">
