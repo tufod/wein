@@ -58,7 +58,7 @@ $template='';
 
 $kunde=login_check();
 $title='Verwaltung';
-$style='<link rel="stylesheet" href="./styles/listen_detail.css" media="screen">';
+$admin.='<link rel="stylesheet" href="./styles/listen_detail.css" media="screen">';
 
 load_tpl('wein.tpl');
 /*
