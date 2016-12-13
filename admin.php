@@ -5,6 +5,17 @@ session_start();
 
 require_once './biblio.inc.php';
 
+function volumen() {
+    $con = con_db();
+    $sql = 'SELECT DISTINCT produkt_volumen FROM produkt';
+    $res = mysqli_query($con, $sql);
+    $option ="";
+    while ($temp=mysqli_fetch_row($res)){
+        $option.='<option>'.$temp[0].'</option>';
+    }
+    return $option;
+}
+
 function display_admin() {
     $id = $_GET['id'];
     $con = con_db();
@@ -27,15 +38,17 @@ function display_admin() {
                 . '.jpg" rel="lightbox" title="'.$d_admin['produkt_name'].'" onerror="this.src=\'images/weinbilder/gross/blank.jpg\'">'
                 . '<img class="detail_bild" src="images/weinbilder/mittel/w'.$d_admin['produkt_nummer'].'.jpg" '
                 . 'onerror="this.src=\'images/weinbilder/mittel/blank.jpg\'"></a>';
-        $admin .= '<h2 class="detail_name">' . $d_admin['produkt_name'] . '</h2>'
+        $admin .= '<input type="text" value="' . $d_admin['produkt_name'] .'">'
                 . '<img class="d_flag" src="images/flags/4x3/' . $d_admin['land_id'] . '.svg"'
                 . 'title="' . $d_admin['land_name'] . '">';
-        $admin .= '<div class="kategorie"><h4>Weintyp</h4>: ' . $d_admin['name_weintyp'] . ''
-                . ', <h4> Region: </h4>' . $d_admin['name_region'] . ', <h4> Weingut: </h4>' . $d_admin['name_weingut'] . '</div>';
-        $admin .= '<br><div class="detail_text">' . $d_admin['produkt_text'] . '<br>'
-                . $d_admin['produkt_volumen'] . ' Liter</div>';
+        $admin .= '<div class="kategorie"><h4>Weintyp:</h4><input type="text" value="' . $d_admin['name_weintyp'] . ''
+                . ' "><h4> Region: </h4><input type="text" value="' . $d_admin['name_region'] . '">'
+                . '<h4> Weingut: </h4><input type="text" value="'
+                . $d_admin['name_weingut'] . '"></div>';
+        $admin .= '<br><div class="detail_text">' . $d_admin['produkt_text'] . '<br><select name="liter">'
+                .$option=  volumen().'</select> Liter</div>';
         $admin .= '<div class="detail_waren"><br>';
-        $admin .= $d_admin['produkt_preis'] . ' €/stück';
+        $admin .= '<select>' .$d_admin['produkt_preis'] . '</select> €/stück';
         if(isset($_SESSION['id_benutzer'])) {
                if ($_SESSION['id_benutzer'] == '1'){
             $admin .= '';
@@ -58,7 +71,7 @@ $template='';
 
 $kunde=login_check();
 $title='Verwaltung';
-$admin.='<link rel="stylesheet" href="./styles/listen_detail.css" media="screen">';
+$style='<link rel="stylesheet" href="./styles/listen_detail.css" media="screen">';
 
 load_tpl('wein.tpl');
 /*
