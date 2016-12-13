@@ -19,6 +19,10 @@ $kunde=login_check();
 $title='Wein Liste';
 
 $search= search_feld();
+/*
+ *  Style CSS Angabe für die Listen Seite 
+ */
+$style='<link rel="stylesheet" href="./styles/wein_liste.css" media="screen">';
 
 /*
  *   Load des Seiten Aufbau Templates (Wein Template)
@@ -31,6 +35,11 @@ $template = str_replace('{search}',$search, $template);
  *   Titel Anzeige der Seite
  */
 $template = str_replace('{title}', $title, $template);
+
+/*
+ *  CSS für die Listen Seite übergabe an wein Tamplate {style} 
+ */
+$template = str_replace('{style}', $style, $template);
 
 /*
  * Anzeige Kunde rechts oben auf der Seite
