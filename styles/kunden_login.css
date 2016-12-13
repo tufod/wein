@@ -1,0 +1,28 @@
+/*
+ * Login php Seite  
+ * 
+ */
+#login{
+    padding:auto;
+    background-position: center;
+}
+#kunden_login_main {
+    padding: 10px;
+    background-color: rgba(255,255,255,0.5);
+}
+#kunden_login_main h1{
+    font-size: 1.5em;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;}
+#kunden_login_main_table{
+    margin: 0px auto;
+}
+#kunden_login_main_table1{
+   
+   /* margin: 0px auto; */
+}
+#login_button {
+    color: #FFFFFF;
+    background-color: #B52136;
+    cursor: pointer;
+}

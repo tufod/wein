@@ -1,0 +1,45 @@
+/*
+ * Kontakt php Seite  
+ * 
+ */
+#kontakt{
+    padding:auto;
+    background-position: center; 
+}
+#kunden_kontakt_main {
+    padding: 10px;
+    background-color: rgba(255,255,255,0.5);
+}
+#kunden_kontakt_main h1{
+    font-size: 1.5em;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;}
+#kunden_kontakt_table{
+    /* margin: 0px auto; */
+}
+#kunden_kontakt_table1{
+    margin: 0px auto;
+   
+}
+
+/*
+ * Kontakt Seite
+ * Info Zeile über Eingabe Feld (textarea)
+ */
+#kunden_kontakt_Infozeile{
+    /* padding:auto; */
+    /* background-position: center; */
+    background-color:rgba(255,255,255,0.7);
+    width: 500px;
+    height: 20px;
+    color:#ac2135;
+    background-color: rgba(255,255,255,0.5);
+    margin: 0 0 0.2em 0;
+    font-size: 0.9em;
+    
+}         
+#kontakt_button {
+    color: #FFFFFF;
+    background-color: #B52136;
+    cursor: pointer;
+}

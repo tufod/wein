@@ -1,0 +1,285 @@
+
+
+
+
+
+
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Calibri,sans-serif;
+    background-color: #96C2DD;
+    background-image: url(../images/background/white3.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+.pro {
+    background-color: rgba(255,255,255,0.6);
+    border: 3px solid #b9462d;
+    height: 85px;
+    width: 95%;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    padding: 3px 20px;
+    border-collapse: collapse;
+}
+
+.liter {
+    margin-left: 25px;
+}
+
+.beschreib {
+    margin-left: 25px;
+}
+
+.filter {
+    color: white;
+    background-color: rgba(171,33,53,0.8);
+    border: 3px solid #b9462d;
+    height: 80px;
+    width: 95%;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    padding: 3px 20px;
+    border-collapse: collapse;
+    
+}
+
+.kategorie {
+    padding-left: 185px;
+}
+
+
+/*
+ * Detail php Seite
+ */
+.detail {
+    background-color: rgba(255,255,255,0.7);
+    border: 3px solid #b9462d;
+    min-height: 100%;
+    width: 95%;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    padding: 20px 20px;
+    border-collapse: collapse;
+    display: inline-block;
+}
+
+.detail_name {
+    padding-left: 130px;
+    padding-bottom: 15px;
+   
+}
+
+.detail_bild {
+     display: inline-block;
+}
+
+.detail_text {
+    padding-left: 130px;
+}
+
+.detail_waren {
+    padding-left: 130px;
+    float: right;
+    clear: both;
+}
+
+h4 {
+    color:#ac2135;
+    margin: 0 0 0.2em 0;
+    font-size: 1.0em;
+    display: inline-block;
+}
+
+.l_flag {
+    margin: 5px;
+    width: 15px;
+    height: 15px;
+    clear: both;
+}
+
+.d_flag {
+    width: 40px;
+    height: 30px;
+    padding-left: 15px;
+    
+}
+
+/*
+ * regestrierung und Login Button rechts
+ */
+#kunde {
+    background-color: rgba(255,255,255,0.9);
+    background-color:#AC1828;
+    float: right;
+    height: 24px;
+    width: 186px;
+    margin-right: 20px;
+    margin-top: 20px;
+}
+.clearfix{
+    clear: both;
+}
+#wrapper {
+    width: 1000px;
+    margin:0 auto;
+    overflow: auto;
+    position: relative;
+}
+
+/*
+ * Kopf
+ */
+#header {
+    margin-bottom:5px;
+    text-align: right;
+    height: 130px;
+    border-radius: 5px;
+}
+
+/*
+ * Navigationsleiste
+ */
+#navi {
+    overflow: auto;
+    background-image: url(../images/header_bg.png);
+}
+#navi ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+#navi a:link, #navi a:visited, #navi a:focus, #navi a:active {
+    float: left; 
+    padding:15px 15px;
+    background-image: url(../images/menu_sep.png);
+    background-position: center right;
+    background-repeat: no-repeat;
+    color:#fff;    
+    text-decoration:none;
+}
+#navi a:hover {
+    background-color:#ac2135;
+    transition: all 0.3s ease-in;    
+}
+/*
+ * Hauptbereich
+ */
+#main {
+    padding: 20px;
+    background-color: rgba(255,255,255,0.5);
+}
+
+#main h1, #main h2, #main h3 {
+    color:#ac2135;
+    background-color: rgba(255,255,255,0);
+    margin: 0 0 0.2em 0;
+}
+#main h1 {
+    font-size: 1.5em;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+#main h2 {
+    font-size: 1.2em;
+}
+#main h3 {
+    font-size: 1em;
+}
+
+#main p {
+    margin: 0 0 0.4em 0;
+}
+#main img {
+    float: left;
+    max-width: 40%;
+}
+
+
+
+
+
+/*
+ * Fussbereich
+ */
+#footer {
+    clear: both;
+    
+    text-align: right;
+    color:#fff;
+    padding:5px 20px;
+    background-color: rgba(172,33,53,0.6);
+}
+#search {
+    position: absolute;  
+    right: 0;
+    margin: auto;
+    color:#fff;
+    background-color: rgba(172,33,53,0.6);
+}
+#footer a{
+    color: #fff;
+    text-decoration: none;
+}
+
+#copyright{
+    margin: 5px 5px 5px 5px;
+   text-align: center;
+}
+/*
+ * Schaltflächen
+ */
+a[class=button]:link, a[class=button]:visited, a[class=button]:focus, a[class=button]:active {
+    float: right;
+    padding:0.1em 1em;
+    text-decoration: none;
+    background-image: url(../images/header_bg.png);
+    border-radius: 3px;
+    color:#fff;
+    
+    
+
+}
+a[class=button]:hover {
+    background-image: url(../images/menu_hover.png);
+}
+/*
+ * Allgemeine Links
+ */
+a:link, a:visited, a:focus, a:active {
+    color:#ac2135;
+    font-weight: bold;
+}
+a:hover {
+    text-decoration:none;
+}
+.mengeUndWarenkorp{
+    float: right;
+    width: 40%;
+    
+}
+input[type=button][class=warenkorp]{
+    float: right;
+    padding:0.1em 1em;
+    background-image: url(../images/header_bg.png);
+    border-radius: 3px;
+    color:#fff;
+    
+}
+.bildUndName{
+    padding-top: 5px;
+    width: 50%;
+    
+    
+}
+
+.nameundtext{
+    padding-left: 5px;
+    float: left;
+    width: 50%;
+}
+

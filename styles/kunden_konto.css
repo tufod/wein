@@ -1,0 +1,76 @@
+/*
+ * Kunden Konto php Seite  
+ * 
+ */
+#kunden_konto_main {
+    padding: 10px;
+    background-color: rgba(255,255,255,0.5);
+}
+#kunden_konto_main h1{
+    font-size: 1.5em;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+#kunden_konto_leftside {
+    padding: 10px;
+    float:left;
+    width: 47%;
+    overflow: auto;
+}
+#kunden_konto_leftside h1{
+    font-size: 1.5em;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+#kunden_konto_leftside h2{
+    padding: 1px;
+    font-size: 1.2em;
+    background-color: rgba(255,255,255,0.5);
+    margin-right: 244px;
+    margin-top: 20px;
+}
+#kunden_konto_leftside h3{
+    padding: 1px;
+    font-size: 1.2em;
+    background-color: rgba(255,255,255,0.5);
+    margin-right: 292px;
+    margin-top: 20px;
+}
+#kunden_konto_leftside_table{
+    margin-right:  0px auto;
+}
+
+
+#kunden_konto_rightside {
+    padding: 10px;
+    width: 47%; 
+    float: right;
+}
+#kunden_konto_rightside h1{
+    font-size: 1.5em;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+#kunden_konto_rightside h2{
+    padding: 1px;
+    font-size: 1.2em;
+    background-color: rgba(255,255,255,0.5);
+    margin-right: 244px;
+    margin-top: 20px;
+}
+#kunden_konto_rightside h3{
+    padding: 1px;
+    font-size: 1.2em;
+    background-color: rgba(255,255,255,0.5);
+    margin-right: 292px;
+    margin-top: 20px;
+}
+#kunden_login_rightside_table{
+   
+   /* margin: 0px auto; */
+}   
+#kunden_aendern_button{
+    color: #FFFFFF;
+    background-color: #B52136;
+    cursor: pointer;
+}
