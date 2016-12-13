@@ -1,10 +1,4 @@
 
-
-
-
-
-
-
 body {
     margin: 0;
     padding: 0;
@@ -231,7 +225,7 @@ h4 {
    text-align: center;
 }
 /*
- * Schaltflächen
+ * Schaltflï¿½chen
  */
 a[class=button]:link, a[class=button]:visited, a[class=button]:focus, a[class=button]:active {
     float: right;
