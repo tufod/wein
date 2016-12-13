@@ -15,6 +15,12 @@ $kunde_Info = login_check();
 $titel = 'Kunden Konto';
 
 /*
+ *  Style CSS Angabe für die Kunden Konto Seite 
+ */
+$style='<link rel="stylesheet" href="./styles/kunden_konto.css" media="screen">';
+
+
+/*
  *  Load des Wein Template 
  */
 load_tpl('wein.tpl');
@@ -23,6 +29,11 @@ load_tpl('wein.tpl');
  *   Titel Anzeige der Seite
  */
 $template = str_replace('{title}', $titel, $template);
+
+/*
+ *  CSS für die Kunden Konto übergabe an wein Tamplate {style} 
+ */
+$template = str_replace('{style}', $style, $template);
 
 /*
  * Anzeige Kunde rechts oben auf der Seite
@@ -266,7 +277,7 @@ $kundeKonto_container .= '</td>
                 </tr>
                 <tr>
                     <td id="registry">
-                    <input class="button" type="submit" id="aendern_button" value="ändern">
+                    <input class="button" type="submit" id="kunden_aendern_button" value="ändern">
                     </td>
                     <td>
                 </td>
