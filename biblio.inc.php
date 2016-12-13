@@ -181,8 +181,14 @@ function list_output($input_filter) {
         //Preis,Menge und Warenkorp
         $list .= '<div class="mengeUndWarenkorp"><br>';
         $list .= $zeil['produkt_preis'] . ' €/stück';
-        $list .= ' <input type="button" class="warenkorp" value="Warenkorb" onClick="warenkorb.php">';
-        $list .= '<input type="button" class="operation" value="-" onclick="operation(\'-\','
+        
+        if($_SESSION['id_benutzer'] == '1'){
+            $list .= '';
+            $list .= ' <input type="button" class="warenkorp" value="bearbeitetn" onClick="admin.php">';
+        }
+        else {
+            $list .= ' <input type="button" class="warenkorp" value="Warenkorb" onClick="warenkorb.php">';
+            $list .= '<input type="button" class="operation" value="-" onclick="operation(\'-\','
                 . $zeil['produkt_nummer'] . ')">';
         $list .= ' <input type="text" name="menge" id="'
                 . $zeil['produkt_nummer']
@@ -190,6 +196,8 @@ function list_output($input_filter) {
                 . $zeil['produkt_nummer'] . ')">';
         $list .= '<input type="button" class="operation" value="+" onclick="operation(\'+\','
                 . $zeil['produkt_nummer'] . ')">';
+        }
+        
 
         $list .= '</div>';
         $list .= '</div>';
