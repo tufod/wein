@@ -1,20 +1,10 @@
 
 <?php
+
 session_start();
 
 require_once './biblio.inc.php';
 
-$template='';
-
-$kunde=login_check();
-$title='Verwaltung';
-$style='<link rel="stylesheet" href="./styles/listen_detail.css" media="screen">';
-
-load_tpl('wein.tpl');
-/*
- *   Titel Anzeige der Seite
- */
-$template = str_replace('{title}', $title, $template);
 function display_admin() {
     $id = $_GET['id'];
     $con = con_db();
@@ -29,27 +19,27 @@ function display_admin() {
             . ' WHERE produkt_nummer = \'' . $id . '\';';
     $res = mysqli_query($con, $sql);
     $admin = '';
-    while ($d_bild = mysqli_fetch_assoc($res)) {
+    while ($d_admin = mysqli_fetch_assoc($res)) {
         $admin .= '<div class="detail">';
         
         $admin .= '<a href="images/weinbilder/gross/w'
-                . $d_bild['produkt_nummer']
-                . '.jpg" rel="lightbox" title="'.$d_bild['produkt_name'].'" onerror="this.src=\'images/weinbilder/gross/blank.jpg\'">'
-                . '<img class="detail_bild" src="images/weinbilder/mittel/w'.$d_bild['produkt_nummer'].'.jpg" '
+                . $d_admin['produkt_nummer']
+                . '.jpg" rel="lightbox" title="'.$d_admin['produkt_name'].'" onerror="this.src=\'images/weinbilder/gross/blank.jpg\'">'
+                . '<img class="detail_bild" src="images/weinbilder/mittel/w'.$d_admin['produkt_nummer'].'.jpg" '
                 . 'onerror="this.src=\'images/weinbilder/mittel/blank.jpg\'"></a>';
-        $admin .= '<h2 class="detail_name">' . $d_bild['produkt_name'] . '</h2>'
-                . '<img class="d_flag" src="images/flags/4x3/' . $d_bild['land_id'] . '.svg"'
-                . 'title="' . $d_bild['land_name'] . '">';
-        $admin .= '<div class="kategorie"><h4>Weintyp</h4>: ' . $d_bild['name_weintyp'] . ''
-                . ', <h4> Region: </h4>' . $d_bild['name_region'] . ', <h4> Weingut: </h4>' . $d_bild['name_weingut'] . '</div>';
-        $admin .= '<br><div class="detail_text">' . $d_bild['produkt_text'] . '<br>'
-                . $d_bild['produkt_volumen'] . ' Liter</div>';
+        $admin .= '<h2 class="detail_name">' . $d_admin['produkt_name'] . '</h2>'
+                . '<img class="d_flag" src="images/flags/4x3/' . $d_admin['land_id'] . '.svg"'
+                . 'title="' . $d_admin['land_name'] . '">';
+        $admin .= '<div class="kategorie"><h4>Weintyp</h4>: ' . $d_admin['name_weintyp'] . ''
+                . ', <h4> Region: </h4>' . $d_admin['name_region'] . ', <h4> Weingut: </h4>' . $d_admin['name_weingut'] . '</div>';
+        $admin .= '<br><div class="detail_text">' . $d_admin['produkt_text'] . '<br>'
+                . $d_admin['produkt_volumen'] . ' Liter</div>';
         $admin .= '<div class="detail_waren"><br>';
-        $admin .= $d_bild['produkt_preis'] . ' €/stück';
+        $admin .= $d_admin['produkt_preis'] . ' €/stück';
         if(isset($_SESSION['id_benutzer'])) {
                if ($_SESSION['id_benutzer'] == '1'){
             $admin .= '';
-            $admin .= ' <a href="admin.php"><input type="button" class="warenkorp" value="bearbeiten"></a>';
+            $admin .= ' <a href="save.php=?id'.$d_admin['produkt_nummer'].'"><input type="button" class="warenkorp" value="speichern"></a>';
             $admin .= ' <input type="button" class="warenkorp" value="zurück" onClick="history.back()">';
         }
         }
@@ -63,6 +53,18 @@ function display_admin() {
 
     return $admin;
 }
+
+$template='';
+
+$kunde=login_check();
+$title='Verwaltung';
+$style='<link rel="stylesheet" href="./styles/listen_detail.css" media="screen">';
+
+load_tpl('wein.tpl');
+/*
+ *   Titel Anzeige der Seite
+ */
+$template = str_replace('{title}', $title, $template);
 
 /*
  * Anzeige Kunde rechts oben auf der Seite
