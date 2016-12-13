@@ -184,7 +184,7 @@ function list_output($input_filter) {
         
         if($_SESSION['id_benutzer'] == '1'){
             $list .= '';
-            $list .= ' <input type="button" class="warenkorp" value="bearbeitetn" onClick="admin.php">';
+            $list .= ' <a href="admin.php"><input type="button" class="warenkorp" value="bearbeiten"></a>';
         }
         else {
             $list .= ' <input type="button" class="warenkorp" value="Warenkorb" onClick="warenkorb.php">';
