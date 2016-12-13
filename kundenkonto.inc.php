@@ -128,16 +128,14 @@ $sql = 'UPDATE adressen SET
     hausnummer=\''. $_POST['lieferung_hausnummer'].'\',
     ort=\''.$_POST['lieferung_ort'].'\',
     plz=\''. $_POST['lieferung_plz'].'\'
-WHERE (benutzer_id='.$_SESSION['id_benutzer'].' and liefer_oder_rechnung=\'lieferung\');
-
-
-UPDATE adressen SET 
+WHERE (benutzer_id='.$_SESSION['id_benutzer'].' and liefer_oder_rechnung=\'lieferung\');';
+mysqli_query($con, $sql);
+$sql = 'UPDATE adressen SET 
     strasse=\''.$_POST['rechnung_strasse'].'\',
     hausnummer=\''. $_POST['rechnung_hausnummer'].'\',
     ort=\''.$_POST['rechnung_ort'].'\',
     plz=\''. $_POST['rechnung_plz'].'\'
 WHERE (benutzer_id='.$_SESSION['id_benutzer'].' and liefer_oder_rechnung=\'rechnung\');';
-
 mysqli_query($con, $sql);
 if($password1 !=''){
 $password = md5($password1);
@@ -147,7 +145,7 @@ mysqli_query($con, $sql);
 }
 uncon_db($con);
 //email2benutzer($benutzer['id_benutzer'], 'aktivation');
-header('Location: kundenkonto.php');
+header('Location: liste.php');
 exit;
 }
 }
