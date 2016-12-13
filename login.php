@@ -12,10 +12,22 @@ load_tpl('wein.tpl');
  *  Titel der Seite
  */
 $titel = 'Login';
+
+/*
+ *  Style CSS Angabe für die Login Seite 
+ */
+$style='<link rel="stylesheet" href="./styles/kunden_login.css" media="screen">';
+
 /*
  *  Ausgabe des Titels der Seite
  */
 $template = str_replace('{title}', $titel, $template);
+
+/*
+ *  CSS für die Login übergabe an wein Tamplate {style} 
+ */
+$template = str_replace('{style}', $style, $template);
+
 /*
  * Login Überschrift
  */
@@ -51,7 +63,7 @@ $login_container = '<div id="kunden_login_main">
                    <td id="login">
                    </td>
                    <td id="login">
-                   <input class="button" type="submit" id="login_buttom" value="Login">
+                   <input class="button" type="submit" id="login_button" value="Login">
                    </td>
                 </tr>';
 /*
