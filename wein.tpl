@@ -8,9 +8,10 @@
 <script src="http://stellatest.de/js/prototype.js" type="text/javascript"></script>
 <script src="http://stellatest.de/js/scriptaculous.js?load=effects,builder" type="text/javascript"></script>
 <script src="http://stellatest.de/js/lightbox.js" type="text/javascript"></script>
-<link href="http://stellatest.de/css/lightbox.css" rel="stylesheet" type="text/css" media="screen" />
+{style}
 </head>
 <body>
+
 {kunde}
     <div class="clearfix"></div>
 <div id="wrapper">
