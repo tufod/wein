@@ -18,6 +18,11 @@ $kunde=login_check();
 $titel='Über uns History';
 
 /*
+ *  Style CSS Angabe für die History Seite 
+ */
+$style='<link rel="stylesheet" href="./styles/history.css" media="screen">';
+
+/*
  *  Load des Wein Template 
  */
 load_tpl('wein.tpl');
@@ -26,6 +31,12 @@ load_tpl('wein.tpl');
  *   Titel Anzeige der Seite
  */
 $template = str_replace('{title}', $titel, $template);
+
+
+/*
+ *  CSS für die History übergabe an wein Tamplate {style} 
+ */
+$template = str_replace('{style}', $style, $template);
 
 /*
  * Anzeige Kunde rechts oben auf der Seite
