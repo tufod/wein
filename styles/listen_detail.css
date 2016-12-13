@@ -1,3 +1,74 @@
+
+/*
+ * Detail php Seite
+ */
+.detail {
+    background-color: rgba(255,255,255,0.7);
+    border: 3px solid #b9462d;
+    min-height: 100%;
+    width: 95%;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    padding: 20px 20px;
+    border-collapse: collapse;
+    display: inline-block;
+}
+
+.detail_name {
+    padding-left: 130px;
+    padding-bottom: 15px;
+   
+}
+
+.detail_bild {
+     display: inline-block;
+}
+
+.detail_text {
+    padding-left: 130px;
+}
+
+.detail_waren {
+    padding-left: 130px;
+    float: right;
+    clear: both;
+}
+
+h4 {
+    color:#ac2135;
+    margin: 0 0 0.2em 0;
+    font-size: 1.0em;
+    display: inline-block;
+}
+
+.l_flag {
+    margin: 5px;
+    width: 15px;
+    height: 15px;
+    clear: both;
+}
+
+.d_flag {
+    width: 40px;
+    height: 30px;
+    padding-left: 15px;
+    
+}
+
+.liter {
+    margin-left: 25px;
+}
+
+.beschreib {
+    margin-left: 25px;
+}
+
+.kategorie {
+    padding-left: 185px;
+}
+/*
+ * lightbox Fenster 
+ */
 #lightbox{	position: absolute;	left: 0; width: 100%; z-index: 100; text-align: center; line-height: 0;}
 #lightbox img{ width: auto; height: auto;}
 #lightbox a img{ border: none; }
