@@ -63,12 +63,94 @@ function login_check() {
     return $kunde;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function list_output() {
     global $_POST;
     $filter_in=$_POST;
     $con = con_db();
     $filter = filtrator($filter_in);
     $list = filter_div($filter_in);
+
+
+
+
+
+
+
+
+
     $sql = 'SELECT id_produkt,produkt_nummer,produkt_name,produkt_beschr,produkt_preis,LOWER(land_id) AS land_id,land_name,produkt_volumen'
             . ' FROM produkt p JOIN '
             . 'weintyp w ON p.weintyp_id=w.id_weintyp JOIN weingut wg ON '
@@ -97,16 +179,40 @@ function list_output() {
                 . '<div class="liter">' . $zeil['produkt_volumen'] . ' Liter</div>';
         $list .= '</div>';
         //Preis,Menge und Warenkorp
-        $list .= gen_div_insertINwarenkorp($zeil['produkt_preis'],$zeil['id_produkt'],$zeil['produkt_nummer']);
+        $list .= '<div class="mengeUndWarenkorp"><br>';
+        $list .= $zeil['produkt_preis'] . ' €/stück';
+        
+        if(isset($_SESSION['id_benutzer'])) {
+               if ($_SESSION['id_benutzer'] == '1'){
+            $list .= '';
+            $list .= ' <input type="button" class="warenkorp" value="X" onClick="clear.php">';
+            $list .= ' <a href="admin.php?id='.$zeil['produkt_nummer'].'"><input type="button" class="warenkorp" value="bearbeiten"></a>';
+        }
+        }
+        else {
+            $list .= ' <input type="button" class="warenkorp" value="Warenkorb" onClick="warenkorb.php">';
+            $list .= '<input type="button" class="operation" value="-" onclick="operation(\'-\','
+                . $zeil['produkt_nummer'] . ')">';
+        $list .= ' <input type="text" name="menge" id="'
+                . $zeil['produkt_nummer']
+                . '" size="3" value="1" onkeyup="menge_pruefen('
+                . $zeil['produkt_nummer'] . ')">';
+        $list .= '<input type="button" class="operation" value="+" onclick="operation(\'+\','
+                . $zeil['produkt_nummer'] . ')">';
+        }
+        
+
+        $list .= '</div>';
+        $list .= '</div>';
     }
     
-    /*
+/*
      * Datenbank schließung
      */
     uncon_db($con);
     return $list;
 }
-
+/* frage ueberflüssig ? */
 function gen_div_insertINwarenkorp($produkt_preis,$id_produkt,$produkt_nummer) {
         $list='<form action="./warenkorb.php" method="GET"><div class="mengeUndWarenkorp"><br>';
         $list.='<input type="hidden" name="add_preis" value="'.$produkt_preis.'">'.$produkt_preis.'€/stück';
@@ -118,7 +224,7 @@ function gen_div_insertINwarenkorp($produkt_preis,$id_produkt,$produkt_nummer) {
         $list.= '</form></div></div>';
     return $list;
 }
-
+/* frage ueberflüssig ? nach oben hin */
 
 
 
@@ -140,87 +246,6 @@ function tpl_output() {
     echo $template;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //detail_seite sascha
 
 function display_detail() {
@@ -241,9 +266,6 @@ function display_detail() {
         $detail .= '<div class="detail">';
         
         $detail .= '<a href="images/weinbilder/gross/w'
-
-
-        
                 . $d_bild['produkt_nummer']
                 . '.jpg" rel="lightbox" title="'.$d_bild['produkt_name'].'" onerror="this.src=\'images/weinbilder/gross/blank.jpg\'">'
                 . '<img class="detail_bild" src="images/weinbilder/mittel/w'.$d_bild['produkt_nummer'].'.jpg" '
@@ -281,14 +303,35 @@ function display_detail() {
         $detail .= '</div>';
     }
 
-    return $detail;
+     return $detail;
 }
+
+
 
 function generate_add_warenkorb_button($id_produkt) {
     $button='<button value="Warenkorb" a href="./warenkorb.php?add_id='.$id_produkt.'">';
     $button.='<img height="20" width="20" src="./images/icons/delete.png" alt="Artikel löschen"></a>';
     return $button;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //email senden mit id_benutzer                              //TODO email server konfigurieren
 
