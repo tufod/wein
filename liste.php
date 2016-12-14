@@ -8,6 +8,8 @@ session_start();
  *  zusatzliche datei die benotigt wird zum ausfuhren der Seite
  */
 require_once './biblio.inc.php';
+require_once './filter.inc.php';
+
 
 $template='';
 
@@ -20,7 +22,7 @@ $title='Wein Liste';
 
 $search= search_feld();
 /*
- *  Style CSS Angabe für die Listen Seite 
+ *  Style CSS Angabe fï¿½r die Listen Seite 
  */
 $style='<link rel="stylesheet" href="./styles/wein_liste.css" media="screen">';
 
@@ -37,7 +39,7 @@ $template = str_replace('{search}',$search, $template);
 $template = str_replace('{title}', $title, $template);
 
 /*
- *  CSS für die Listen Seite übergabe an wein Tamplate {style} 
+ *  CSS fï¿½r die Listen Seite ï¿½bergabe an wein Tamplate {style} 
  */
 $template = str_replace('{style}', $style, $template);
 
