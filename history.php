@@ -8,7 +8,13 @@
  *  zusätzliche datei die benötigt wird zum ausführen der Seite
  */
  require_once './list.inc.php';
-
+ 
+/*
+ *  Link zuweisung CSS
+ */
+ 
+ 
+ 
 $template='';
 $kunde=login_check();
 
@@ -20,7 +26,7 @@ $titel='Über uns History';
 /*
  *  Style CSS Angabe für die History Seite 
  */
-$style='<link rel="stylesheet" href="./styles/history.css" media="screen">';
+$style='<link rel="stylesheet" href="./styles/history.css"> media="screen">';
 
 /*
  *  Load des Wein Template 
