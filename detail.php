@@ -14,8 +14,9 @@ $template='';
  *  Ausgabe des Titels der Seite
  */
 $title='Wein Details';
+
 /*
- *  Style CSS Angabe für die History Seite 
+ *  Style CSS Angabe für die detail Seite 
  */
 $style='<link rel="stylesheet" href="./styles/listen_detail.css" media="screen">';
 
@@ -47,7 +48,7 @@ $detail = display_detail();
 
 /*
  *   Load des Seiten Inhaltes (container)
- *   Seiten inhalt = 
+ *   Seiten inhalt = $detail
  */
 $template = str_replace('{container}',$detail,$template);
 
