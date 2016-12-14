@@ -9,6 +9,10 @@
  */
  
  require_once './biblio.inc.php';
+ /*
+ *  Link zuweisung CSS
+ */
+
 
 $template='';
 $kunde=login_check();
