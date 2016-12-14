@@ -55,7 +55,7 @@ function login_check() {
     if (isset($_SESSION['id_benutzer']) && $_SESSION['id_benutzer'] > 0) {
         $kunde = '<div id="kunde"><a class="button" href="kundenkonto.inc.php?kunde=' . $_SESSION['id_benutzer'] . '">'
                 . $_SESSION['vorname']
-                . '</a><a class="button" href="logout.php">logout</a><a class="button" href="#">Warenkorp</a></div>';
+                . '</a><a class="button" href="logout.php">logout</a><a class="button" href="warenkorb.php">Warenkorb</a></div>';
     } else {
         $kunde = '<div id="kunde"><a class="button" href="login.php">login</a><a class="button" href="regestrierung.php">regestrierung</a></div>';
     }
@@ -63,100 +63,100 @@ function login_check() {
     return $kunde;
 }
 
-function filtrator($filter) {
-    $filtrator = "";
-    $filtrator .= filtrator_child($filtrator, $filter, 'produkt_name');
-    $filtrator .= filtrator_child($filtrator, $filter, 'produkt_volumen');
-    $filtrator .= filtrator_child($filtrator, $filter, 'name_weintyp');
-    $filtrator .= filtrator_child($filtrator, $filter, 'name_weingut');
-    $filtrator .= filtrator_child($filtrator, $filter, 'land_name');
-    $filtrator .= filtrator_child($filtrator, $filter, 'name_region');
-    $filtrator .= filtrator_child($filtrator, $filter, 'name_kontinent');
-    return $filtrator;
-}
 
-//feld kann sein produkt_name,produkt_volumen,name_weintyp,name_weingut,land_name,name_region,name_kontinent
-function filtrator_child($filtrator, $filter, $feld) {
-    $filtrator_child = '';
-    if ((strlen($filtrator) > 0) && (strlen($filter[$feld]) > 0)) {
-        $filtrator_child .= " AND ";
-    }
-    if ((isset($filter[$feld])) && (strlen($filter[$feld]) > 0)) {
-        $filtrator_child .= $feld . ' LIKE ';
-        $filtrator_child .= '"%' . $filter[$feld] . '%"';
-    }
-    return $filtrator_child;
-}
 
-function filter_div($input_filter) {
-    $filter_form = '<div class="filter">';
-    $filter_form .= '<form action="./liste.php" method="GET">';
-    $filter_form .= ' Name ' . generate_html_form_datalist('produkt_name');
-    $filter_form .= ' Typ ' . generate_html_form_datalist('name_weintyp');
-    $filter_form .= ' Weingut ' . generate_html_form_datalist('name_weingut');
-    $filter_form .= ' Volume ' . generate_html_form_datalist('produkt_volumen');
-    $filter_form .= ' Land ' . generate_html_form_datalist('land_name');
-    $filter_form .= ' Region ' . generate_html_form_datalist('name_region');
-    $filter_form .= ' Kontinent ' . generate_html_form_datalist('name_kontinent');
-    $filter_form .= '<input type="submit" value="filter">';
-    $filter_form .= '</form></div>';
-    return $filter_form;
-}
 
-//$feld kann sein produkt_name,produkt_volumen,name_weintyp,name_weingut,land_name,name_region,name_kontinent
-function generate_html_form_datalist($feld) {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function list_output() {
+    global $_POST;
+    $filter_in=$_POST;
     $con = con_db();
-    $select = '<input list="' . $feld . '" name="' . $feld . '"><datalist id="' . $feld . '">';
-    $sql = 'SELECT DISTINCT ' . $feld . ' '
-            . 'FROM produkt p JOIN weintyp w ON p.weintyp_id=w.id_weintyp JOIN weingut wg ON '
-            . 'p.weingut_id=wg.id_weingut JOIN laender l ON wg.land_id=l.id_land JOIN region r ON'
-            . ' wg.region_id=r.id_region JOIN kontinent k ON l.kontinent_id=k.id_kontinent ORDER BY ' . $feld . ' ASC';
-    $res = mysqli_query($con, $sql);
-    while ($zeil = mysqli_fetch_assoc($res)) {
-        $select .= '<option value="' . $zeil["$feld"] . '">';
-    }
-    $select .= '</datalist>';
-    return $select;
-}
+    $filter = filtrator($filter_in);
+    $list = filter_div($filter_in);
 
-//$feld kann sein produkt_name,produkt_volumen,name_weintyp,name_weingut,land_name,name_region,name_kontinent
-function generate_html_form_select($feld) {
-    $con = con_db();
-    
-    $select = '<select>';
-    $sql = 'SELECT DISTINCT ' . $feld . ' '
-            . 'FROM produkt p JOIN weintyp w ON p.weintyp_id=w.id_weintyp JOIN weingut wg ON '
-            . 'p.weingut_id=wg.id_weingut JOIN laender l ON wg.land_id=l.id_land JOIN region r ON'
-            . ' wg.region_id=r.id_region JOIN kontinent k ON l.kontinent_id=k.id_kontinent ORDER BY ' . $feld . ' ASC';
-    $res = mysqli_query($con, $sql);
-    while ($zeil = mysqli_fetch_assoc($res)) {
-        $select .= '<option value="' . $zeil["$feld"] . '">' . $zeil["$feld"] . '</option>';
-    }
-    $select .= '</select>';
-    return $select;
-}
 
-function list_output($input_filter) {
-    $con = con_db();
-    $list = "";
-    $filter = "";
-    $list .= filter_div($input_filter);
-    if (array_filter($input_filter)) {
-        $filter .= " WHERE ";
-        $filter .= filtrator($input_filter);
-    }
-    
-    /*
-     * Select Anweisung die erstellt die Produktnummer, die Produkt beschreibung, 
-     * den Produkt Preis und das land zur verfügung für filter auf der listen seite
-     *
-     */
-    $sql = 'SELECT produkt_nummer,produkt_name,produkt_beschr,produkt_preis,LOWER(land_id) AS land_id,land_name,produkt_volumen'
+
+
+
+
+
+
+
+    $sql = 'SELECT id_produkt,produkt_nummer,produkt_name,produkt_beschr,produkt_preis,LOWER(land_id) AS land_id,land_name,produkt_volumen'
             . ' FROM produkt p JOIN '
             . 'weintyp w ON p.weintyp_id=w.id_weintyp JOIN weingut wg ON '
             . 'p.weingut_id=wg.id_weingut JOIN laender l ON wg.land_id=l.id_land JOIN region r ON'
-            . ' wg.region_id=r.id_region JOIN kontinent k ON l.kontinent_id=k.id_kontinent' . $filter;
-    //echo $sql;
+            . ' wg.region_id=r.id_region JOIN kontinent k ON l.kontinent_id=k.id_kontinent'.$filter.' LIMIT 20';
+    // echo $sql;
 
     $res = mysqli_query($con, $sql);
     while ($zeil = mysqli_fetch_assoc($res)) {
@@ -185,6 +185,7 @@ function list_output($input_filter) {
         if(isset($_SESSION['id_benutzer'])) {
                if ($_SESSION['id_benutzer'] == '1'){
             $list .= '';
+            $list .= ' <input type="button" class="warenkorp" value="X" onClick="clear.php">';
             $list .= ' <a href="admin.php?id='.$zeil['produkt_nummer'].'"><input type="button" class="warenkorp" value="bearbeiten"></a>';
         }
         }
@@ -205,12 +206,29 @@ function list_output($input_filter) {
         $list .= '</div>';
     }
     
-    /*
+/*
      * Datenbank schließung
      */
     uncon_db($con);
     return $list;
 }
+/* frage ueberflüssig ? */
+function gen_div_insertINwarenkorp($produkt_preis,$id_produkt,$produkt_nummer) {
+        $list='<form action="./warenkorb.php" method="GET"><div class="mengeUndWarenkorp"><br>';
+        $list.='<input type="hidden" name="add_preis" value="'.$produkt_preis.'">'.$produkt_preis.'€/stück';
+        $list.='<input type="hidden" name="add_id" value="'.$id_produkt.'">';
+        $list.='<input type="submit" class="warenkorp" value="Warenkorb">';
+        $list.='<input type="button" class="operation" value="-" onclick="operation(\'-\','.$produkt_nummer . ')">';
+        $list.=' <input type="text" name="add_menge" id="'.$produkt_nummer.'" size="3" value="1" onkeyup="menge_pruefen('.$produkt_nummer.')">';
+        $list.= '<input type="button" class="operation" value="+" onclick="operation(\'+\','.$produkt_nummer.')">';
+        $list.= '</form></div></div>';
+    return $list;
+}
+/* frage ueberflüssig ? nach oben hin */
+
+
+
+
 /*
  *   Load des template
  */
@@ -285,35 +303,35 @@ function display_detail() {
         $detail .= '</div>';
     }
 
-    return $detail;
+     return $detail;
 }
 
-//warenkorb_check tomas
 
-function warenkorb_id($id_benutzer) {
-    if (!isset($_SESSION['warenkorb'])) {
-        $con = con_db();
-        $sql = 'SELECT id_warenkorb FROM warenkorb WHERE benutzer_id=' . $id_benutzer . ' AND ISNULL(rechung_id)';
-        $res = mysqli_query($con, $sql);
-        if (!mysqli_affected_rows($con) == 0) {
-            $warenkorb = mysqli_fetch_assoc($res);
-            $act_warenkorb = $warenkorb['id_warenkorb'];
-        } else {
-            $act_warenkorb = warenkorb_new($id_benutzer);
-        }
-    }
-    return $act_warenkorb;
+
+function generate_add_warenkorb_button($id_produkt) {
+    $button='<button value="Warenkorb" a href="./warenkorb.php?add_id='.$id_produkt.'">';
+    $button.='<img height="20" width="20" src="./images/icons/delete.png" alt="Artikel löschen"></a>';
+    return $button;
 }
 
-//warenkorb_new tomas
 
-function warenkorb_new($id_benutzer) {
-    $con = con_db();
-    $sql = 'INSERT INTO warenkorb(benutzer_id) VALUES (' . $id_benutzer . ')';
-    mysqli_query($con, $sql);
-    $id_warenkorb = mysqli_insert_id($con);
-    return $id_warenkorb;
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //email senden mit id_benutzer                              //TODO email server konfigurieren
 

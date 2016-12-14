@@ -1,0 +1,129 @@
+/*
+ * History php Seite  
+ * 
+ */
+#history{
+            text-decoration: none;
+            padding: 0px;
+            margin: 0px;
+            text-align: justify;
+            padding-right: 10px;
+            } 
+#history_main {
+    padding: 20px;
+    background-color: rgba(255,255,255,0.5);
+}
+
+/*
+ * Jahrhundert Zeile ( Auswahl ) 
+ */
+#history_main_table_sprungzeile{
+    padding: 5px;
+    border: 0px; 
+    vertical-align: top;
+    text-transform: uppercase;
+    text-align: center;
+    padding-right: 47px;
+    background-position: center;
+    background-color: rgba(255,255,255,0.5);
+}
+#history_zeile{
+    text-decoration: none;
+    padding: 0px;
+    margin: 0px;
+    text-align: justify;
+    padding-right: 26px;
+} 
+            
+/*
+ * History ueberschriften 
+ */         
+#history_main span1{
+font-size: 10pt;
+font-family: arial,helvetica,sans-serif;
+}
+#history_main h1, #history_main h2, #history_main h3 {
+    color:#ac2135;
+    background-color: rgba(255,255,255,0);
+    margin: 0 0 0.2em 0;
+}
+#history_main h1 {
+    font-size: 1.5em;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+#history_main h2 {
+    font-size: 1.2em;
+}
+#history_main h3 {
+    font-size: 1em;
+}
+#history_main p {
+    margin: 0 0 0.4em 0;
+}
+#history_main_table{
+    width: 100%;
+    border: 0px; 
+}
+/*
+ * History php Seite  
+ * Bilder einpassen
+ */
+#history_main img {
+    float: right;
+    max-width: 40%;
+}
+
+/*
+ * History php Seite  
+ * die einzelnen Bilder einpassen
+ */
+#history_bild_01,#history_bild_02,#history_bild_03,#history_bild_04,#history_bild_05,#history_bild_06,#history_bild_07,#history_bild_08,#history_bild_09,#history_bild_10,#history_bild_11,#history_bild_12,#history_bild_13,#history_bild_15,#history_bild_16,#history_bild_17,#history_bild_18,#history_bild_19,#history_bild_20{
+    margin-bottom: 20px;
+    margin-left: 20px;
+    width: 285px;
+}
+#history_bild_01{
+    float: right;
+    height: 384px;
+    background-color: rgba(255,255,255,0.5);
+}
+#history_bild_02{
+    height: 411px; 
+}
+#history_bild_03,#history_bild_06,#history_bild_07{
+    height: 199px;
+}
+#history_bild_04{
+    height: 380px;
+}
+#history_bild_05,#history_bild_08, #history_bild_09{
+    height: 200px;
+}
+#history_bild_10{
+    height: 215px;
+}
+#history_bild_11, #history_bild_12{
+    height: 188px;
+}
+#history_bild_13, #history_bild_18, #history_bild_20{
+    height: 183px;
+}
+#history_bild_14{
+    margin-bottom: 40px;
+    margin-left: 20px;
+    width: 285px; 
+    height: 430px;
+}
+#history_bild_15{
+    height: 397px;
+}
+#history_bild_16{
+    height: 429px; 
+}
+#history_bild_17{
+    height: 182px;
+}
+#history_bild_19{
+    height: 218px;
+}
